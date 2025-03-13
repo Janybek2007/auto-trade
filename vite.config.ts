@@ -9,7 +9,8 @@ import compression from 'vite-plugin-compression';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig(({ mode }) => {
-	const env = loadEnv(mode, process.cwd(), '');
+   console.log(mode);
+   const env = loadEnv(mode, process.cwd(), '');
    const isProd = mode === 'production';
    const isDev = mode === 'development';
 
@@ -22,8 +23,8 @@ export default defineConfig(({ mode }) => {
                tsconfigPath: './tsconfig.json',
             },
             eslint: {
-               lintCommand: 'eslint "./src/**/*.{ts,tsx}"', 
-               useFlatConfig: true, 
+               lintCommand: 'eslint "./src/**/*.{ts,tsx}"',
+               useFlatConfig: true,
                dev: {
                   logLevel: ['error', 'warning'],
                },
