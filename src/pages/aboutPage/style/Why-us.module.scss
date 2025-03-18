@@ -1,0 +1,43 @@
+.Main {
+   .container {
+      max-width: 1250px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 20px;
+
+      .content {
+         h1 {
+            margin-bottom: 20px;
+            font-size: 36px;
+            font-weight: 600;
+            color: rgb(3, 69, 66);
+            margin-bottom: 40px;
+         }
+
+         .main_card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            .card {
+               width: 290px;
+               height: 212px;
+               border-radius: 18px;
+               background: rgb(245, 245, 245);
+               padding: 30px 37px;
+
+               img {
+                  width: 65.29px;
+                  height: 64.5px;
+               }
+
+               p {
+                  font-size: 20px;
+                  font-weight: 600;
+                  color: rgb(1, 83, 79);
+                  margin-top: 20px;
+               }
+            }
+         }
+      }
+   }
+}
