@@ -11,6 +11,7 @@
 	},
 	"dependencies": {
 		"@hookform/resolvers": "^4.1.3",
+		"@iconify/react": "^5.2.0",
 		"@tanstack/react-query": "^5.67.2",
 		"immer": "^10.1.1",
 		"react": "^19.0.0",
