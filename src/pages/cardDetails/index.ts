@@ -1,0 +1,1 @@
+export { Card_detail_page } from "./Card-detail-page"
