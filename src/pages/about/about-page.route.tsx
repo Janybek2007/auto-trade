@@ -1,17 +1,15 @@
-import { lazy, createElement } from 'react';
-import type { LoaderFunctionArgs, RouteObject } from 'react-router';
-import { compose } from '@shared/libs/react';
-import { pathKeys } from '@shared/libs/react-router/config';
+import { lazy } from 'react';
+import type { Route } from './+types/about-page.route'
 
-const aboutPageLoader = (args: LoaderFunctionArgs) =>
-	import('./about-page.model').then(module => module.AboutLoader.aboutPage(args));
+const aboutPageLoader = (args: Route.ClientLoaderArgs) =>
+   import('./about-page.model').then(module => module.AboutLoader.aboutPage(args));
 
-const AboutPage = lazy(() =>
-	import('./about-page.ui').then(module => ({ default: module.AboutPage }))
-);
+const AboutPage = lazy(() => import('./about-page.ui').then(module => ({ default: module.AboutPage })));
 
-export const aboutPageRoute: RouteObject = {
-	path: pathKeys.about(),
-	element: createElement(compose()(AboutPage)),
-	loader: aboutPageLoader,
-};
+export const clientLoader = aboutPageLoader;
+
+export function HydrateFallback() {
+   return <></>;
+}
+
+export default AboutPage;

@@ -1,0 +1,196 @@
+.Main {
+   .container {
+      max-width: 1250px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 20px;
+
+      .content {
+         .top {
+            display: flex;
+            justify-content: space-between;
+            .left {
+               .mainImage {
+                  width: 640px;
+                  height: 470px;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  img {
+                     width: 100%;
+                     height: 100%;
+                     border-radius: 10px;
+                     object-fit: cover;
+                  }
+               }
+
+               .thumbnailContainer {
+                  display: flex;
+                  gap: 10px;
+                  margin-top: 10px;
+                  img {
+                     width: 120px;
+                     height: 120px;
+                     object-fit: cover;
+                     border-radius: 10px;
+                     cursor: pointer;
+                     transition: transform 0.2s ease-in-out;
+                     &:hover {
+                        transform: scale(1.1);
+                     }
+                  }
+                  .active {
+                     border: 2px solid rgb(3, 69, 66);
+                  }
+               }
+            }
+
+            .right {
+               .main_content {
+                  width: 500px;
+                  .block1 {
+                     display: flex;
+                     justify-content: space-between;
+                     margin-bottom: 30px;
+                     h1 {
+                        font-size: 40px;
+                        font-weight: 600;
+                        color: rgb(56, 55, 55);
+                     }
+
+                     h2 {
+                        font-size: 40px;
+                        font-weight: 600;
+                        color: rgb(3, 69, 66);
+                     }
+                  }
+
+                  .block2 {
+                     h1 {
+                        font-size: 22px;
+                        font-weight: 600;
+                        color: rgb(0, 0, 0);
+                        margin-bottom: 15px;
+                     }
+
+                     .specs_boxes {
+                        .box {
+                           display: flex;
+                           align-items: center;
+                           justify-content: space-between;
+                           border-bottom: 0.5px solid rgba(99, 99, 102, 0.6);
+                           padding: 10px 0;
+                           span {
+                              font-size: 16px;
+                              font-weight: 400;
+                              color: rgb(118, 118, 118);
+                           }
+
+                           p {
+                              font-size: 16px;
+                              font-weight: 400;
+                              color: rgb(0, 0, 0);
+                           }
+                        }
+                     }
+                  }
+
+                  .block3 {
+                     h1 {
+                        font-size: 22px;
+                        font-weight: 600;
+                        color: rgb(0, 0, 0);
+                        margin-top: 35px;
+                        margin-bottom: 10px;
+                     }
+
+                     .comp_boxes {
+                        width: 100%;
+                        .box {
+                           display: flex;
+                           align-items: center;
+                           justify-content: space-between;
+                           border-bottom: 0.5px solid rgba(99, 99, 102, 0.6);
+                           padding: 10px 0;
+                           padding-right: 10px;
+
+                           span {
+                              font-size: 16px;
+                              font-weight: 400;
+                              color: rgb(118, 118, 118);
+                              padding-right: 50px;
+                           }
+
+                           p {
+                              width: 300px;
+                              font-size: 16px;
+                              font-weight: 400;
+                              color: rgb(0, 0, 0);
+                           }
+                        }
+                     }
+                  }
+               }
+            }
+         }
+
+         .bottom {
+            .bot_content {
+               display: flex;
+               align-items: start;
+               justify-content: space-between;
+               padding: 50px 0;
+               .left {
+                  .box {
+                     width: 640px;
+                     height: 80px;
+                     border-radius: 10px;
+                     background: rgb(245, 245, 245);
+                     margin-bottom: 17px;
+
+                     display: flex;
+                     align-items: center;
+                     gap: 20px;
+                     padding: 10px 30px;
+                     img {
+                        width: 34px;
+                        height: 34px;
+                     }
+
+                     p {
+                        font-size: 22px;
+                        font-weight: 400;
+                        color: rgb(0, 0, 0);
+                     }
+                  }
+               }
+
+               .right {
+                  .box {
+                     width: 500px;
+                     height: 80px;
+                     border-radius: 10px;
+                     background: rgb(21, 122, 117);
+                     cursor: pointer;
+
+                     display: flex;
+                     align-items: center;
+                     gap: 20px;
+                     padding: 10px 120px;
+                     img {
+                        width: 34px;
+                        height: 34px;
+                     }
+
+                     p {
+                        font-size: 22px;
+                        font-weight: 400;
+                        color: rgb(255, 255, 255);
+                     }
+                  }
+               }
+            }
+         }
+      }
+   }
+}

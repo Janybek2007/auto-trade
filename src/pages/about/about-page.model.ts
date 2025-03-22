@@ -1,12 +1,9 @@
-import type { LoaderFunctionArgs } from 'react-router';
+import type { Route } from './+types/about-page.route'
 
 export class AboutLoader {
-    static async aboutPage(args: LoaderFunctionArgs) {
-        
-    }
+   static async aboutPage(args: Route.ClientLoaderArgs) {}
 }
 
-class AboutModel {
-}
+class AboutModel {}
 
 export const aboutModel = new AboutModel();

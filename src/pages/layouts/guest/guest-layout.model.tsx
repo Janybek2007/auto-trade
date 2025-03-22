@@ -1,7 +1,7 @@
-import {  type LoaderFunctionArgs } from 'react-router';
+import type { Route } from './+types/guest-layout.route'
 
 export class GuestLoader {
-	static async guestLayout(args: LoaderFunctionArgs) {
+	static async guestLayout(args: Route.ClientLoaderArgs) {
 		
 	}
 }

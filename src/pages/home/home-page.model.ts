@@ -1,12 +1,9 @@
-import type { LoaderFunctionArgs } from 'react-router';
+import type { Route } from './+types/home-page.route'
+
+class HomeModel {}
 
 export class HomeLoader {
-    static async homePage(args: LoaderFunctionArgs) {
-        
-    }
-}
-
-class HomeModel {
+   static async homePage(args: Route.ClientLoaderArgs) {}
 }
 
 export const homeModel = new HomeModel();

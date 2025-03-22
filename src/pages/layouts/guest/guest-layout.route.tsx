@@ -1,22 +1,15 @@
-import { aboutPageRoute } from '@pages/about/about-page.route'
-import { homePageRoute } from '@pages/home/home-page.route'
-import { compose } from '@shared/libs/react';
-import { pathKeys } from '@shared/libs/react-router/config';
-import { createElement, lazy } from 'react';
-import type { LoaderFunctionArgs, RouteObject } from 'react-router';
+import { lazy } from 'react';
+import type { Route } from './+types/guest-layout.route'
 
-const guestLayoutLoader = (args: LoaderFunctionArgs) =>
-	import('./guest-layout.model').then(module =>
-		module.GuestLoader.guestLayout(args)
-	);
+const questLayoutLoader = (args: Route.ClientLoaderArgs) =>
+   import('./guest-layout.model').then(module => module.GuestLoader.guestLayout(args));
 
-const GuestLayout = lazy(() =>
-	import('./guest.layout.ui').then(module => ({ default: module.GuestLayout }))
-);
+const GuestLayout = lazy(() => import('./guest.layout.ui').then(module => ({ default: module.GuestLayout })));
 
-export const guestLayoutRoute: RouteObject = {
-	path: pathKeys.root,
-	element: createElement(compose()(GuestLayout)),
-	loader: guestLayoutLoader,
-	children: [homePageRoute, aboutPageRoute]
-};
+export const clientLoader = questLayoutLoader;
+
+export function HydrateFallback() {
+   return <></>;
+}
+
+export default GuestLayout;
