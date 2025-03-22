@@ -1,5 +1,10 @@
+import { Hero } from '@widgets/hero';
 import React from 'react';
 
 export const HomePage: React.FC = () => {
-   return <div>Home Page</div>;
+   return (
+      <div>
+         <Hero />
+      </div>
+   );
 };

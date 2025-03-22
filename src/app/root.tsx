@@ -1,9 +1,9 @@
 import { isRouteErrorResponse, Links, Meta, Scripts, ScrollRestoration } from 'react-router';
+import { Provider } from './providers/index.js';
+import type { Route } from './+types/root';
 import './styles/reset.scss';
 import './styles/variables.scss';
 import './styles/global.scss';
-import { Provider } from './providers/index.js';
-import type { Route } from './+types/root';
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const links: Route.LinksFunction = () => [

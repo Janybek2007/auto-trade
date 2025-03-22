@@ -1,12 +1,8 @@
 import { defineConfig, loadEnv } from 'vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
-import { dirname, resolve } from 'path';
-import { fileURLToPath } from 'url';
 import checker from 'vite-plugin-checker';
 import compression from 'vite-plugin-compression';
 import { reactRouter } from '@react-router/dev/vite';
-
-const __dirname = dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig(({ mode }) => {
    const env = loadEnv(mode, process.cwd(), '');
@@ -39,11 +35,6 @@ export default defineConfig(({ mode }) => {
       server: {
          port: parseInt(env.APP_PORT),
          host: true,
-      },
-      resolve: {
-         alias: {
-            '@': resolve(__dirname, './src'),
-         },
       },
       build: {
          target: 'esnext',

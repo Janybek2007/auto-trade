@@ -1,97 +1,97 @@
 *,
 *::before,
 *::after {
-	box-sizing: border-box;
-	margin: 0;
-	padding: 0;
-	margin-inline: 0;
-	margin-block: 0;
-	padding-inline: 0;
-	padding-block: 0;
+   box-sizing: border-box;
+   margin: 0;
+   padding: 0;
+   margin-inline: 0;
+   margin-block: 0;
+   padding-inline: 0;
+   padding-block: 0;
 }
 
 button {
-	border: 0;
-	outline: 0;
-	background: 0;
-	cursor: pointer;
+   border: 0;
+   outline: 0;
+   background: 0;
+   cursor: pointer;
 }
 
 figure {
-	width: 100%;
-	height: 100%;
+   width: 100%;
+   height: 100%;
 }
 
 label {
-	border: 0;
-	outline: 0;
-	background: 0;
+   border: 0;
+   outline: 0;
+   background: 0;
 }
 
 input,
 select,
 textarea {
-	border: 0;
-	outline: 0;
-	background: 0;
+   border: 0;
+   outline: 0;
+   background: 0;
 }
 
 a,
 li,
 ul {
-	list-style: none;
-	text-decoration: none;
-	border: none;
-	outline: none;
+   list-style: none;
+   text-decoration: none;
+   border: none;
+   outline: none;
 }
 
 img {
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
+   width: 100%;
+   height: 100%;
+   object-fit: cover;
 }
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-	-webkit-appearance: none;
-	margin: 0;
+   -webkit-appearance: none;
+   margin: 0;
 }
 
 body {
-	overflow-x: hidden;
-	overflow-y: scroll;
-	width: 100%;
+   overflow-x: hidden;
+   overflow-y: scroll;
+   width: 100%;
 
-	&::-webkit-scrollbar {
-		width: 0;
-	}
+   &::-webkit-scrollbar {
+      width: 0;
+   }
 }
 
 .wrapper {
-	width: 100%;
-	position: relative;
-	overflow: hidden;
-	display: flex;
-	flex-direction: column;
-	min-height: 100dvh;
+   width: 100%;
+   position: relative;
+   overflow: hidden;
+   display: flex;
+   flex-direction: column;
+   min-height: 100dvh;
 
-	footer {
-		margin-top: auto;
-	}
+   footer {
+      margin-top: auto;
+   }
 
-	main {
-		display: flex;
-		width: 100%;
-		flex-direction: column;
-	}
+   main {
+      display: flex;
+      width: 100%;
+      flex-direction: column;
+   }
 }
 
 html {
-	scroll-behavior: smooth;
-	height: 100%;
+   scroll-behavior: smooth;
+   height: 100%;
 }
 
 *:disabled {
-	pointer-events: none;
-	opacity: 0.6;
+   pointer-events: none;
+   opacity: 0.6;
 }

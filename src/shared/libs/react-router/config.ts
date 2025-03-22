@@ -9,7 +9,7 @@ export const pathKeys = {
       return pathKeys.root.concat('about/');
    },
    page404() {
-      return '/404/';
+      return pathKeys.root.concat('404/');
    },
    cars: {
       root() {

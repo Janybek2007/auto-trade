@@ -1,5 +1,5 @@
 import s from './styles.module.scss';
-import carImg from '../../../public/image/jylas-car-img.svg';
+import carImg from '../../../public/image/jylas-car-img.svg?url';
 
 const AboutData = {
    title: 'О нас',
