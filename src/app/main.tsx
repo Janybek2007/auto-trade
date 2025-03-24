@@ -21,6 +21,6 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 
       {/* <Card_detail_page/> */}
 
-      <ComparePage/>
+      {/* <ComparePage/> */}
    </>,
 );
