@@ -8,7 +8,6 @@ import image4 from '../../../public/image/detail-img4.svg';
 import detIcon1 from '../../../public/icons/det-icon1.svg';
 import detIcon2 from '../../../public/icons/det-icon2.svg';
 import detIcon3 from '../../../public/icons/det-icon3.svg';
-import { Link } from '@tanstack/react-router'
 
 export const CarDetailPage = () => {
    const images = [image1, image2, image3, image4, image1];

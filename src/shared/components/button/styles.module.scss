@@ -1,25 +1,25 @@
 .button {
-    width: 149px;
-    height: 40px;
-    font-size: 15px;
-    font-weight: 500;
-    &.v-solid {
-            color: white;
-            border-radius: 8px;
-            background: rgb(3, 69, 66);
-    }
-    &.v-outline {
-            color: rgb(3, 69, 66);
-            border-radius: 8px;
-            border: 1px solid rgb(3, 69, 66);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-        
-            img {
-                width: 21px;
-                height: 20px;
-            }
-    }
+   width: 149px;
+   height: 40px;
+   font-size: 15px;
+   font-weight: 500;
+   &.v-solid {
+      color: white;
+      border-radius: 8px;
+      background: rgb(3, 69, 66);
+   }
+   &.v-outline {
+      color: rgb(3, 69, 66);
+      border-radius: 8px;
+      border: 1px solid rgb(3, 69, 66);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+
+      img {
+         width: 21px;
+         height: 20px;
+      }
+   }
 }

@@ -19,7 +19,7 @@ interface IProps {
 }
 
 export const CarItem: React.FC<IProps> = ({ actions }) => {
-   return ( 
+   return (
       <>
          <div className={`${s.car} ${s['t-card']}`}>
             <div className={s.card}>
