@@ -1,20 +1,8 @@
-import { compose } from '@shared/libs/react';
-import { withErrorBoundary } from 'react-error-boundary';
 import { QueryClientProvider } from './QueryClientProvider';
-import { ErrorHandler, logError } from '@shared/components';
-import { Outlet } from 'react-router';
+import React from 'react';
 
-const enhance = compose(component =>
-   withErrorBoundary(component, {
-      FallbackComponent: ErrorHandler,
-      onError: logError,
-   }),
-);
-
-export const Provider = enhance(() => (
+export const Provider: React.FC<React.PropsWithChildren> = ({ children }) => (
    <>
-      <QueryClientProvider>
-         <Outlet />
-      </QueryClientProvider>
+      <QueryClientProvider>{children}</QueryClientProvider>
    </>
-));
+);

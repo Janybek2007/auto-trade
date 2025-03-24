@@ -1,1 +1,0 @@
-import { ComparePage } from "./Compare-page"

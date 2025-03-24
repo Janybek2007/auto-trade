@@ -1,6 +1,6 @@
-import GuestLayout from '@pages/layouts/guest';
+import { GuestLayout } from '@pages/layouts';
 import { createFileRoute } from '@tanstack/react-router';
 
 export const Route = createFileRoute('/_guest-layout')({
-	component: GuestLayout
+   component: GuestLayout,
 });

@@ -10,13 +10,20 @@
 
 // Import Routes
 
-import { Route as rootRoute } from './routes/__root'
-import { Route as AboutImport } from './routes/about'
-import { Route as GuestLayoutImport } from './routes/_guest-layout'
-import { Route as CarsCarIdImport } from './routes/cars.$car-id'
-import { Route as GuestLayoutHomeIndexImport } from './routes/_guest-layout/_home.index'
+import { Route as rootRoute } from './app/routes/__root'
+import { Route as CompareImport } from './app/routes/compare'
+import { Route as AboutImport } from './app/routes/about'
+import { Route as GuestLayoutImport } from './app/routes/_guest-layout'
+import { Route as CarsCarIdImport } from './app/routes/cars.$car-id'
+import { Route as GuestLayoutHomeIndexImport } from './app/routes/_guest-layout/_home.index'
 
 // Create/Update Routes
+
+const CompareRoute = CompareImport.update({
+  id: '/compare',
+  path: '/compare',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const AboutRoute = AboutImport.update({
   id: '/about',
@@ -59,6 +66,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutImport
       parentRoute: typeof rootRoute
     }
+    '/compare': {
+      id: '/compare'
+      path: '/compare'
+      fullPath: '/compare'
+      preLoaderRoute: typeof CompareImport
+      parentRoute: typeof rootRoute
+    }
     '/cars/$car-id': {
       id: '/cars/$car-id'
       path: '/cars/$car-id'
@@ -93,12 +107,14 @@ const GuestLayoutRouteWithChildren = GuestLayoutRoute._addFileChildren(
 export interface FileRoutesByFullPath {
   '': typeof GuestLayoutRouteWithChildren
   '/about': typeof AboutRoute
+  '/compare': typeof CompareRoute
   '/cars/$car-id': typeof CarsCarIdRoute
   '/': typeof GuestLayoutHomeIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/about': typeof AboutRoute
+  '/compare': typeof CompareRoute
   '/cars/$car-id': typeof CarsCarIdRoute
   '/': typeof GuestLayoutHomeIndexRoute
 }
@@ -107,19 +123,21 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/_guest-layout': typeof GuestLayoutRouteWithChildren
   '/about': typeof AboutRoute
+  '/compare': typeof CompareRoute
   '/cars/$car-id': typeof CarsCarIdRoute
   '/_guest-layout/_home/': typeof GuestLayoutHomeIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '' | '/about' | '/cars/$car-id' | '/'
+  fullPaths: '' | '/about' | '/compare' | '/cars/$car-id' | '/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/about' | '/cars/$car-id' | '/'
+  to: '/about' | '/compare' | '/cars/$car-id' | '/'
   id:
     | '__root__'
     | '/_guest-layout'
     | '/about'
+    | '/compare'
     | '/cars/$car-id'
     | '/_guest-layout/_home/'
   fileRoutesById: FileRoutesById
@@ -128,12 +146,14 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   GuestLayoutRoute: typeof GuestLayoutRouteWithChildren
   AboutRoute: typeof AboutRoute
+  CompareRoute: typeof CompareRoute
   CarsCarIdRoute: typeof CarsCarIdRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   GuestLayoutRoute: GuestLayoutRouteWithChildren,
   AboutRoute: AboutRoute,
+  CompareRoute: CompareRoute,
   CarsCarIdRoute: CarsCarIdRoute,
 }
 
@@ -149,6 +169,7 @@ export const routeTree = rootRoute
       "children": [
         "/_guest-layout",
         "/about",
+        "/compare",
         "/cars/$car-id"
       ]
     },
@@ -160,6 +181,9 @@ export const routeTree = rootRoute
     },
     "/about": {
       "filePath": "about.tsx"
+    },
+    "/compare": {
+      "filePath": "compare.tsx"
     },
     "/cars/$car-id": {
       "filePath": "cars.$car-id.tsx"
