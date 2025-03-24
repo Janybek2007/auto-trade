@@ -1,0 +1,41 @@
+.container {
+	padding: 0.5rem;
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+.message {
+	color: #4b5563;
+
+	&:global(.dark) & {
+		color: #9ca3af;
+	}
+}
+
+.buttonGroup {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	flex-wrap: wrap;
+}
+
+.backButton {
+	background-color: #10b981;
+	color: white;
+	padding: 0.25rem 0.5rem;
+	border-radius: 0.25rem;
+	text-transform: uppercase;
+	font-weight: 900;
+	font-size: 0.875rem;
+}
+
+.homeButton {
+	background-color: #0891b2;
+	color: white;
+	padding: 0.25rem 0.5rem;
+	border-radius: 0.25rem;
+	text-transform: uppercase;
+	font-weight: 900;
+	font-size: 0.875rem;
+}

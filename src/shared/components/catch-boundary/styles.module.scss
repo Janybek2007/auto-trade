@@ -1,0 +1,30 @@
+.container {
+  min-width: 0;
+  flex: 1;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.button {
+  padding: 0.5rem 1rem;
+  background-color: #4b5563;
+  border-radius: 0.25rem;
+  color: white;
+  text-transform: uppercase;
+  font-weight: 800;
+
+  &:global(.dark) & {
+    background-color: #374151;
+  }
+}
