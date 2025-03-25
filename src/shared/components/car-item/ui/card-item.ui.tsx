@@ -1,50 +1,24 @@
 import s from '../style.module.scss';
-import expamleImgForCard from '../../../../../public/image/askar-img.svg';
-import { Button, type ButtonProps } from '@shared/components/button/button.ui';
+import React from 'react';
+import { CarItemPops } from '../card-item.types';
 
-const CardDatas = {
-   model: 'Kia K5',
-   range: '38 000',
-   year: '2024',
-   price: '24 410',
-};
-
-interface ActionButton {
-   type: 'Подробнее' | 'Сравнение';
-   button?: Omit<ButtonProps, 'children'>;
-}
-
-interface IProps {
-   actions: ActionButton[];
-}
-
-export const CarItem: React.FC<IProps> = ({ actions }) => {
+export const CardItem: React.FC<Omit<CarItemPops, 'actions'>> = ({ children, item }) => {
    return (
       <>
          <div className={`${s.car} ${s['t-card']}`}>
-            <div className={s.card}>
-               <img src={expamleImgForCard} alt='' />
+            <div className={s.content}>
+               <img className={s.image} src={item.image} alt='Car Image' />
 
                <div className={s.card_content}>
-                  <h1>{CardDatas.model}</h1>
+                  <h1>{item.model}</h1>
                   <div className={s.car_specs}>
-                     <p>{CardDatas.range}km</p>
+                     <p>{item.range}km</p>
                      <div className={s.circle}></div>
-                     <p>{CardDatas.year}</p>
+                     <p>{item.year}</p>
                   </div>
-                  <h3>${CardDatas.price}</h3>
+                  <h3>${item.price}</h3>
                </div>
-
-               <div className={s.buttons}>
-                  {actions.map(({ type, button }, index) => (
-                     <Button
-                        {...button}
-                        variant={type === 'Сравнение' ? 'outline' : 'solid'}
-                        key={type}
-                        children={type}
-                     />
-                  ))}
-               </div>
+               {children}
             </div>
          </div>
       </>

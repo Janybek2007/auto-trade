@@ -1,0 +1,40 @@
+.list {
+   display: grid;
+   padding: 25px;
+   gap: 16px;
+   width: 100%;
+   min-width: 1070px;
+   &.type-card {
+      grid-template-columns: repeat(3, 1fr);
+   }
+   &.type-list {
+      grid-template-columns: repeat(1, 1fr);
+   }
+}
+
+.moreButton {
+   display: inline-flex;
+   align-items: center;
+   justify-content: center;
+   margin: 20px auto;
+   gap: 10px;
+   font-size: 15px;
+   font-weight: 600;
+   color: var(--text2);
+   &:hover {
+      transform: translateY(-1px);
+   }
+   &:active {
+      transform: translateY(0.5px);
+   }
+}
+
+.content {
+   display: flex;
+   flex-direction: column;
+   max-height: 140dvh;
+   overflow-y: auto;
+   &::-webkit-scrollbar {
+      width: 0;
+   }
+}

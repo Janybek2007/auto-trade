@@ -1,25 +1,48 @@
 .button {
-   width: 149px;
-   height: 40px;
-   font-size: 15px;
-   font-weight: 500;
-   &.v-solid {
-      color: white;
-      border-radius: 8px;
-      background: rgb(3, 69, 66);
+   font-weight: var(--font-weight, 500);
+   padding: var(--padding-y) var(--padding-x);
+   --border-width: var(--border-width-default, 1px);
+   transition: all 0.25s;
+
+   &.s-md {
+      --padding-x: var(--padding-x-md, 38px);
+      --padding-y: var(--padding-y-md, 10px);
    }
+
+   &.s-lg {
+      --padding-x: var(--padding-x-lg, 40px);
+      --padding-y: var(--padding-y-lg, 14px);
+   }
+
+   &.v-solid {
+      color: var(--color-white, var(--white));
+      border-radius: var(--border-radius, 8px);
+      &.c-primary {
+         background: var(--background-primary, var(--primary));
+      }
+      &.c-neutral {
+         color: var(--color-neutral, var(--black));
+         background: var(--background-neutral, rgb(240, 240, 240));
+         &:hover {
+            background: var(--background-neutral-hover, rgb(235, 235, 235));
+         }
+      }
+   }
+
    &.v-outline {
-      color: rgb(3, 69, 66);
-      border-radius: 8px;
-      border: 1px solid rgb(3, 69, 66);
+      border-radius: var(--border-radius, 8px);
+      border: var(--border-width) solid transparent;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 6px;
-
-      img {
-         width: 21px;
-         height: 20px;
+      gap: var(--gap, 6px);
+      &.c-primary {
+         color: var(--outline-color-primary, var(--primary));
+         border-color: var(--outline-border-primary, var(--primary));
+      }
+      &.c-neutral {
+         color: var(--outline-color-neutral, rgb(240, 240, 240));
+         border-color: var(--outline-border-neutral, rgb(240, 240, 240));
       }
    }
 }

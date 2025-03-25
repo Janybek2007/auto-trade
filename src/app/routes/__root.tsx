@@ -2,7 +2,6 @@ import { Provider } from '@app/providers';
 import { CatchBoundary, NotFound } from '@shared/components';
 import { seo } from '@shared/utils/seo';
 import { HeadContent, Outlet, Scripts, createRootRoute } from '@tanstack/react-router';
-import * as React from 'react';
 
 export const Route = createRootRoute({
    head: () => ({
@@ -15,19 +14,15 @@ export const Route = createRootRoute({
          }),
       ],
       links: [
-         { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' },
-         { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon-32x32.png' },
-         { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicon-16x16.png' },
+         { rel: 'apple-touch-icon', sizes: '180x180', href: '/seo/apple-touch-icon.png' },
+         { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/seo/favicon-32x32.png' },
+         { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/seo/favicon-16x16.png' },
          { rel: 'manifest', href: '/site.webmanifest', color: '#fffff' },
-         { rel: 'icon', href: '/favicon.ico' },
+         { rel: 'icon', href: '/seo/favicon.ico' },
       ],
    }),
    errorComponent: props => {
-      return (
-         <RootDocument>
-            <CatchBoundary {...props} />
-         </RootDocument>
-      );
+      return <CatchBoundary {...props} />;
    },
    notFoundComponent: () => <NotFound />,
    component: RootComponent,
@@ -35,24 +30,12 @@ export const Route = createRootRoute({
 
 function RootComponent() {
    return (
-      <RootDocument>
-         <Outlet />
-      </RootDocument>
-   );
-}
-
-function RootDocument({ children }: { children: React.ReactNode }) {
-   return (
-      <html>
-         <head>
-            <HeadContent />
-         </head>
-         <body>
-            <div className='wrapper'>
-               <Provider>{children}</Provider>
-            </div>
-            <Scripts />
-         </body>
-      </html>
+      <div className='wrapper'>
+         <HeadContent />
+         <Provider>
+            <Outlet />
+         </Provider>
+         <Scripts />
+      </div>
    );
 }

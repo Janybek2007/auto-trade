@@ -1,0 +1,43 @@
+.compire_switch {
+   display: flex;
+   align-items: center;
+   gap: 25px;
+   margin: 28px 0 42px 0;
+}
+
+.compare {
+   --padding-x-md: 23px;
+   --border-width: 2px;
+   position: relative;
+}
+
+.compare span:not(.badge) {
+   font-size: 20px;
+   font-weight: 500;
+   letter-spacing: -0.3px;
+}
+
+.item_type {
+   --padding-x-md: 7px;
+   --padding-y-md: 7px;
+   --border-width: 2px;
+}
+
+.badge {
+   position: absolute;
+   top: -10px;
+   left: -10px;
+   width: 24px;
+   height: 24px;
+   padding: 0 5px;
+   background-color: var(--white);
+   border: 2px solid var(--primary);
+   color: var(--primary);
+   border-radius: 50%;
+   font-size: 14px;
+   font-weight: 700;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   will-change: transform;
+}

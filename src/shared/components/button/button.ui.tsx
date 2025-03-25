@@ -6,14 +6,29 @@ import { Icon } from '../icon/icon.ui';
 export interface ButtonProps extends React.PropsWithChildren {
    variant?: 'solid' | 'outline';
    disabled?: boolean;
-   onClick?: VoidFunction;
+   onClick?: (e: React.MouseEvent) => void;
    icon?: IconProps;
    className?: string;
+   color?: 'neutral' | 'primary';
+   size?: 'sm' | 'md' | 'lg';
 }
 
-export const Button: React.FC<ButtonProps> = ({ variant, children, disabled, onClick, icon, className }) => {
+export const Button: React.FC<ButtonProps> = ({
+   variant = 'solid',
+   children,
+   disabled,
+   onClick,
+   icon,
+   className,
+   color = 'primary',
+   size = 'md',
+}) => {
    return (
-      <button disabled={disabled} onClick={onClick} className={`${s.button} ${s[`v-${variant}`]} ${className}`}>
+      <button
+         disabled={disabled}
+         onClick={onClick}
+         className={`${s.button} ${s[`v-${variant}`]} ${s[`c-${color}`]} ${s[`s-${size}`]} ${className}`}
+      >
          {icon && <Icon {...icon} />}
          {children}
       </button>

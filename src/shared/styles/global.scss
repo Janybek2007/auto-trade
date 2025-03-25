@@ -1,3 +1,13 @@
 body {
    font-family: var(--font-family);
+   color: var(--text);
+}
+
+.container {
+   --container-mw: 1440px;
+   --container-px: 0;
+
+   max-width: var(--container-mw);
+   margin: 0 auto;
+   padding: 0 var(--container-px);
 }

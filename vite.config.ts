@@ -1,5 +1,5 @@
 import { defineConfig, loadEnv } from 'vite';
-import react from '@vitejs/plugin-react';
+import viteReact from '@vitejs/plugin-react-swc';
 import { TanStackRouterVite } from '@tanstack/router-plugin/vite';
 import tsConfigPaths from 'vite-tsconfig-paths';
 import compression from 'vite-plugin-compression';
@@ -10,12 +10,12 @@ export default defineConfig(({ mode }) => {
    const isDev = mode === 'development';
    return {
       plugins: [
-         react(),
          TanStackRouterVite({
             target: 'react',
             autoCodeSplitting: true,
             routesDirectory: './src/app/routes',
          }),
+         viteReact(),
          tsConfigPaths({
             projects: ['./tsconfig.json'],
          }),

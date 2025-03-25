@@ -1,10 +1,9 @@
 import { HttpClient } from '@shared/libs/http';
 import { HTTPError } from '@shared/libs/http/http-error';
 import { z } from 'zod';
+import { ApiUrl } from './url'
 
-const ApiUrl = ""
-
-export const http = new HttpClient(ApiUrl,{}, true);
+export const http = new HttpClient(ApiUrl, {}, true);
 
 export function handleGenericError(error: HTTPError): HTTPError {
 	const validation = GenericErrorSchema.safeParse(error.response?.data);

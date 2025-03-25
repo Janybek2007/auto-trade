@@ -1,0 +1,10 @@
+.collapsible {
+   width: 100%;
+   * {
+      will-change: height;
+   }
+
+   .collapsible_content {
+      overflow: hidden;
+   }
+}

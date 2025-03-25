@@ -1,0 +1,45 @@
+.brandSelector {
+   .title {
+      font-size: 36px;
+      font-weight: bold;
+      color: var(--primary);
+      line-height: 100%;
+      margin-bottom: 20px;
+   }
+
+   .brandList {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 10px;
+   }
+
+   .brandButton {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      transition: all 0.2s;
+      border-radius: 12px;
+
+      img {
+         width: 40px;
+         height: 40px;
+      }
+
+      span {
+         font-size: 22px;
+         line-height: 100%;
+         font-weight: 500;
+      }
+      &.active {
+         background: #f3f3f3;
+      }
+   }
+
+   .brandLogo {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+   }
+}

@@ -1,68 +1,101 @@
+.compare-icon {
+   width: 20px;
+}
+
 .car {
+   .content {
+      box-shadow: 1px 4px 4px 0px rgba(83, 83, 83, 0.25);
+      border-radius: 10px;
+   }
+
+   .car_specs {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+
+      p {
+         font-size: 17px;
+         font-weight: 500;
+         color: var(--primary);
+      }
+
+      .circle {
+         width: 5px;
+         height: 5px;
+         border-radius: 50%;
+         background: var(--primary);
+      }
+   }
+
+   h3 {
+      color: var(--primary);
+      font-size: 18px;
+      font-weight: 600;
+   }
+
+   .buttons {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      button {
+         --padding-y: 13px;
+         --padding-x: 0;
+         font-size: 16px;
+         letter-spacing: -0.3px;
+         transition: all 0.25s;
+         will-change: transform;
+         &.t-Сравнение {
+            --padding-y: 10.5px;
+            --border-width: 2px;
+         }
+         &:hover {
+            transform: translateY(-1px);
+         }
+         &:active {
+            transform: translateY(0.5px);
+         }
+      }
+   }
+
    &.t-card {
-      .card {
+      .content {
          width: 323px;
          height: 416px;
-         padding: 10px 10px;
-         box-shadow: 1px 4px 4px 0px rgba(83, 83, 83, 0.25);
-         border-radius: 10px;
-         img {
+         padding: 10px;
+
+         .image {
             width: 100%;
             height: 240px;
+            object-fit: contain;
          }
 
          .card_content {
             padding: 9px 0;
-            .car_specs {
-               display: flex;
-               align-items: center;
-               padding: 5px 0;
-               gap: 5px;
-
-               p {
-                  font-size: 17px;
-                  font-weight: 500;
-                  color: rgb(3, 69, 66);
-               }
-
-               .circle {
-                  width: 5px;
-                  height: 5px;
-                  border-radius: 50%;
-                  background: rgb(3, 69, 66);
-               }
-            }
-
-            h3 {
-               color: rgb(3, 69, 66);
-               font-size: 18px;
-               font-weight: 600;
-            }
          }
 
          .buttons {
-            display: flex;
-            align-items: center;
             justify-content: space-between;
+            button {
+               width: 100%;
+            }
          }
       }
    }
+
    &.t-list {
-      .card {
+      .content {
          width: 100%;
          height: 230px;
          padding: 14px 10px;
-         box-shadow: 1px 4px 4px 0px rgba(83, 83, 83, 0.25);
-         border-radius: 10px;
-
          display: flex;
          align-items: center;
 
          .card_img {
-            img {
+            .image {
                width: 256px;
                height: 220px;
                border-radius: 10px;
+               object-fit: cover;
             }
          }
 
@@ -77,41 +110,20 @@
                display: flex;
                justify-content: space-between;
                align-items: end;
+
                .card_title {
                   display: flex;
                   flex-direction: column;
-
-                  .car_specs {
-                     display: flex;
-                     align-items: center;
-                     gap: 5px;
-
-                     p {
-                        font-size: 17px;
-                        font-weight: 500;
-                        color: rgb(3, 69, 66);
-                     }
-
-                     .circle {
-                        width: 5px;
-                        height: 5px;
-                        border-radius: 50%;
-                        background: rgb(3, 69, 66);
-                     }
-                  }
-               }
-
-               h3 {
-                  color: rgb(3, 69, 66);
-                  font-size: 18px;
-                  font-weight: 600;
                }
             }
+
             .buttons {
-               display: flex;
-               align-items: center;
                justify-content: end;
+               flex-direction: row-reverse;
                gap: 5px;
+               button {
+                  --padding-x: 25px;
+               }
             }
          }
       }
