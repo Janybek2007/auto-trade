@@ -1,0 +1,165 @@
+.Header {
+   width: 100%;
+   background: var(--primary);
+   position: relative;
+   z-index: 100;
+   .container {
+      max-width: 1250px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 20px;
+      .content {
+         display: flex;
+         align-items: center;
+         justify-content: space-between;
+         padding: 30px 0;
+
+         .right_place {
+            display: flex;
+            align-items: center;
+            gap: 110px;
+
+            .right {
+               display: flex;
+               align-items: center;
+               gap: 50px;
+
+               p,
+               a {
+                  font-size: 20px;
+                  font-weight: 500;
+                  color: var(--white);
+                  cursor: pointer;
+               }
+
+               .jylas_logo {
+                  display: flex;
+                  flex-direction: column;
+                  img {
+                     width: 82px;
+                     height: 42px;
+                  }
+               }
+            }
+         }
+      }
+   }
+}
+
+.switch_language {
+   position: relative;
+   display: inline-block;
+
+   .toggle_button {
+      border-radius: 8px;
+      font-weight: 500;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--white);
+      background: var(--primary);
+      gap: 7px;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+
+      &:hover {
+         background: var(--hover-primary);
+         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      }
+
+      svg {
+         width: 15px;
+         height: 15px;
+         transition: all 0.25s;
+      }
+   }
+
+   .dropdown {
+      position: absolute;
+      top: calc(100% + 6px);
+      left: 0;
+      border-radius: 8px;
+      background: var(--white);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+      animation: slideDown 0.25s ease-out;
+      z-index: 10;
+      border: 1px solid var(--light-gray);
+   }
+
+   .lang_button {
+      padding: 12px 20px;
+      width: 100%;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      text-align: center;
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--dark);
+      transition: all 0.3s ease;
+
+      &.active {
+         background: var(--secondary);
+         color: var(--white);
+         &:hover {
+            background: var(--hover-secondary);
+         }
+      }
+
+      &:not(.active):hover {
+         background: var(--hover-white);
+         color: var(--primary);
+      }
+
+      &:not(:last-child) {
+         border-bottom: 1px solid var(--light-gray);
+      }
+   }
+
+   @keyframes slideDown {
+      from {
+         opacity: 0;
+         transform: translateY(-6px);
+      }
+      to {
+         opacity: 1;
+         transform: translateY(0);
+      }
+   }
+}
+
+.nav_list {
+   display: flex;
+   align-items: center;
+   gap: 30px;
+   cursor: pointer;
+   background: var(--white);
+   border-radius: 20px;
+   overflow: hidden;
+
+   li a {
+      padding: 13.46px 16.76px;
+      display: flex;
+      align-items: center;
+      gap: 10.2px;
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--black);
+      line-height: 100%;
+
+      &.active {
+         background: var(--secondary);
+         color: var(--white);
+      }
+      &:not(.active):hover {
+         background-color: var(--hover-white);
+      }
+
+      img {
+         width: 27.53px;
+         height: 18.31px;
+      }
+   }
+}

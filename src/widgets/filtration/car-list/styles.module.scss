@@ -38,3 +38,18 @@
       width: 0;
    }
 }
+
+.button {
+   --padding-x-md: 17.86px;
+   --padding-y-md: 7.5px;
+   display: flex;
+   align-items: center;
+   gap: 8px;
+   font-size: 14px;
+   letter-spacing: -0.3px;
+   img {
+      object-fit: contain;
+      width: 24px;
+      height: 24px;
+   }
+}

@@ -10,7 +10,7 @@ import { useNavigate } from '@tanstack/react-router';
 export const Hero: React.FC = () => {
    const router = useNavigate();
    return (
-      <>
+      <main className={styles.main}>
          <video className={styles.background} autoPlay loop muted>
             <source src='/video/hero.mp4' type='video/mp4' />
          </video>
@@ -58,6 +58,6 @@ export const Hero: React.FC = () => {
                </div>
             </div>
          </div>
-      </>
+      </main>
    );
 };

@@ -13,12 +13,31 @@ const baseCarData = [
    { model: 'BMW X5', range: '50 000', year: 2023, price: '48 300' },
 ];
 
+const BaseActionProps = {
+   color: 'secondary' as 'secondary',
+   className: s.button,
+};
+
 export const CarList: React.FC = () => {
    const { item_type, onCompares } = useFiltrations();
    const [visibleCount, setVisibleCount] = useState(9);
 
-   const handleLoadMore = React.useCallback(() => setVisibleCount(prev => prev + 9), []);
-   const navigate = useNavigate();
+   const HandleLoadMore = React.useCallback(() => setVisibleCount(prev => prev + 9), []);
+   const Navigate = useNavigate();
+
+   const CompareClick = React.useCallback((v: number) => {
+      onCompares(String(v), [
+         {
+            children: (
+               <>
+                  <img src='/icons/compare-white-icon.svg' alt='Compare Icon' /> Вернуть
+               </>
+            ),
+            ...BaseActionProps,
+            onClick: () => onCompares(String(v))
+         },
+      ]);
+   }, []);
 
    return (
       <div className={s['content']}>
@@ -44,8 +63,8 @@ export const CarList: React.FC = () => {
                         }}
                         type={item_type}
                         actions={[
-                           { type: 'Подробнее', button: { onClick: () => navigate({ to: `/cars/${i}` }) } },
-                           { type: 'Сравнение', button: { onClick: () => onCompares(String(i)) } },
+                           { type: 'Подробнее', button: { onClick: () => Navigate({ to: `/cars/${i}` }) } },
+                           { type: 'Сравнение', button: { onClick: () => CompareClick(i) } },
                         ]}
                      />
                   </motion.div>
@@ -53,7 +72,7 @@ export const CarList: React.FC = () => {
             })}
          </motion.div>
          {visibleCount < 100 && (
-            <Button size='lg' color='neutral' className={s.moreButton} onClick={handleLoadMore}>
+            <Button size='lg' color='neutral' className={s.moreButton} onClick={HandleLoadMore}>
                Загрузить еще
                <Icon name='line-md:arrow-down' c_size={20} />
             </Button>

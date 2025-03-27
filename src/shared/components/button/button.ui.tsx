@@ -9,7 +9,7 @@ export interface ButtonProps extends React.PropsWithChildren {
    onClick?: (e: React.MouseEvent) => void;
    icon?: IconProps;
    className?: string;
-   color?: 'neutral' | 'primary';
+   color?: 'neutral' | 'primary' | 'secondary';
    size?: 'sm' | 'md' | 'lg';
 }
 

@@ -124,7 +124,7 @@ export const CarDetailPage = () => {
                      </div>
                      <div className={s.right}>
                         <div className={s.box}>
-                           <img src={detIcon3} alt='' />
+                           <img src={detIcon3} alt='WhatsApp Icon' />
                            <p>Написать менеджеру</p>
                         </div>
                      </div>

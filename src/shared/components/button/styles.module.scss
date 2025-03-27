@@ -1,7 +1,6 @@
 .button {
    font-weight: var(--font-weight, 500);
    padding: var(--padding-y) var(--padding-x);
-   --border-width: var(--border-width-default, 1px);
    transition: all 0.25s;
 
    &.s-md {
@@ -20,6 +19,9 @@
       &.c-primary {
          background: var(--background-primary, var(--primary));
       }
+      &.c-secondary {
+         background: var(--background-secondary, var(--secondary));
+      }
       &.c-neutral {
          color: var(--color-neutral, var(--black));
          background: var(--background-neutral, rgb(240, 240, 240));
@@ -31,7 +33,7 @@
 
    &.v-outline {
       border-radius: var(--border-radius, 8px);
-      border: var(--border-width) solid transparent;
+      border: var(--border-width, 1px) solid transparent;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -39,6 +41,10 @@
       &.c-primary {
          color: var(--outline-color-primary, var(--primary));
          border-color: var(--outline-border-primary, var(--primary));
+      }
+      &.c-secondary {
+         color: var(--outline-color-secondary, var(--secondary));
+         border-color: var(--outline-border-secondary, var(--secondary));
       }
       &.c-neutral {
          color: var(--outline-color-neutral, rgb(240, 240, 240));

@@ -1,3 +1,5 @@
+import { toast } from '@features/toast';
+import { ButtonProps } from '@shared/components';
 import { createStore } from '@shared/libs/zustand';
 
 interface FilterUpdatePayload<T> {
@@ -42,11 +44,22 @@ export const filtrationStore = createStore({
       setBrand: (state, brand) => {
          state.brand = brand;
       },
-      onCompares: (state, car_id: string) => {
+      onCompares: (state, car_id: string, actions?: ButtonProps[]) => {
          if (state.compares.includes(car_id)) {
             state.compares = state.compares.filter(id => id !== car_id);
+            toast('Авто удалено из сравнения', {
+               actions: actions,
+               description: `Авто для сравнения: ${state.compares.length}`,
+            });
          } else {
+            if (state.compares.length == 6) {
+               alert('Не больше 6 сравнений!');
+            }
             state.compares = [...state.compares, car_id];
+            toast('Авто добавлено к сравнения', {
+               actions: actions,
+               description: `Авто для сравнения: ${state.compares.length}`,
+            });
          }
       },
       toggleItemType: state => {
