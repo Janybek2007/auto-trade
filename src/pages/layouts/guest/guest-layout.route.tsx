@@ -1,3 +1,4 @@
+import { aboutPageRoute } from '@pages/about/about-page.route'
 import { homePageRoute } from '@pages/home/home-page.route'
 import { compose } from '@shared/libs/react';
 import { pathKeys } from '@shared/libs/react-router/config';
@@ -17,5 +18,5 @@ export const guestLayoutRoute: RouteObject = {
 	path: pathKeys.root,
 	element: createElement(compose()(GuestLayout)),
 	loader: guestLayoutLoader,
-	children: [homePageRoute]
+	children: [homePageRoute, aboutPageRoute]
 };
