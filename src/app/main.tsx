@@ -7,6 +7,7 @@ import { Card_item, List_item } from '@shared/components/car-item';
 import { About_info, Contact, Why_us } from '@pages/aboutPage';
 import { Card_detail_page } from '@pages/cardDetails';
 import { ComparePage } from '@pages/comparePage/Compare-page';
+import { Header } from '@widgets/header';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
    <>
