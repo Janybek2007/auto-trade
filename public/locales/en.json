@@ -1,0 +1,131 @@
+{
+   "about": {
+      "info": {
+         "title": "About Us",
+         "desc1": "The roar of engines, the smell of burnt rubber, and tension in the air – the race begins! Drivers stare at the traffic light, and as soon as it turns green, the cars surge forward, leaving a smoky trail. Every turn is a test at the limit of possibilities. Street races, Formula 1 tracks, or rally races on rough terrain – everywhere demands cold calculation and steel nerves. In one place, speed decides; in another, it’s the skill to keep the car under control on wet asphalt or a narrow mountain road.",
+         "desc2": "Cars in the world of racing are not just vehicles but true masterpieces of engineering. Aerodynamics, powerful engines, sports suspensions – every detail matters. Yet even the fastest car won’t win without a talented driver behind the wheel."
+      },
+      "whyUs": {
+         "title": "Why Us?",
+         "cards": {
+            "individualSelection": "Individual Car Selection",
+            "qualityReliability": "Quality and Reliability for You",
+            "transparentConditions": "Transparent Deal Conditions",
+            "fastDelivery": "Fast Delivery to Any Location"
+         }
+      },
+      "contact": {
+         "title": "Contacts",
+         "address": {
+            "title": "Address",
+            "bishkek": "Bishkek, EURASIA, Kievskaya Street, office; 4th floor",
+            "osh": "Osh, EURASIA, Kievskaya Street, office; 4th floor"
+         },
+         "phone": {
+            "title": "Phone Number"
+         },
+         "social": {
+            "title": "Our Social Media"
+         }
+      }
+   },
+   "hero": {
+      "logoAlt": "Askar Auto Logo",
+      "title": {
+         "part1": "Car selection and delivery",
+         "part2": "From America, Korea, and UAE"
+      },
+      "subtitle": "Choose a country"
+   },
+   "filterPanel": {
+      "filters": "Filters",
+      "choose": "Choose",
+      "price": {
+         "label": "Price, $",
+         "options": {
+            "8000-20000": "$8k-20k",
+            "20000-40000": "$20k-40k",
+            "40000-60000": "$40k-60k",
+            "60000-80000": "$60k-80k",
+            "80000-100000": "$80k-100k"
+         }
+      },
+      "year_of_production": {
+         "label": "Year of Production",
+         "options": {
+            "2000-2005": "2000-2005",
+            "2005-2010": "2005-2010",
+            "2010-2015": "2010-2015",
+            "2015-2020": "2015-2020",
+            "2020-2024": "2020-2024"
+         }
+      },
+      "mileage": {
+         "label": "Mileage, km",
+         "options": {
+            "0-30000": "Up to 30,000",
+            "30000-60000": "30k-60k",
+            "60000-90000": "60k-90k",
+            "90000-150000": "90k-150k",
+            "150000+": "Over 150,000"
+         }
+      },
+      "kpp_type": {
+         "label": "Transmission Type",
+         "options": {
+            "automatic": "Automatic",
+            "manual": "Manual",
+            "variator": "Variator",
+            "robot": "Robot"
+         }
+      },
+      "fuel_type": {
+         "label": "Fuel Type",
+         "options": {
+            "": "Any",
+            "petrol": "Petrol",
+            "diesel": "Diesel",
+            "hybrid": "Hybrid"
+         }
+      },
+      "bodywork": {
+         "label": "Body Type",
+         "options": {
+            "sedan": "Sedan",
+            "hatchback": "Hatchback",
+            "crossover": "Crossover",
+            "suv": "SUV",
+            "minivan": "Minivan",
+            "microbus": "Microbus"
+         }
+      }
+   },
+   "carDetail": {
+      "selectedImageAlt": "Selected Car Image",
+      "specsTitle": "Technical Specifications",
+      "engineLabel": "Engine Capacity",
+      "powerLabel": "Power",
+      "gearboxLabel": "Transmission Type",
+      "wheelDriveLabel": "Drive",
+      "steeringWheelLabel": "Steering Wheel",
+      "rangeLabel": "Mileage",
+      "equipmentTitle": "Equipment",
+      "exteriorLabel": "Exterior",
+      "interiorLabel": "Interior",
+      "securityLabel": "Safety",
+      "deliveryTime": "Delivery time approximately 2.5 months",
+      "deliveryCost": "Delivery cost is $4000-4500 depending on the state",
+      "whatsappAlt": "WhatsApp Icon",
+      "contactManager": "Contact Manager"
+   },
+   "comparison": {
+      "added": "Car added to comparison",
+      "removed": "Car removed from comparison",
+      "count": "Cars for comparison",
+      "limit": "No more than 6 comparisons!"
+   },
+   "carActions": {
+      "comparison": "Compare",
+      "more": "More details"
+   }
+}

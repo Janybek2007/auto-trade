@@ -1,30 +1,32 @@
 import React from 'react';
 import s from '../styles.module.scss';
-import { Link } from '@tanstack/react-router';
+import { Link, useLocation } from '@tanstack/react-router';
 
-export const NavLinks: React.FC = React.memo(() => {
+export const NavLinks: React.FC<{ currentLanguage: string }> = React.memo(({ currentLanguage }) => {
+   const isRuOrKg = currentLanguage === 'RU' || currentLanguage === 'KG';
+   const {pathname} = useLocation()
    return (
       <nav>
-         <ul className={s.nav_list}>
+         <ul className={`${pathname !== '/' &&  s.bg} ${s.nav_list}`}>
             <li>
-               <Link activeProps={{ className: s.active }} to='/filtration' search={{ by: 'america' }}>
+               <Link className={`${pathname !== '/' &&  s.bg}`} activeProps={{ className: s.active }} to='/filtration' search={{ by: 'america' }}>
                   {' '}
                   <img src={'/icons/usa-logo.svg'} alt='USA' />
-                  Америка
+                  {isRuOrKg ? 'Америка' : 'America'}
                </Link>
             </li>
             <li>
-               <Link activeProps={{ className: s.active }} to='/filtration' search={{ by: 'dubai' }}>
+               <Link className={`${pathname !== '/' &&  s.bg}`} activeProps={{ className: s.active }} to='/filtration' search={{ by: 'dubai' }}>
                   {' '}
                   <img src={'/icons/oae-logo.svg'} alt='OAE' />
-                  Дубай
+                  {isRuOrKg ? 'Дубай' : 'Dubai'}
                </Link>
             </li>
             <li>
-               <Link activeProps={{ className: s.active }} to='/filtration' search={{ by: 'korea' }}>
+               <Link className={`${pathname !== '/' &&  s.bg}`} activeProps={{ className: s.active }} to='/filtration' search={{ by: 'korea' }}>
                   {' '}
                   <img src={'/icons/kor-logo.svg'} alt='KOR' />
-                  Кореа
+                  {isRuOrKg ? 'Корея' : 'Korea'}
                </Link>
             </li>
          </ul>

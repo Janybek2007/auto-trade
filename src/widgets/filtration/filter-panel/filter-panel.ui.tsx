@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
-import s from './styles.module.scss';
-import { filtrationStore } from '../store';
 import { Collapsible, Icon } from '@shared/components';
+import { useLanguages } from '@shared/libs/intl';
+import React, { useState } from 'react';
 import { filtrations } from '../const';
+import s from './styles.module.scss';
+import { useFiltrations } from '../context';
 
 export const FilterPanel: React.FC = () => {
-   const { actions, useStore } = filtrationStore;
    const [openSections, setOpenSections] = useState<string[]>([]);
+   const { t } = useLanguages();
 
-   const filters = useStore(state => state.filters);
+   const { filters, updateFilter } = useFiltrations();
 
    React.useEffect(() => {
       setOpenSections(filtrations.map(f => f.value));
@@ -23,7 +24,7 @@ export const FilterPanel: React.FC = () => {
          <div>
             <div className={`${s.block} ${s.trigger} ${s.filter_block}`}>
                <Icon name='mage:filter' />
-               <span>Фильтры</span>
+               <span>{t.get('filterPanel.filters')}</span>
             </div>
             {filtrations.map(filtration => (
                <Collapsible
@@ -31,9 +32,9 @@ export const FilterPanel: React.FC = () => {
                   className={s.block}
                   trigger={
                      <div className={`${s.trigger}`} onClick={() => toggleSection(filtration.value)}>
-                        <span>{filtration.label}</span>
+                        <span>{t.get(`filterPanel.${filtration.value}.label`)}</span>
                         <button className={`${openSections.includes(filtration.value) && s['active']} ${s.choose}`}>
-                           <span>Выбрать</span>
+                           <span>{t.get('filterPanel.choose')}</span>
                            <Icon name='ep:arrow-up' />
                         </button>
                      </div>
@@ -46,10 +47,10 @@ export const FilterPanel: React.FC = () => {
                            key={option.value}
                            className={`${s.option} ${filters[filtration.key] === option.value ? s.active : ''}`}
                            onClick={() => {
-                              actions.updateFilter({ field: filtration.key, value: option.value });
+                              updateFilter(filtration.key, option.value);
                            }}
                         >
-                           {option.label}
+                           {t.get(`filterPanel.${filtration.value}.options.${option.value}`)}
                         </div>
                      ))}
                   </div>

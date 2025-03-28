@@ -1,15 +1,16 @@
 import React from 'react';
 import s from '../styles.module.scss';
+import { useLanguages } from '@shared/libs/intl';
 
 export const SwitchLanguage: React.FC = React.memo(() => {
-   const languages = ['KG', 'RU', 'EN'];
-   const [activeLang, setActiveLang] = React.useState('EN');
+   const { currentLanguage, setLanguage } = useLanguages();
+   const languages: (typeof currentLanguage)[] = ['KG', 'RU', 'EN'];
    const [isOpen, setIsOpen] = React.useState(false);
 
    return (
       <div className={s.switch_language}>
          <button className={s.toggle_button} onClick={() => setIsOpen(!isOpen)}>
-            {activeLang}
+            {currentLanguage.toUpperCase()}
             <svg
                style={{ transform: isOpen ? 'rotateX(180deg)' : '' }}
                width='10'
@@ -26,9 +27,9 @@ export const SwitchLanguage: React.FC = React.memo(() => {
                {languages.map(lang => (
                   <button
                      key={lang}
-                     className={`${s.lang_button} ${activeLang === lang ? s.active : ''}`}
+                     className={`${s.lang_button} ${currentLanguage === lang ? s.active : ''}`}
                      onClick={() => {
-                        setActiveLang(lang);
+                        setLanguage(lang);
                         setIsOpen(false);
                      }}
                   >
