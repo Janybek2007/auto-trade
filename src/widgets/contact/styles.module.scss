@@ -131,3 +131,99 @@
       }
    }
 }
+
+
+@media(max-width: 1220px) {
+   .Main {
+      .container {
+         max-width: 1250px;
+         width: 100%;
+         margin: 0 auto;
+         padding: 0 20px;
+   
+         .content {
+            .main_block {
+               display: flex;
+               align-items: center;
+               justify-content: space-between;
+               flex-wrap: wrap;
+               gap: 17px;
+
+               .block1 {
+                  width: 100%;
+               }
+               .block2 {
+                  width: 100%;
+               }
+               .block3 {
+                  width: 100%;
+               }
+            }
+         }
+      }
+   }
+}
+
+
+@media(max-width: 420px) {
+   .Main {
+      .container {
+         .content {
+            h1 {
+               font-size: 24px;
+            }
+
+            .main_block {
+               .block1 {
+                  .icons {
+                     h3 {
+                        font-size: 17px;
+                     }
+                  }
+                  .links {
+                     margin-top: 33px;
+                     p {
+                        font-size: 16px;
+                        font-weight: 500;
+                        color: rgb(3, 69, 66);
+                        margin-bottom: 20px;
+                     }
+                  }
+               }
+               .block2 {
+                  .icons {
+                     h3 {
+                        font-size: 17px;
+                     }
+                  }
+                  .links {
+                     margin-top: 33px;
+                     p {
+                        font-size: 16px;
+                        font-weight: 500;
+                        color: rgb(3, 69, 66);
+                        margin-bottom: 20px;
+                     }
+                  }
+               }
+               .block3 {
+                  .icons {
+                     h3 {
+                        font-size: 17px;
+                     }
+                  }
+                  .links {
+                     margin-top: 33px;
+                     p {
+                        font-size: 16px;
+                        font-weight: 500;
+                        color: rgb(3, 69, 66);
+                        margin-bottom: 20px;
+                     }
+                  }
+               }
+            }
+         }
+      }
+   }
+}

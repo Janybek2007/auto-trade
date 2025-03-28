@@ -9,7 +9,7 @@
          display: flex;
          align-items: center;
          justify-content: space-between;
-         margin-top: 200px;
+         margin-top: 50px;
          .right {
             width: 650px;
             margin-bottom: 60px;
@@ -26,6 +26,12 @@
                font-weight: 500;
                color: rgb(56, 55, 55);
                line-height: 150%;
+               margin-bottom: 30px;
+
+               span {
+                  color: rgb(6, 116, 111);
+                  font-weight: 700;
+               }
             }
          }
 
@@ -45,6 +51,125 @@
                border-radius: 60px 2px 2px 60px;
                background: rgb(1, 83, 79);
                margin-top: -370px;
+            }
+         }
+      }
+   }
+}
+
+@media(max-width: 1300px) {
+   .Main {
+      .container {
+         .content {
+            .right {
+
+               p {
+                  font-size: 17px;
+               }
+            }
+            .left {
+               margin-top: 120px;
+               img {
+                  width: 520px;
+                  height: 220px;
+               }
+
+               .back_div {
+                  width: 510px;
+                  height: 380px;
+               }
+            }
+         }
+      }
+   }
+}
+
+@media(max-width: 1200px) {
+   .Main {
+      .container {
+         .content {
+            .right {
+               p {
+                  width: 500px;
+                  font-size: 15px;
+               }
+            }
+         }
+      }
+   }
+}
+
+@media(max-width: 1040px) {
+   .Main {
+      .container {
+         .content {
+            .right {
+               p {
+                  width: 410px;
+                  font-size: 15px;
+               }
+            }
+
+            .left {
+               margin-top: 150px;
+               img {
+                  width: 450px;
+                  height: 200px;
+               }
+
+               .back_div {
+                  width: 440px;
+                  height: 380px;
+               }
+            }
+         }
+      }
+   }
+}
+
+
+@media(max-width: 890px) {
+   .Main {
+      .container {
+         .content {
+            .right {
+               p {
+                  width: 360px;
+                  font-size: 12px;
+               }
+            }
+
+            .left {
+               margin-top: 210px;
+               img {
+                  width: 350px;
+                  height: 150px;
+               }
+
+               .back_div {
+                  width: 320px;
+                  height: 380px;
+               }
+            }
+         }
+      }
+   }
+}
+
+@media(max-width: 710px) {
+   .Main {
+      .container {
+         .content {
+            .right {
+               p {
+                  width: 100%;
+                  font-size: 16px;
+                  margin-top: 20px;
+               }
+            }
+
+            .left {
+               display: none;
             }
          }
       }

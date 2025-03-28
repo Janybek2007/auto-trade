@@ -27,7 +27,7 @@ const cardData = [
    },
 ];
 
-export const WhyUs = () => {
+export const WhyUs = () => { 
    return (
       <section className={s.Main}>
          <div className={s.container}>

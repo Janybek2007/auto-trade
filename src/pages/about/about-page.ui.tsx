@@ -8,7 +8,7 @@ export const AboutPage: React.FC = () => {
       <>
          <AboutInfo />
          <WhyUs />
-         <Contact />
+         <Contact /> 
       </>
    );
 };
