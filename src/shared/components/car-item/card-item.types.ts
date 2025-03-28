@@ -1,7 +1,7 @@
 import { ButtonProps } from '../button/button.ui';
 
 export interface ActionButton {
-   type: 'Подробнее' | 'Сравнение';
+   type: 'more' | 'compare';
    button?: Omit<ButtonProps, 'children'>;
 }
 
