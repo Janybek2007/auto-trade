@@ -41,3 +41,35 @@
       }
    }
 }
+
+
+@media(max-width: 1240px) {
+   .Main {
+      .container {
+         .content {
+            .main_card {
+               display: flex;
+               align-items: center;
+               justify-content: space-between;
+               flex-wrap: wrap;
+               gap: 20px;
+               .card {
+                  width: 100%;
+               }
+            }
+         }
+      }
+   }
+}
+
+@media(max-width: 420px) {
+   .Main {
+      .container {
+         .content {
+            h1 {
+               font-size: 24px;
+            }
+         }
+      }
+   }
+}

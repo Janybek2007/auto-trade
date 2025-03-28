@@ -9,7 +9,7 @@ export const AboutPage: React.FC = async () => {
       <>
          <AboutInfo />
          <WhyUs />
-         <Contact />
+         <Contact /> 
       </>
    );
 };
