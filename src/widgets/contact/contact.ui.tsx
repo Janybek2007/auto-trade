@@ -2,48 +2,50 @@ import s from './styles.module.scss';
 import logo1 from '../../../public/icons/con-logo1.svg';
 import logo2 from '../../../public/icons/con-logo2.svg';
 import logo3 from '../../../public/icons/con-logo3.svg';
+import { useLanguages } from '@shared/libs/intl';
+
+const blockData1 = {
+   icon: logo1,
+   titleKey: 'about.contact.address.title',
+   li1Key: 'about.contact.address.bishkek',
+   li2Key: 'about.contact.address.osh',
+};
+
+const blockData2 = {
+   icon: logo2,
+   titleKey: 'about.contact.phone.title',
+   li1Key: '+996 995-20-08-92',
+   li2Key: '+996 700-90-00-82',
+   li3Key: '+996 508-00-00-01',
+};
+
+const blockData3 = {
+   icon: logo3,
+   titleKey: 'about.contact.social.title',
+   li1Key: '@askar_auto_america',
+   li2Key: '@askar_korea',
+   li3Key: '@jylas_tuning',
+};
 
 export const Contact = () => {
-   const blockData1 = {
-      icon: logo1,
-      title: 'Адрес',
-      li1: 'г. Бишкек​, EURASIA ​Киевская улица, офис; 4 этаж',
-      li2: 'г. Ош, EURASIA ​Киевская улица, офис; 4 этаж',
-   };
-
-   const blockData2 = {
-      icon: logo2,
-      title: 'Номер телефона',
-      li1: '+996 995-20-08-92',
-      li2: '+996 700-90-00-82',
-      li3: '+996 508-00-00-01',
-   };
-
-   const blockData3 = {
-      icon: logo3,
-      title: 'Наши социальные сети',
-      li1: '@askar_auto_america',
-      li2: '@askar_korea',
-      li3: '@jylas_tuning',
-   };
+   const { t } = useLanguages();
 
    return (
       <section className={s.Main}>
          <div className={s.container}>
             <div className={s.content}>
-               <h1>Контакты</h1>
+               <h1>{t.get('about.contact.title')}</h1>
 
                <div className={s.main_block}>
                   {/* block 1 */}
                   <div className={s.block1}>
                      <div className={s.icons}>
                         <img src={blockData1.icon} alt='' />
-                        <h3>{blockData1.title}</h3>
+                        <h3>{t.get(blockData1.titleKey)}</h3>
                      </div>
-
                      <div className={s.links}>
-                        <p>{blockData1.li1}</p>
-                        <p>{blockData1.li2}</p>
+                        <p>{t.get(blockData1.li1Key)}</p>
+                        <p>{t.get(blockData1.li2Key)}</p>
                      </div>
                   </div>
                   {/* block 1 */}
@@ -52,13 +54,12 @@ export const Contact = () => {
                   <div className={s.block2}>
                      <div className={s.icons}>
                         <img src={blockData2.icon} alt='' />
-                        <h3>{blockData2.title}</h3>
+                        <h3>{t.get(blockData2.titleKey)}</h3>
                      </div>
-
                      <div className={s.links}>
-                        <p>{blockData2.li1}</p>
-                        <p>{blockData2.li2}</p>
-                        <p>{blockData2.li3}</p>
+                        <p>{blockData2.li1Key}</p>
+                        <p>{blockData2.li2Key}</p>
+                        <p>{blockData2.li3Key}</p>
                      </div>
                   </div>
                   {/* block 2 */}
@@ -67,13 +68,12 @@ export const Contact = () => {
                   <div className={s.block3}>
                      <div className={s.icons}>
                         <img src={blockData3.icon} alt='' />
-                        <h3>{blockData3.title}</h3>
+                        <h3>{t.get(blockData3.titleKey)}</h3>
                      </div>
-
                      <div className={s.links}>
-                        <p>{blockData3.li1}</p>
-                        <p>{blockData3.li2}</p>
-                        <p>{blockData3.li3}</p>
+                        <p>{blockData3.li1Key}</p>
+                        <p>{blockData3.li2Key}</p>
+                        <p>{blockData3.li3Key}</p>
                      </div>
                   </div>
                   {/* block 3 */}

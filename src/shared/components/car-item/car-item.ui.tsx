@@ -4,24 +4,29 @@ import { CardItem } from './ui/card-item.ui';
 import { ListItem } from './ui/list-item.ui';
 import s from './style.module.scss';
 import { Button } from '../button/button.ui';
+import { useLanguages } from '@shared/libs/intl';
 
-const ActionsComponent = (actions: CarItemPops['actions'] = [{ type: 'Подробнее' }, { type: 'Сравнение' }]) => (
-   <div className={s.buttons}>
-      {actions.map(({ type, button }) => (
-         <Button {...button} className={s[`t-${type}`]} variant={type === 'Сравнение' ? 'outline' : 'solid'} key={type}>
-            {type == 'Сравнение' && (
-               <img className={s['compare-icon']} src='/icons/compare-icon.svg' alt='Compare Icon' />
-            )}
-            {type}
-         </Button>
-      ))}
-   </div>
-);
+const ActionsComponent = (actions: CarItemPops['actions'] = [{ type: 'more' }, { type: 'compare' }]) => {
+   const { t } = useLanguages();
+
+   return (
+      <div className={s.buttons}>
+         {actions.map(({ type, button }) => (
+            <Button {...button} className={s[`t-${type}`]} variant={type === 'more' ? 'outline' : 'solid'} key={type}>
+               {type === 'more' && (
+                  <img className={s['compare-icon']} src='/icons/compare-icon.svg' alt='Compare Icon' />
+               )}
+               {type === 'compare' ? t.get('carActions.comparison') : t.get('carActions.more')}
+            </Button>
+         ))}
+      </div>
+   );
+};
 
 type TProps = Omit<CarItemPops, 'children'> & CarItemType;
 
 export const CarItem: React.FC<TProps> = ({ actions, item, type = 'card' }) => {
-   return type == 'card' ? (
+   return type === 'card' ? (
       <CardItem item={item}>{ActionsComponent(actions)}</CardItem>
    ) : (
       <ListItem item={item}>{ActionsComponent(actions)}</ListItem>

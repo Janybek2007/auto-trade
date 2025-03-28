@@ -1,9 +1,21 @@
-import React, { useState } from 'react';
-import s from './styles.module.scss';
 import { Button, CarItem, Icon } from '@shared/components';
-import { useFiltrations } from '../store';
-import { motion } from 'framer-motion';
 import { useNavigate } from '@tanstack/react-router';
+import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { useFiltrations } from '../context';
+import s from './styles.module.scss';
+import { useLanguages } from '@shared/libs/intl';
+
+const getTranslationByLanguage = (key: string, language: string) => {
+   switch (language) {
+      case 'RU':
+         return key === 'return' ? 'Вернуть' : key === 'loadMore' ? 'Загрузить еще' : key;
+      case 'KG':
+         return key === 'return' ? 'Кайтаруу' : key === 'loadMore' ? 'Жана жүктөө' : key;
+      default:
+         return key === 'return' ? 'Return' : key === 'loadMore' ? 'Load More' : key;
+   }
+};
 
 const baseCarData = [
    { model: 'Kia K5', range: '38 000', year: 2024, price: '24 410' },
@@ -19,30 +31,35 @@ const BaseActionProps = {
 };
 
 export const CarList: React.FC = () => {
-   const { item_type, onCompares } = useFiltrations();
+   const { onCompares, itemType } = useFiltrations();
    const [visibleCount, setVisibleCount] = useState(9);
+   const { t, currentLanguage } = useLanguages();
 
    const HandleLoadMore = React.useCallback(() => setVisibleCount(prev => prev + 9), []);
    const Navigate = useNavigate();
 
-   const CompareClick = React.useCallback((v: number) => {
-      onCompares(String(v), [
-         {
-            children: (
-               <>
-                  <img src='/icons/compare-white-icon.svg' alt='Compare Icon' /> Вернуть
-               </>
-            ),
-            ...BaseActionProps,
-            onClick: () => onCompares(String(v))
-         },
-      ]);
-   }, []);
+   const CompareClick = React.useCallback(
+      (v: number) => {
+         onCompares(String(v), [
+            {
+               children: (
+                  <>
+                     <img src='/icons/compare-white-icon.svg' alt='Compare Icon' />
+                     {getTranslationByLanguage('return', currentLanguage)}
+                  </>
+               ),
+               ...BaseActionProps,
+               onClick: () => onCompares(String(v)),
+            },
+         ]);
+      },
+      [currentLanguage],
+   );
 
    return (
       <div className={s['content']}>
          <motion.div
-            className={`${s.list} ${s[`type-${item_type}`]}`}
+            className={`${s.list} ${s[`type-${itemType}`]}`}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -51,7 +68,7 @@ export const CarList: React.FC = () => {
                const carData = baseCarData[i % baseCarData.length];
                return (
                   <motion.div
-                     key={`${item_type}-${i}`}
+                     key={`${itemType}-${i}`}
                      initial={{ opacity: 0, scale: 0.9 }}
                      animate={{ opacity: 1, scale: 1 }}
                      transition={{ delay: i * 0.02, duration: 0.3 }}
@@ -61,10 +78,10 @@ export const CarList: React.FC = () => {
                            image: '/image/askar-img.svg',
                            ...carData,
                         }}
-                        type={item_type}
+                        type={itemType}
                         actions={[
-                           { type: 'Подробнее', button: { onClick: () => Navigate({ to: `/cars/${i}` }) } },
-                           { type: 'Сравнение', button: { onClick: () => CompareClick(i) } },
+                           { type: 'more', button: { onClick: () => Navigate({ to: `/cars/${i}` }) } },
+                           { type: 'compare', button: { onClick: () => CompareClick(i) } },
                         ]}
                      />
                   </motion.div>
@@ -73,7 +90,7 @@ export const CarList: React.FC = () => {
          </motion.div>
          {visibleCount < 100 && (
             <Button size='lg' color='neutral' className={s.moreButton} onClick={HandleLoadMore}>
-               Загрузить еще
+               {getTranslationByLanguage('loadMore', currentLanguage)}
                <Icon name='line-md:arrow-down' c_size={20} />
             </Button>
          )}

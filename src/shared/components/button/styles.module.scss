@@ -26,6 +26,7 @@
          color: var(--color-neutral, var(--black));
          background: var(--background-neutral, rgb(240, 240, 240));
          &:hover {
+            color: var(--color-neutral-hover, var(--black));
             background: var(--background-neutral-hover, rgb(235, 235, 235));
          }
       }

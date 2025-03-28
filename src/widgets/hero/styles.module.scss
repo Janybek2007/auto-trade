@@ -1,9 +1,13 @@
 .main {
-   max-height: calc(100dvh - var(--header-height));
+   --main-max-height: calc(100dvh - var(--header-height));
+   max-height: var(--main-max-height);
 }
+
 .background {
-   height: 100%;
-   width: 100%;
+   --bg-height: 100%;
+   --bg-width: 100%;
+   height: var(--bg-height);
+   width: var(--bg-width);
    position: absolute;
    top: 0;
    left: 0;
@@ -14,23 +18,27 @@
 }
 
 .leftSideDarkening {
+   --darkening-width: 50%;
    position: absolute;
    top: 0;
    left: 0;
-   width: 50%;
+   width: var(--darkening-width);
    height: 100%;
    z-index: 3;
    background: linear-gradient(90deg, rgba(0, 0, 0, 0.7) 20%, rgba(0, 0, 0, 0.5) 70%, rgba(0, 0, 0, 0) 100%);
 }
 
 .heroContainer {
+   --hero-padding: 173px 0 0 99px;
+   --hero-height: 100vh;
+   --hero-gap: 10px;
    display: flex;
    flex-direction: column;
    align-items: flex-start;
-   padding: 173px 0 0 99px;
-   height: 100vh;
+   padding: var(--hero-padding);
+   height: var(--hero-height);
    position: relative;
-   gap: 10px;
+   gap: var(--hero-gap);
    overflow: hidden;
    * {
       position: relative;
@@ -39,16 +47,20 @@
 }
 
 .logo {
-   width: 227px;
+   --logo-width: 227px;
+   --logo-margin-bottom: 12px;
+   width: var(--logo-width);
    height: auto;
-   margin-bottom: 12px;
+   margin-bottom: var(--logo-margin-bottom);
 }
 
 .title {
+   --title-font-size: 48px;
+   --title-line-height: 70px;
    font-weight: 700;
-   font-size: 48px;
-   line-height: 70px;
-   color: var(#fff);
+   font-size: var(--title-font-size);
+   line-height: var(--title-line-height);
+   color: var(--white);
    text-align: start;
 
    span {
@@ -57,37 +69,247 @@
 }
 
 .subtitle {
+   --subtitle-font-size: 28px;
    font-weight: 600;
-   font-size: 28px;
+   font-size: var(--subtitle-font-size);
    text-align: left;
-   color: #157a75;
+   color: var(--secondary);
 }
 
 .languageButtons {
+   --lang-buttons-gap: 10px;
+   --lang-buttons-margin-top: 10px;
    display: flex;
-   gap: 10px;
-   margin-top: 10px;
+   gap: var(--lang-buttons-gap);
+   margin-top: var(--lang-buttons-margin-top);
 }
 
 .languageButton {
+   --lang-button-font-size: 20px;
+   --lang-button-gap: 10px;
+   --padding-x-md: 22.24px;
+   --padding-y-md: 12.84px;
+   --background-neutral-hover: var(--secondary);
+   --color-neutral-hover: var(--white);
    display: flex;
    align-items: center;
    justify-content: center;
    will-change: transform;
-   font-size: 20px;
+   font-size: var(--lang-button-font-size);
    font-weight: 500;
    letter-spacing: -0.4px;
-   gap: 10px;
-   &:hover {
-      transform: scale(1.05);
-      transition: all 0.4s ease;
-   }
+   gap: var(--lang-button-gap);
+   transition: all 0.4s ease;
 }
 
 .flag {
    display: flex;
 
    .flagImage {
-      width: 27px;
+      --flag-width: 27px;
+      width: var(--flag-width);
+   }
+}
+
+@media (max-width: 1240px) {
+   .heroContainer {
+      --hero-padding: 150px 0 0 80px;
+      --hero-gap: 8px;
+   }
+
+   .logo {
+      --logo-width: 200px;
+      --logo-margin-bottom: 10px;
+   }
+
+   .title {
+      --title-font-size: 42px;
+      --title-line-height: 62px;
+   }
+
+   .subtitle {
+      --subtitle-font-size: 24px;
+   }
+
+   .languageButton {
+      --lang-button-font-size: 18px;
+      --lang-button-gap: 8px;
+   }
+
+   .flagImage {
+      --flag-width: 24px;
+   }
+}
+
+@media (max-width: 1024px) {
+   .heroContainer {
+      --hero-padding: 120px 0 0 60px;
+      --hero-gap: 6px;
+   }
+
+   .logo {
+      --logo-width: 180px;
+      --logo-margin-bottom: 8px;
+   }
+
+   .title {
+      --title-font-size: 36px;
+      --title-line-height: 52px;
+   }
+
+   .subtitle {
+      --subtitle-font-size: 22px;
+   }
+
+   .languageButtons {
+      --lang-buttons-gap: 8px;
+      --lang-buttons-margin-top: 8px;
+   }
+
+   .languageButton {
+      --lang-button-font-size: 16px;
+      --lang-button-gap: 6px;
+   }
+
+   .flagImage {
+      --flag-width: 22px;
+   }
+}
+
+@media (max-width: 768px) {
+   .leftSideDarkening {
+      --darkening-width: 60%;
+   }
+
+   .heroContainer {
+      --hero-padding: 100px 0 0 40px;
+      --hero-gap: 5px;
+   }
+
+   .logo {
+      --logo-width: 150px;
+      --logo-margin-bottom: 6px;
+   }
+
+   .title {
+      --title-font-size: 30px;
+      --title-line-height: 44px;
+   }
+
+   .subtitle {
+      --subtitle-font-size: 18px;
+   }
+
+   .languageButtons {
+      --lang-buttons-gap: 6px;
+      --lang-buttons-margin-top: 6px;
+   }
+
+   .languageButton {
+      --lang-button-gap: 5px;
+   }
+
+   .flagImage {
+      --flag-width: 20px;
+   }
+}
+
+@media (max-width: 660px) {
+   .content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .title {
+         text-align: center;
+      }
+      .subtitle {
+         margin-top: 30px;
+         margin-bottom: 10px;
+         color: var(--white);
+      }
+   }
+}
+
+@media (max-width: 550px) {
+   .languageButtons {
+      flex-direction: column;
+      button {
+         --lang-button-gap: 10px;
+         --padding-x-md: 84px;
+         --padding-y-md: 18px;
+         --lang-button-font-size: 20px;
+         --border-radius: 100px;
+      }
+   }
+}
+
+@media (max-width: 480px) {
+   .leftSideDarkening {
+      --darkening-width: 70%;
+   }
+
+   .heroContainer {
+      --hero-padding: 80px 0 0 20px;
+      --hero-gap: 4px;
+   }
+
+   .logo {
+      --logo-width: 120px;
+      --logo-margin-bottom: 5px;
+   }
+
+   .title {
+      --title-font-size: 24px;
+      --title-line-height: 36px;
+   }
+
+   .subtitle {
+      --subtitle-font-size: 16px;
+   }
+
+   .languageButtons {
+      --lang-buttons-gap: 5px;
+      --lang-buttons-margin-top: 5px;
+   }
+
+   .languageButtons button {
+      --lang-button-gap: 10px;
+      --padding-x-md: 68px;
+      --padding-y-md: 14px;
+      --lang-button-font-size: 18px;
+      --border-radius: 100px;
+   }
+
+   .flagImage {
+      --flag-width: 18px;
+   }
+}
+
+@media (max-width: 360px) {
+   .leftSideDarkening {
+      --darkening-width: 80%;
+   }
+
+   .heroContainer {
+      --hero-padding: 60px 0 0 15px;
+      --hero-gap: 3px;
+   }
+
+   .logo {
+      --logo-width: 100px;
+      --logo-margin-bottom: 4px;
+   }
+
+   .title {
+      --title-font-size: 20px;
+      --title-line-height: 30px;
+   }
+
+   .subtitle {
+      --subtitle-font-size: 14px;
+   }
+
+   .flagImage {
+      --flag-width: 16px;
    }
 }
