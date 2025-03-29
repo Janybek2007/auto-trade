@@ -1,52 +1,64 @@
 .compare-icon {
-   width: 20px;
+   --compare-icon-size: 20px;
+   width: var(--compare-icon-size);
 }
 
 .car {
    .content {
-      box-shadow: 1px 4px 4px 0px rgba(83, 83, 83, 0.25);
-      border-radius: 10px;
+      --content-shadow: 1px 4px 4px 0px rgba(83, 83, 83, 0.25);
+      --content-radius: 10px;
+      box-shadow: var(--content-shadow);
+      border-radius: var(--content-radius);
    }
 
    .car_specs {
+      --specs-gap: 5px;
       display: flex;
       align-items: center;
-      gap: 5px;
+      gap: var(--specs-gap);
 
       p {
-         font-size: 17px;
+         --specs-font-size: 17px;
+         font-size: var(--specs-font-size);
          font-weight: 500;
          color: var(--primary);
       }
 
       .circle {
-         width: 5px;
-         height: 5px;
+         --circle-size: 5px;
+         width: var(--circle-size);
+         height: var(--circle-size);
          border-radius: 50%;
          background: var(--primary);
       }
    }
 
    h3 {
+      --h3-font-size: 18px;
       color: var(--primary);
-      font-size: 18px;
+      font-size: var(--h3-font-size);
       font-weight: 600;
    }
 
    .buttons {
+      --buttons-gap: 4px;
       display: flex;
       align-items: center;
-      gap: 4px;
+      gap: var(--buttons-gap);
       button {
          --padding-y: 13px;
          --padding-x: 0;
-         font-size: 16px;
+         --button-font-size: 16px;
+         font-size: var(--button-font-size);
          letter-spacing: -0.3px;
          transition: all 0.25s;
          will-change: transform;
          &.t-Сравнение {
-            --padding-y: 10.5px;
-            --border-width: 2px;
+            --button-compare-padding-y: 10.5px;
+            --button-compare-border-width: 2px;
+            padding-top: var(--button-compare-padding-y);
+            padding-bottom: var(--button-compare-padding-y);
+            border-width: var(--button-compare-border-width);
          }
          &:hover {
             transform: translateY(-1px);
@@ -59,18 +71,23 @@
 
    &.t-card {
       .content {
-         width: 323px;
-         height: 416px;
-         padding: 10px;
+         --card-width: 323px;
+         --card-height: 416px;
+         --card-padding: 10px;
+         width: var(--card-width);
+         height: var(--card-height);
+         padding: var(--card-padding);
 
          .image {
+            --card-img-height: 240px;
             width: 100%;
-            height: 240px;
+            height: var(--card-img-height);
             object-fit: contain;
          }
 
          .card_content {
-            padding: 9px 0;
+            --card-content-padding: 9px 0;
+            padding: var(--card-content-padding);
          }
 
          .buttons {
@@ -84,27 +101,34 @@
 
    &.t-list {
       .content {
-         width: 100%;
-         height: 230px;
-         padding: 14px 10px;
+         --list-width: 100%;
+         --list-height: 230px;
+         --list-padding: 14px 10px;
+         width: var(--list-width);
+         height: var(--list-height);
+         padding: var(--list-padding);
          display: flex;
          align-items: center;
 
          .card_img {
             .image {
-               width: 256px;
-               height: 220px;
+               --list-img-width: 256px;
+               --list-img-height: 220px;
+               width: var(--list-img-width);
+               height: var(--list-img-height);
                border-radius: 10px;
                object-fit: cover;
             }
          }
 
          .left_cont {
-            padding: 0 20px;
+            --left-padding: 0 20px;
+            --left-gap: 96px;
+            padding: var(--left-padding);
             width: 100%;
             display: flex;
             flex-direction: column;
-            gap: 96px;
+            gap: var(--left-gap);
 
             .card_content {
                display: flex;
@@ -120,9 +144,110 @@
             .buttons {
                justify-content: end;
                flex-direction: row-reverse;
-               gap: 5px;
+               --buttons-list-gap: 5px;
+               gap: var(--buttons-list-gap);
                button {
-                  --padding-x: 25px;
+                  --button-list-padding-x: 25px;
+                  padding-left: var(--button-list-padding-x);
+                  padding-right: var(--button-list-padding-x);
+               }
+            }
+         }
+      }
+   }
+}
+
+@media (max-width: 768px) {
+   .compare-icon {
+      --compare-icon-size: 18px;
+   }
+   .car {
+      .car_specs {
+         --specs-font-size: 15px;
+         --specs-gap: 4px;
+      }
+      h3 {
+         --h3-font-size: 16px;
+      }
+      .buttons {
+         --buttons-gap: 3px;
+         button {
+            --button-font-size: 14px;
+            --padding-y: 11px;
+            &.t-Сравнение {
+               --button-compare-padding-y: 9px;
+            }
+         }
+      }
+      &.t-card {
+         .content {
+            --card-width: 280px;
+            --card-height: 380px;
+            --card-padding: 8px;
+            .image {
+               --card-img-height: 200px;
+            }
+         }
+      }
+      &.t-list {
+         .content {
+            --list-height: 200px;
+            --list-padding: 12px 8px;
+            .card_img .image {
+               --list-img-width: 220px;
+               --list-img-height: 180px;
+            }
+            .left_cont {
+               --left-gap: 70px;
+            }
+         }
+      }
+   }
+}
+
+@media (max-width: 480px) {
+   .compare-icon {
+      --compare-icon-size: 16px;
+   }
+   .car {
+      .car_specs {
+         --specs-font-size: 14px;
+      }
+      h3 {
+         --h3-font-size: 15px;
+      }
+      .buttons {
+         button {
+            --button-font-size: 13px;
+            --padding-y: 9px;
+            &.t-Сравнение {
+               --button-compare-padding-y: 8px;
+            }
+         }
+      }
+      &.t-card {
+         .content {
+            --card-width: 100%;
+            --card-height: 340px;
+            --card-padding: 6px;
+            .image {
+               --card-img-height: 180px;
+            }
+         }
+      }
+      &.t-list {
+         .content {
+            --list-height: 180px;
+            --list-padding: 10px 6px;
+            .card_img .image {
+               --list-img-width: 180px;
+               --list-img-height: 160px;
+            }
+            .left_cont {
+               --left-gap: 50px;
+               --left-padding: 0 10px;
+               .buttons button {
+                  --button-list-padding-x: 15px;
                }
             }
          }

@@ -1,9 +1,12 @@
 .list {
+   --list-padding: 25px;
+   --list-gap: 16px;
+   --list-min-width: 1070px;
    display: grid;
-   padding: 25px;
-   gap: 16px;
+   padding: var(--list-padding);
+   gap: var(--list-gap);
    width: 100%;
-   min-width: 1070px;
+   min-width: var(--list-min-width);
    &.type-card {
       grid-template-columns: repeat(3, 1fr);
    }
@@ -13,12 +16,15 @@
 }
 
 .moreButton {
+   --more-margin: 20px auto;
+   --more-gap: 10px;
+   --more-font-size: 15px;
    display: inline-flex;
    align-items: center;
    justify-content: center;
-   margin: 20px auto;
-   gap: 10px;
-   font-size: 15px;
+   margin: var(--more-margin);
+   gap: var(--more-gap);
+   font-size: var(--more-font-size);
    font-weight: 600;
    color: var(--text2);
    &:hover {
@@ -30,26 +36,70 @@
 }
 
 .content {
+   --content-max-height: 140dvh;
    display: flex;
    flex-direction: column;
-   max-height: 140dvh;
+   max-height: var(--content-max-height);
    overflow-y: auto;
+   overflow-x: hidden;
    &::-webkit-scrollbar {
       width: 0;
    }
 }
 
 .button {
-   --padding-x-md: 17.86px;
-   --padding-y-md: 7.5px;
+   --padding-x: 17.86px;
+   --padding-y: 7.5px;
+   --button-gap: 8px;
+   --button-font-size: 14px;
+   --button-img-size: 24px;
    display: flex;
    align-items: center;
-   gap: 8px;
-   font-size: 14px;
+   gap: var(--button-gap);
+   font-size: var(--button-font-size);
    letter-spacing: -0.3px;
    img {
       object-fit: contain;
-      width: 24px;
-      height: 24px;
+      width: var(--button-img-size);
+      height: var(--button-img-size);
+   }
+}
+
+@media (max-width: 1024px) {
+   .list {
+      --list-padding: 20px;
+      --list-gap: 12px;
+      --list-min-width: 800px;
+      &.type-card {
+         grid-template-columns: repeat(2, 1fr);
+      }
+   }
+   .moreButton {
+      --more-font-size: 14px;
+   }
+   .button {
+      --button-font-size: 13px;
+      --button-img-size: 20px;
+   }
+}
+
+@media (max-width: 768px) {
+   .list {
+      --list-padding: 15px;
+      --list-gap: 10px;
+      --list-min-width: 0;
+      &.type-card {
+         grid-template-columns: 1fr;
+      }
+   }
+   .moreButton {
+      --more-margin: 15px auto;
+      --more-font-size: 13px;
+      --more-gap: 8px;
+   }
+   .button {
+      --padding-x: 14px;
+      --padding-y: 6px;
+      --button-img-size: 18px;
    }
 }

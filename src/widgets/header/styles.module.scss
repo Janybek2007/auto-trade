@@ -15,6 +15,7 @@
    background: var(--header-bg);
    position: relative;
    z-index: var(--header-z-index);
+   z-index: 80;
 
    .container {
       .content {
@@ -47,12 +48,11 @@
                color: var(--white);
                cursor: pointer;
             }
-            
+
             .right {
                display: flex;
                align-items: center;
                gap: var(--right-gap);
-
 
                .jylas_logo {
                   display: flex;
@@ -199,6 +199,73 @@
          height: var(--nav-img-height);
       }
    }
+
+   &.d-col {
+      flex-direction: column;
+      align-items: flex-start;
+      background: transparent;
+      width: min-content;
+      border-radius: 0;
+      li a {
+         color: var(--white);
+         justify-content: flex-start;
+         padding-left: 0;
+         &:hover {
+            background: transparent !important;
+         }
+      }
+   }
+}
+
+.menubar {
+   width: calc(100dvw - 52px);
+   height: 100dvh;
+   background: var(--secondary);
+   position: fixed;
+   top: 0;
+   left: 0;
+   z-index: 100;
+   display: none;
+   @media (max-width: 860px) {
+      display: block;
+   }
+   .body {
+      position: relative;
+      padding: 25px;
+      .content {
+         max-width: 90%;
+      }
+      .row {
+         display: flex;
+         align-items: center;
+         justify-content: space-between;
+         .jylas_logo {
+            width: 31px;
+            height: 23px;
+         }
+      }
+      .divider {
+         width: 100%;
+         margin: 15px 0;
+      }
+
+      .jylas_tuning {
+         width: 82px;
+      }
+
+      .closeButton {
+         font-size: 28px;
+         color: var(--white);
+      }
+
+      .links {
+         display: flex;
+         flex-direction: column;
+         a {
+            color: var(--white);
+         }
+      }
+   }
 }
 
 @media (max-width: 1240px) {
@@ -247,5 +314,3 @@
       --content-gap: 30px;
    }
 }
-
-
