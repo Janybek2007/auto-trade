@@ -48,22 +48,24 @@ export const Header: React.FC = () => {
                         </>
                      ) : (
                         <>
-                           {width >= 600 && (
+                           {/* <NavLinks /> */}
+
+                           {width >= 860 && (
                               <>
                                  <Link className={s.aboutLink} to='/about'>
                                     {AboutText}
                                  </Link>
-                                 <SwitchLanguage />
                               </>
                            )}
-                           <figure className={s.jylas_logo}>
-                              <img src={'/image/jylas.svg'} alt='' />
-                           </figure>
-                           {width <= 600 && (
-                              <button onClick={() => setOpen(p => !p)} className={`${s.menu} flexCenter`}>
-                                 <Icon name='lucide:menu' />
-                              </button>
+                           <SwitchLanguage />
+                           {width >= 600 && (
+                              <figure className={s.jylas_logo}>
+                                 <img src={'/image/jylas.svg'} alt='' />
+                              </figure>
                            )}
+                           <button onClick={() => setOpen(p => !p)} className={`${s.menu} flexCenter`}>
+                              <Icon name='lucide:menu' />
+                           </button>
                         </>
                      )}
                   </div>

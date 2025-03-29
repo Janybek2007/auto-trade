@@ -1,0 +1,86 @@
+.filterControl {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 16px;
+   padding: 16px;
+   border-radius: 8px;
+   width: 100%;
+}
+
+.locationFilter {
+   display: flex;
+   align-items: center;
+   gap: 8px;
+}
+
+.btn {
+   --border-radius: 100px;
+   --padding-x-md: 16px;
+   --padding-y-md: 12px;
+   display: flex;
+   align-items: center;
+   gap: 8px;
+   &.compare {
+      border: 2px solid var(--primary);
+   }
+   &:not(.compare) {
+      border: 2px solid rgb(235, 235, 235);
+   }
+   img {
+      width: 18px;
+      height: 18px;
+      object-fit: contain;
+   }
+}
+
+.searchContainer {
+   width: 100%;
+   max-width: 400px;
+}
+
+.searchInput {
+   width: 100%;
+   padding: 10px 16px;
+   border: 1px solid #ddd;
+   border-radius: 20px;
+   font-size: 16px;
+   &:focus {
+      outline: none;
+      border-color: #aaa;
+   }
+}
+
+.parameters {
+   display: flex;
+   align-items: center;
+   gap: 8px;
+}
+
+@media (max-width: 768px) {
+   .filterControl {
+      gap: 12px;
+      padding: 12px;
+   }
+   .locationFilter,
+   .parameters {
+      gap: 6px;
+   }
+}
+
+@media (max-width: 480px) {
+   .filterControl {
+      gap: 8px;
+      padding: 8px;
+   }
+   .btn {
+      --padding-x-md: 16px;
+      --padding-y-md: 8px;
+   }
+   .locationFilter,
+   .parameters {
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+   }
+}

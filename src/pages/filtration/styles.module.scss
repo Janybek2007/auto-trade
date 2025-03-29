@@ -1,10 +1,79 @@
 .main {
-   padding-top: 50px;
-   padding-bottom: 50px;
+   --py: 50px;
+   padding-top: var(--py);
+   padding-bottom: var(--py);
 
+   :global(.filtration-head) {
+      border-bottom: 1px solid #63636699;
+      margin-bottom: var(--margin-bottom, 15px);
+      padding-bottom: var(--padding-bottom, 13px);
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+
+      button[aria-label='close'] {
+         color: var(--primary);
+         font-size: var(--close-btn-size, 38px);
+      }
+      button:not([aria-label='close']) {
+         font-weight: 600;
+         font-size: var(--reset-btn-size, 16px);
+         color: var(--secondary);
+      }
+      span {
+         color: #303030;
+         font-size: var(--title-size, 20px);
+         font-weight: 700;
+      }
+
+      @media (max-width: 768px) {
+         --margin-bottom: 12px;
+         --padding-bottom: 11px;
+         --close-btn-size: 32px;
+         --reset-btn-size: 14px;
+         --title-size: 18px;
+      }
+
+      @media (max-width: 480px) {
+         --margin-bottom: 10px;
+         --padding-bottom: 9px;
+         --close-btn-size: 28px;
+         --reset-btn-size: 13px;
+         --title-size: 16px;
+      }
+
+      @media (max-width: 320px) {
+         --margin-bottom: 8px;
+         --padding-bottom: 7px;
+         --close-btn-size: 24px;
+         --reset-btn-size: 12px;
+         --title-size: 14px;
+      }
+   }
+
+   .container {
+      width: min-content;
+      @media (max-width: 1680px) {
+         max-width: 100%;
+      }
+      @media (max-width: 768px) {
+         width: 100%;
+      }
+   }
    .bottom {
       display: flex;
       align-items: flex-start;
       border-top: 1px solid var(--gray);
+   }
+   @media (max-width: 768px) {
+      --py: 20px;
+      [data-compare-switch] {
+         display: none;
+      }
+   }
+   @media (min-width: 768px) {
+      [data-filter-control] {
+         display: none;
+      }
    }
 }

@@ -41,6 +41,7 @@
    flex-direction: column;
    max-height: var(--content-max-height);
    overflow-y: auto;
+   width: 100%;
    overflow-x: hidden;
    &::-webkit-scrollbar {
       width: 0;
@@ -65,14 +66,28 @@
    }
 }
 
+@media (max-width: 1770px) {
+   .list {
+      --list-padding: 10px;
+   }
+}
+
+@media (max-width: 1300px) {
+   .list {
+      --list-gap: 10px;
+      --list-min-width: auto;
+   }
+}
+
+@media (max-width: 1140px) {
+   .list.type-card {
+      grid-template-columns: repeat(2, 1fr);
+   }
+}
+
 @media (max-width: 1024px) {
    .list {
-      --list-padding: 20px;
-      --list-gap: 12px;
-      --list-min-width: 800px;
-      &.type-card {
-         grid-template-columns: repeat(2, 1fr);
-      }
+      --list-gap: 8px;
    }
    .moreButton {
       --more-font-size: 14px;
@@ -83,13 +98,18 @@
    }
 }
 
+// @media (min-width: 768px) and (max-width: 1024px) {
+//    .list.type-card {
+//       grid-template-columns: repeat(1, 1fr);
+//    }
+// }
+
 @media (max-width: 768px) {
    .list {
       --list-padding: 15px;
       --list-gap: 10px;
-      --list-min-width: 0;
       &.type-card {
-         grid-template-columns: 1fr;
+         grid-template-columns: repeat(1, 1fr);
       }
    }
    .moreButton {

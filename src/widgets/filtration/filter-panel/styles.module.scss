@@ -9,6 +9,27 @@
    &::-webkit-scrollbar {
       width: 0;
    }
+
+   @media (max-width: 768px) {
+      --panel-w: 100dvw;
+      position: absolute;
+      background: white;
+      height: 100dvh;
+      top: 0;
+      left: 0;
+      z-index: 100;
+      padding: 39px 24px;
+      .head {
+         display: flex;
+      }
+      &:not(.om-parameters) {
+         display: none;
+      }
+   }
+}
+
+.head {
+   display: none;
 }
 
 .block {
@@ -35,12 +56,28 @@
    }
 }
 
+.f-block {
+   @media (max-width: 768px) {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+   }
+   @media (max-width: 650px) {
+      grid-template-columns: repeat(2, 1fr);
+   }
+   @media (max-width: 380px) {
+      grid-template-columns: repeat(1, 1fr);
+   }
+}
+
 .filter_block {
    --filter-bg: var(--white);
    position: sticky;
    flex-direction: row;
    top: 0;
    background-color: var(--filter-bg);
+   @media (max-width: 768px) {
+      display: none;
+   }
 }
 
 .choose {
@@ -104,12 +141,9 @@
 }
 
 @media (max-width: 768px) {
-   .panel {
-      --panel-w: 180px;
-   }
    .block {
       --block-py: 18px;
-      --block-choose-ol-mw: 160px;
+      --block-choose-ol-mw: 100%;
    }
    .trigger {
       --trigger-font-size: 16px;
@@ -127,12 +161,8 @@
 }
 
 @media (max-width: 480px) {
-   .panel {
-      --panel-w: 150px;
-   }
    .block {
       --block-py: 14px;
-      --block-choose-ol-mw: 130px;
    }
    .trigger {
       --trigger-font-size: 14px;

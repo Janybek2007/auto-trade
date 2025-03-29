@@ -1,4 +1,4 @@
-import { BrandSelector, CompareSwitch, FilterPanel, CarList } from '@widgets/filtration';
+import { BrandSelector, CompareSwitch, FilterPanel, CarList, FilterControl } from '@widgets/filtration';
 import s from './styles.module.scss';
 import React from 'react';
 import { FiltrationProvider } from '@widgets/filtration/context';
@@ -10,6 +10,7 @@ export const FiltrationPage: React.FC = () => {
             <FiltrationProvider>
                <BrandSelector />
                <CompareSwitch />
+               <FilterControl />
                <div className={s.bottom}>
                   <FilterPanel />
                   <CarList />

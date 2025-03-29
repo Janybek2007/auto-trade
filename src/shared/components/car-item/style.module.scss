@@ -4,9 +4,9 @@
 }
 
 .car {
+   --content-radius: 10px;
    .content {
       --content-shadow: 1px 4px 4px 0px rgba(83, 83, 83, 0.25);
-      --content-radius: 10px;
       box-shadow: var(--content-shadow);
       border-radius: var(--content-radius);
    }
@@ -71,10 +71,9 @@
 
    &.t-card {
       .content {
-         --card-width: 323px;
          --card-height: 416px;
          --card-padding: 10px;
-         width: var(--card-width);
+         width: 100%;
          height: var(--card-height);
          padding: var(--card-padding);
 
@@ -82,7 +81,8 @@
             --card-img-height: 240px;
             width: 100%;
             height: var(--card-img-height);
-            object-fit: contain;
+            object-fit: cover;
+            border-radius: var(--content-radius);
          }
 
          .card_content {
@@ -157,7 +157,19 @@
    }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1300px) {
+   .car.t-card .content {
+      width: 24dvw;
+   }
+}
+
+@media (max-width: 1140px) {
+   .car.t-card .content {
+      width: 34.5dvw;
+   }
+}
+
+@media (max-width: 900px) {
    .compare-icon {
       --compare-icon-size: 18px;
    }
@@ -181,8 +193,7 @@
       }
       &.t-card {
          .content {
-            --card-width: 280px;
-            --card-height: 380px;
+            --card-height: auto;
             --card-padding: 8px;
             .image {
                --card-img-height: 200px;
@@ -205,13 +216,32 @@
    }
 }
 
-@media (max-width: 480px) {
+@media (min-width: 768px) and (max-width: 1140px) {
+   .car.t-card .content {
+      width: 33dvw;
+   }
+}
+
+@media (max-width: 768px) {
+   .car.t-list .content {
+      width: 100%;
+   }
+   .car.t-card .content {
+      width: 85%;
+      margin: 0 auto;
+   }
+}
+
+@media (max-width: 630px) {
    .compare-icon {
       --compare-icon-size: 16px;
    }
    .car {
       .car_specs {
          --specs-font-size: 14px;
+      }
+      h1 {
+         font-size: 30px;
       }
       h3 {
          --h3-font-size: 15px;
@@ -227,11 +257,10 @@
       }
       &.t-card {
          .content {
-            --card-width: 100%;
-            --card-height: 340px;
+            --card-height: auto;
             --card-padding: 6px;
             .image {
-               --card-img-height: 180px;
+               --card-img-height: 280px;
             }
          }
       }
@@ -252,5 +281,17 @@
             }
          }
       }
+   }
+}
+
+@media (max-width: 460px) {
+   .car.t-card .content {
+      width: 95%;
+   }
+}
+
+@media (max-width: 400px) {
+   .car.t-card .content {
+      width: 98%;
    }
 }

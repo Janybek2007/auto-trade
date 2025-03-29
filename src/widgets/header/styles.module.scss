@@ -47,6 +47,7 @@
                font-weight: 500;
                color: var(--white);
                cursor: pointer;
+               text-wrap: nowrap;
             }
 
             .right {
@@ -218,7 +219,8 @@
 }
 
 .menubar {
-   width: calc(100dvw - 52px);
+   --slice-size: 40dvw;
+   width: calc(100dvw - var(--slice-size));
    height: 100dvh;
    background: var(--secondary);
    position: fixed;
@@ -226,6 +228,11 @@
    left: 0;
    z-index: 100;
    display: none;
+
+   @media (max-width: 600px) {
+      --slice-size: 52px;
+   }
+
    @media (max-width: 860px) {
       display: block;
    }

@@ -9,7 +9,7 @@ export const FilterPanel: React.FC = () => {
    const [openSections, setOpenSections] = useState<string[]>([]);
    const { t } = useLanguages();
 
-   const { filters, updateFilter } = useFiltrations();
+   const { filters, updateFilter, modalOpen, setModalOpen } = useFiltrations();
 
    React.useEffect(() => {
       setOpenSections(filtrations.map(f => f.value));
@@ -20,8 +20,15 @@ export const FilterPanel: React.FC = () => {
    }, []);
 
    return (
-      <aside className={s.panel}>
-         <div>
+      <aside data-filter-panel className={`${s[`om-${modalOpen}`]} ${s.panel}`}>
+         <div className={`filtration-head ${s.head}`}>
+            <button onClick={() => setModalOpen(null)} aria-label='close' className='flexCenter'>
+               <Icon name='lucide:x' />
+            </button>
+            <span>Параметры</span>
+            <button>Сбросить</button>
+         </div>
+         <div className={s['f-block']}>
             <div className={`${s.block} ${s.trigger} ${s.filter_block}`}>
                <Icon name='mage:filter' />
                <span>{t.get('filterPanel.filters')}</span>

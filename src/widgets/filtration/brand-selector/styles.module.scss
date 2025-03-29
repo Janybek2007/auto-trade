@@ -15,6 +15,37 @@
       color: var(--primary);
       line-height: 100%;
       margin-bottom: var(--title-margin-bottom);
+      @media (max-width: 768px) {
+         display: none;
+      }
+   }
+   .head {
+      display: none;
+   }
+
+   @media (max-width: 768px) {
+      position: absolute;
+      background: white;
+      width: 100dvw;
+      height: 100dvh;
+      top: 0;
+      left: 0;
+      z-index: 100;
+      padding: 39px 24px;
+      .head {
+         display: flex;
+      }
+      &:not(.om-stamp) {
+         display: none;
+      }
+   }
+
+   @media (max-width: 600px) {
+      padding: 34px 22px;
+   }
+
+   @media (max-width: 491px) {
+      padding: 30px 18px;
    }
 
    .brandList {

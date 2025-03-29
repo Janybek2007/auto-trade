@@ -2,33 +2,7 @@ import { createContext, useContext, useState, ReactNode, useCallback, useMemo } 
 import { toast } from '@features/toast';
 import { useLanguages } from '@shared/libs/intl';
 import { ButtonProps } from '@shared/components';
-
-interface Filters {
-   price: string;
-   year_of_production: string;
-   mileage: string;
-   kpp_type: string;
-   fuel_type: string;
-   bodywork: string;
-}
-
-interface Brand {
-   name: string;
-   logo: string;
-}
-
-interface FiltrationContextType {
-   compares: string[];
-   itemType: 'card' | 'list';
-   filters: Filters;
-   brand: Brand | null;
-   setBrand: (brand: Brand | null) => void;
-   onCompares: (car_id: string, actions?: any[]) => void;
-   toggleItemType: () => void;
-   updateFilter: (field: keyof Filters, value: string) => void;
-   resetFilters: () => void;
-   setAllFilters: (newFilters: Partial<Filters>) => void;
-}
+import { FiltrationContextType, Brand, Filters, ModalOpenType } from './types';
 
 const FiltrationContext = createContext<FiltrationContextType | null>(null);
 
@@ -48,7 +22,8 @@ export const FiltrationProvider: React.FC<FiltrationProviderProps> = ({ children
       fuel_type: '',
       bodywork: '',
    });
-   const [brand, setBrand] = useState<Brand | null>(null);
+   const [activeBrands, setActiveBrands] = useState<Brand[]>([]);
+   const [modalOpen, setModalOpen] = useState<ModalOpenType>(null);
 
    const onCompares = useCallback(
       (car_id: string, actions?: ButtonProps[]) => {
@@ -96,21 +71,20 @@ export const FiltrationProvider: React.FC<FiltrationProviderProps> = ({ children
       setFilters(prev => ({ ...prev, ...newFilters }));
    }, []);
 
-   const contextValue = useMemo(
-      () => ({
-         compares,
-         itemType,
-         filters,
-         brand,
-         setBrand,
-         onCompares,
-         toggleItemType,
-         updateFilter,
-         resetFilters,
-         setAllFilters,
-      }),
-      [compares, itemType, filters, brand, onCompares, toggleItemType, updateFilter, resetFilters, setAllFilters],
-   );
+   const contextValue: FiltrationContextType = {
+      compares,
+      itemType,
+      filters,
+      activeBrands,
+      setActiveBrands,
+      onCompares,
+      toggleItemType,
+      updateFilter,
+      resetFilters,
+      setAllFilters,
+      modalOpen,
+      setModalOpen,
+   };
 
    return <FiltrationContext.Provider value={contextValue}>{children}</FiltrationContext.Provider>;
 };

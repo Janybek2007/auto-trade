@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import { useFiltrations } from '../context';
 import s from './styles.module.scss';
 import { useLanguages } from '@shared/libs/intl';
+import { useSize } from '@shared/utils';
 
 const getTranslationByLanguage = (key: string, language: string) => {
    switch (language) {
@@ -34,7 +35,7 @@ export const CarList: React.FC = () => {
    const { onCompares, itemType } = useFiltrations();
    const [visibleCount, setVisibleCount] = useState(9);
    const { t, currentLanguage } = useLanguages();
-
+   const { width } = useSize();
    const HandleLoadMore = React.useCallback(() => setVisibleCount(prev => prev + 9), []);
    const Navigate = useNavigate();
 
@@ -78,7 +79,7 @@ export const CarList: React.FC = () => {
                            image: '/image/askar-img.svg',
                            ...carData,
                         }}
-                        type={itemType}
+                        type={width <= 768 ? (width >= 560 ? 'list' : 'card') : itemType}
                         actions={[
                            { type: 'more', button: { onClick: () => Navigate({ to: `/cars/${i}` }) } },
                            { type: 'compare', button: { onClick: () => CompareClick(i) } },

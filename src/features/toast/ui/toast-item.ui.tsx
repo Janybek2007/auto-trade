@@ -7,7 +7,7 @@ import s from '../styles.module.scss';
 
 const ToastItem: React.FC<{ toast: TItem; is: boolean }> = React.memo(({ toast, is }) => {
    const { removeToast } = useToast();
-   const { title, description, icon, actions, duration = 5000 } = toast;
+   const { title, description, icon, actions, duration = 2500 } = toast;
 
    const [progress, setProgress] = useState(100);
    const [isHovered, setIsHovered] = useState(false);
