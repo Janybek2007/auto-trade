@@ -147,5 +147,9 @@
       "interiorColor": "Interior Color:",
       "seatMaterial": "Seat Material:",
       "contactManager": "Contact Manager"
+   },
+   "policy": {
+      "title": "Privacy Policy",
+      "content": "At Askar Auto Trade, we value our customers' trust and guarantee complete confidentiality at all stages of cooperation. All information you provide is used solely for processing the transaction and organizing vehicle delivery. We do not share personal data with third parties without your consent and take all necessary measures to protect it. The security of your data is our priority. With Askar Auto Trade, you can be confident in the reliability and transparency of every transaction!"
    }
 }
