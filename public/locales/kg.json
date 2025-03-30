@@ -127,5 +127,25 @@
    "carActions": {
       "comparison": "Салыштыруу",
       "more": "Толук"
+   },
+   "compare": {
+      "title": "Унаа салыштыруу",
+      "addCar": "+ Унаа кошуу",
+      "removeAll": "Баарын өчүрүү",
+      "history": "Унаанын тарыхы",
+      "specs": "Техникалык мүнөздөмөлөр",
+      "interior": "Ички бөлүгү",
+      "carfaxStatus": "Carfax статусу:",
+      "vinCode": "VIN коду:",
+      "engine": "Кыймылдаткыч:",
+      "color": "Түсү:",
+      "gearbox": "КПП:",
+      "drive": "Привод:",
+      "year": "Жылы:",
+      "trim": "Комплектация:",
+      "wheel": "Руль:",
+      "interiorColor": "Салон түсү:",
+      "seatMaterial": "Орундук материал:",
+      "contactManager": "Менеджерге жазуу"
    }
 }

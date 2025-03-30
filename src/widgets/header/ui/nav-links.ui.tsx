@@ -3,7 +3,12 @@ import s from '../styles.module.scss';
 import { Link, useLocation } from '@tanstack/react-router';
 import { useLanguages } from '@shared/libs/intl';
 
-export const NavLinks: React.FC<{ direction?: 'row' | 'col' }> = React.memo(({ direction = "row" }) => {
+interface IProps {
+   direction?: 'row' | 'col';
+   onClick?: VoidFunction;
+}
+
+export const NavLinks: React.FC<IProps> = React.memo(({ direction = 'row', onClick }) => {
    const { currentLanguage } = useLanguages();
 
    const isRuOrKg = currentLanguage === 'RU' || currentLanguage === 'KG';
@@ -13,6 +18,7 @@ export const NavLinks: React.FC<{ direction?: 'row' | 'col' }> = React.memo(({ d
          <ul className={`${pathname !== '/' && s.bg} ${s.nav_list} ${s[`d-${direction}`]}`}>
             <li>
                <Link
+                  onClick={onClick}
                   className={`${pathname !== '/' && s.bg}`}
                   activeProps={{ className: s.active }}
                   to='/filtration'
@@ -25,6 +31,7 @@ export const NavLinks: React.FC<{ direction?: 'row' | 'col' }> = React.memo(({ d
             </li>
             <li>
                <Link
+                  onClick={onClick}
                   className={`${pathname !== '/' && s.bg}`}
                   activeProps={{ className: s.active }}
                   to='/filtration'
@@ -37,6 +44,7 @@ export const NavLinks: React.FC<{ direction?: 'row' | 'col' }> = React.memo(({ d
             </li>
             <li>
                <Link
+                  onClick={onClick}
                   className={`${pathname !== '/' && s.bg}`}
                   activeProps={{ className: s.active }}
                   to='/filtration'

@@ -12,8 +12,13 @@ const ActionsComponent = (actions: CarItemPops['actions'] = [{ type: 'more' }, {
    return (
       <div className={s.buttons}>
          {actions.map(({ type, button }) => (
-            <Button {...button} className={s[`t-${type}`]} variant={type === 'more' ? 'outline' : 'solid'} key={type}>
-               {type === 'more' && (
+            <Button
+               {...button}
+               className={`${s[`l-${actions.length}`]} ${s[`t-${type}`]}`}
+               variant={type === 'more' ? 'outline' : 'solid'}
+               key={type}
+            >
+               {type === 'more' && actions.length > 1 && (
                   <img className={s['compare-icon']} src='/icons/compare-icon.svg' alt='Compare Icon' />
                )}
                {type === 'compare' ? t.get('carActions.comparison') : t.get('carActions.more')}
@@ -25,10 +30,10 @@ const ActionsComponent = (actions: CarItemPops['actions'] = [{ type: 'more' }, {
 
 type TProps = Omit<CarItemPops, 'children'> & CarItemType;
 
-export const CarItem: React.FC<TProps> = ({ actions, item, type = 'card' }) => {
+export const CarItem: React.FC<TProps> = ({ actions, type = 'card', ...props }) => {
    return type === 'card' ? (
-      <CardItem item={item}>{ActionsComponent(actions)}</CardItem>
+      <CardItem {...props}>{ActionsComponent(actions)}</CardItem>
    ) : (
-      <ListItem item={item}>{ActionsComponent(actions)}</ListItem>
+      <ListItem {...props}>{ActionsComponent(actions)}</ListItem>
    );
 };

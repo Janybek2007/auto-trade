@@ -98,12 +98,6 @@
    }
 }
 
-// @media (min-width: 768px) and (max-width: 1024px) {
-//    .list.type-card {
-//       grid-template-columns: repeat(1, 1fr);
-//    }
-// }
-
 @media (max-width: 768px) {
    .list {
       --list-padding: 15px;
@@ -121,5 +115,11 @@
       --padding-x: 14px;
       --padding-y: 6px;
       --button-img-size: 18px;
+   }
+}
+
+@media (max-width: 500px) {
+   .list {
+      --list-padding: 10px 0px;
    }
 }

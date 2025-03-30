@@ -5,6 +5,7 @@
 
 .car {
    --content-radius: 10px;
+   position: relative;
    .content {
       --content-shadow: 1px 4px 4px 0px rgba(83, 83, 83, 0.25);
       box-shadow: var(--content-shadow);
@@ -60,6 +61,10 @@
             padding-bottom: var(--button-compare-padding-y);
             border-width: var(--button-compare-border-width);
          }
+         &.l-1 {
+            color: var(--white);
+            background-color: var(--primary);
+         }
          &:hover {
             transform: translateY(-1px);
          }
@@ -71,10 +76,8 @@
 
    &.t-card {
       .content {
-         --card-height: 416px;
          --card-padding: 10px;
          width: 100%;
-         height: var(--card-height);
          padding: var(--card-padding);
 
          .image {
@@ -193,7 +196,6 @@
       }
       &.t-card {
          .content {
-            --card-height: auto;
             --card-padding: 8px;
             .image {
                --card-img-height: 200px;
@@ -257,7 +259,6 @@
       }
       &.t-card {
          .content {
-            --card-height: auto;
             --card-padding: 6px;
             .image {
                --card-img-height: 280px;

@@ -127,5 +127,25 @@
    "carActions": {
       "comparison": "Сравнение",
       "more": "Подробнее"
+   },
+   "compare": {
+      "title": "Сравнение авто",
+      "addCar": "+ Добавить авто",
+      "removeAll": "Удалить все",
+      "history": "История авто",
+      "specs": "Технические характеристики",
+      "interior": "Интерьер",
+      "carfaxStatus": "Статус Carfax:",
+      "vinCode": "VIN код:",
+      "engine": "Объем двигателя",
+      "color": "Цвет",
+      "gearbox": "Тип КПП",
+      "drive": "Привод",
+      "year": "Год выпуска",
+      "trim": "Комплектация",
+      "wheel": "Руль",
+      "interiorColor": "Цвет салона",
+      "seatMaterial": "Материал сидений",
+      "contactManager": "Написать менеджеру"
    }
 }

@@ -11,6 +11,7 @@ export interface CarItemType {
 
 export interface CarItemPops extends React.PropsWithChildren {
    actions?: ActionButton[];
+   extraComponents?: React.ReactNode
    item: {
       model: string;
       range: string;

@@ -1,13 +1,14 @@
 import s from '../style.module.scss';
 import { CarItemPops } from '../card-item.types';
 
-export const ListItem: React.FC<Omit<CarItemPops, 'actions'>> = ({ item, children }) => {
+export const ListItem: React.FC<Omit<CarItemPops, 'actions'>> = ({ item, children, extraComponents }) => {
    return (
       <>
-         <div className={`${s.car} ${s['t-list']}`}>
-            <div className={s.content}>
+         <div data-car-item className={`${s.car} ${s['t-list']}`}>
+            {extraComponents}
+            <div data-car-content className={s.content}>
                <div className={s.card_img}>
-                  <img className={s.image} src={item.image} alt='Car Image' />
+                  <img data-car-image className={s.image} src={item.image} alt='Car Image' />
                </div>
 
                <div className={s.left_cont}>

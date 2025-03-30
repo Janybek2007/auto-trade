@@ -33,14 +33,20 @@ export const MenuBar: React.FC<IProps> = ({ onClose }) => {
                   <img src={'/image/jylas-tuning.svg'} alt='' />
                </figure>
                <hr className={s.divider} />
-               <NavLinks direction='col' />
+               <NavLinks onClick={onClose} direction='col' />
                <hr className={s.divider} />
                <div className={s.links}>
-                  <Link to='/'>Главная</Link>
+                  <Link onClick={onClose} to='/'>
+                     Главная
+                  </Link>
                   <hr className={s.divider} />
-                  <Link to='/about'>О нас</Link>
+                  <Link onClick={onClose} to='/about'>
+                     О нас
+                  </Link>
                   <hr className={s.divider} />
-                  <Link to='/policy'>Политика конфиденциальности</Link>
+                  <Link onClick={onClose} to='/policy'>
+                     Политика конфиденциальности
+                  </Link>
                </div>
             </div>
          </div>

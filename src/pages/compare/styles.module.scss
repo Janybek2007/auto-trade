@@ -1,0 +1,169 @@
+.Main {
+   --main-padding: 50px 0;
+   --container-max-width: 1250px;
+   --container-padding: 0 20px;
+   --section-gap: 40px;
+
+   padding: var(--main-padding);
+
+   .contact-btn {
+      --button-margin-top: 57px;
+      --button-padding: 14px 35px;
+      --button-radius: 10px;
+      --icon-size: 17px;
+      --text-font-size: 14px;
+
+      margin-top: var(--button-margin-top);
+      border-radius: var(--button-radius);
+      background: var(--secondary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: var(--button-padding);
+
+      img {
+         width: var(--icon-size);
+         height: var(--icon-size);
+         object-fit: contain;
+      }
+
+      p {
+         font-size: var(--text-font-size);
+         font-weight: 500;
+         letter-spacing: -0.3px;
+         color: var(--white);
+      }
+   }
+
+   .container {
+      max-width: var(--container-max-width);
+      width: 100%;
+      margin: 0 auto;
+      padding: var(--container-padding);
+
+      .content {
+         .cards_for_compare {
+            h1 {
+               --title-font-size: 36px;
+               --title-margin-bottom: 20px;
+
+               color: var(--primary);
+               font-size: var(--title-font-size);
+               font-weight: 600;
+               margin-bottom: var(--title-margin-bottom);
+            }
+         }
+
+         .contact-btn.mobile {
+            display: none;
+         }
+      }
+   }
+}
+
+@media (max-width: 1024px) {
+   .Main {
+      --main-padding: 40px 0;
+      --section-gap: 30px;
+
+      .content {
+         .cards_for_compare h1 {
+            --title-font-size: 32px;
+         }
+      }
+   }
+}
+
+@media (max-width: 900px) {
+   .Main {
+      .content {
+         .contact-btn.mobile {
+            display: flex !important;
+            margin: 0 auto;
+         }
+      }
+   }
+}
+
+@media (max-width: 768px) {
+   .Main {
+      --main-padding: 30px 0;
+      --container-padding: 0 15px;
+
+      .content {
+         .cards_for_compare {
+            h1 {
+               --title-font-size: 28px;
+               --title-margin-bottom: 16px;
+            }
+         }
+
+         [data-car-item] [data-car-content] {
+            width: 340px;
+         }
+      }
+   }
+}
+
+@media (max-width: 580px) {
+   .Main {
+      [data-car-item] [data-car-content] {
+         width: 340px;
+
+         [data-car-image] {
+            --card-img-height: 24dvh;
+         }
+      }
+   }
+}
+
+@media (max-width: 480px) {
+   .Main {
+      --main-padding: 20px 0;
+
+      .content {
+         .cards_for_compare {
+            h1 {
+               --title-font-size: 20px;
+            }
+         }
+
+         [data-car-item] [data-car-content] {
+            width: 300px;
+            h1 {
+               font-size: 24px;
+            }
+            [data-car-image] {
+               --card-img-height: 22dvh;
+            }
+         }
+      }
+   }
+}
+
+@media (max-width: 400px) {
+   .Main {
+      [data-car-item] [data-car-content] {
+         width: 280px;
+         h1 {
+            font-size: 20px;
+         }
+         [data-car-image] {
+            --card-img-height: 22dvh;
+         }
+      }
+   }
+}
+
+@media (max-width: 360px) {
+   .Main {
+      --container-padding: 0 10px;
+
+      .content {
+         .cards_for_compare h1 {
+            --title-font-size: 22px;
+         }
+      }
+   }
+}

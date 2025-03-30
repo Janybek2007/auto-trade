@@ -48,8 +48,6 @@ export const Header: React.FC = () => {
                         </>
                      ) : (
                         <>
-                           {/* <NavLinks /> */}
-
                            {width >= 860 && (
                               <>
                                  <Link className={s.aboutLink} to='/about'>

@@ -127,5 +127,25 @@
    "carActions": {
       "comparison": "Compare",
       "more": "More details"
+   },
+   "compare": {
+      "title": "Car Comparison",
+      "addCar": "+ Add Car",
+      "removeAll": "Remove All",
+      "history": "Vehicle History",
+      "specs": "Technical Specifications",
+      "interior": "Interior",
+      "carfaxStatus": "Carfax Status:",
+      "vinCode": "VIN Code:",
+      "engine": "Engine:",
+      "color": "Color:",
+      "gearbox": "Transmission:",
+      "drive": "Drive:",
+      "year": "Year:",
+      "trim": "Trim:",
+      "wheel": "Steering Wheel:",
+      "interiorColor": "Interior Color:",
+      "seatMaterial": "Seat Material:",
+      "contactManager": "Contact Manager"
    }
 }
