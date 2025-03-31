@@ -15,13 +15,13 @@ export const CarDetailPage = () => {
 
    const data = {
       title: 'KIA K5',
-      price: '24 410',
+      price: '24 410 - 27 000',
       engine: 'Бензин, 2.5л',
       power: '294 л.с.',
       gearbox: 'Робот',
       wheelDrive: 'Передний',
       steeringWheel: 'Левый',
-      range: '25 000 км, без пробега по КР',
+      range: '25 000 км, без пробега по КР', 
    };
 
    const data2 = {
@@ -41,19 +41,19 @@ export const CarDetailPage = () => {
                      <div className={s.mainImage}>
                         <img src={selectedImage} alt={t.get('carDetail.selectedImageAlt')} />
                      </div>
-                     <div className={s.thumbnailContainer}>
-                        {images.map((img, index) => (
+                     <div className={s.thumbnailContainer}> 
+                        {images.map((img, index) => (  
                            <img
                               key={index}
                               src={img}
-                              alt={`Thumbnail Image ${index}`}
+                              alt={`Thumbnail Image ${index}`} 
                               className={selectedImage === img ? s.active : ''}
                               onClick={() => setSelectedImage(img)}
                            />
                         ))}
                      </div>
                   </div>
-                  <div className={s.right}>
+                  <div className={s.right}>  
                      <div className={s.main_content}>
                         <div className={s.block1}>
                            <h1>{data.title}</h1>
@@ -110,7 +110,7 @@ export const CarDetailPage = () => {
                </div>
 
                <div className={s.bottom}>
-                  <div className={s.bot_content}>
+                  <div className={s.bot_content}> 
                      <div className={s.left}>
                         <div className={s.box}>
                            <img src={detIcon1} alt='' />
@@ -122,10 +122,10 @@ export const CarDetailPage = () => {
                         </div>
                      </div>
                      <div className={s.right}>
-                        <div className={s.box}>
+                        <button className={s.box}>
                            <img src={detIcon3} alt={t.get('carDetail.whatsappAlt')} />
                            <p>{t.get('carDetail.contactManager')}</p>
-                        </div>
+                        </button>
                      </div>
                   </div>
                </div>
