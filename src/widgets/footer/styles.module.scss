@@ -1,123 +1,321 @@
 .footer {
-  padding: 50px 0;
-  background: #157a75;
-  color: white;
+   padding: 50px 0;
+   background: #157a75;
+   color: white;
+}
+
+.container {
+   width: 100%;
+   max-width: 1200px;
+   margin: 0 auto;
+   padding: 0 15px;
 }
 
 .content {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
+   display: flex;
+   flex-direction: column;
+   gap: 30px;
 }
 
 .first {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid white;
-  padding: 0 40px 30px;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   border-bottom: 1px solid white;
+   padding: 0 40px 30px;
 
-  .logo {
-    width: 84px;
-    height: 42px;
-  }
+   .logo {
+      width: 84px;
+      height: 42px;
+   }
 }
 
 .head {
-  display: flex;
-  align-items: center;
-  gap: 40px;
+   display: flex;
+   align-items: center;
+   gap: 40px;
 
-  hr {
-    height: 20px;
-    border: none;
-    border-left: 1px solid white;
-  }
+   hr {
+      height: 20px;
+      border: none;
+      border-left: 1px solid white;
+   }
 }
 
 .blog {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+   display: flex;
+   align-items: center;
+   gap: 10px;
 
-  .flag {
-    width: 27px;
-    height: 18px;
-  }
+   .flag {
+      width: 27px;
+      height: 18px;
+   }
 
-  p {
-    font-size: 16px;
-    font-weight: 400;
-  }
+   p {
+      font-size: 16px;
+      font-weight: 400;
+   }
 }
 
 .second {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 20px 0 50px;
-  border-bottom: 1px solid white;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   padding: 20px 0 50px;
+   border-bottom: 1px solid white;
 
-  .logoAskar {
-    width: 180px;
-    height: 138px;
-  }
+   .logoAskar {
+      width: 180px;
+      height: 138px;
+      @media (max-width: 700px) {
+         display: none;
+      }
+   }
 }
 
 .box {
-  width: 190px;
+   width: 190px;
 
-  h4 {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 16px;
-  }
+   h4 {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 16px;
+   }
 
-  p {
-    font-size: 13px;
-    padding-top: 15px;
-  }
+   p {
+      font-size: 13px;
+      padding-top: 15px;
+   }
 }
 
 .block {
-  display: flex;
-  align-items: flex-start;
-  gap: 70px;
+   display: flex;
+   align-items: flex-start;
+   gap: 70px;
 }
 
 ul {
-  line-height: 28px;
+   line-height: 28px;
 
-  li:first-child {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 16px;
-  }
+   li:first-child {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 16px;
+   }
 
-  li {
-    cursor: pointer;
-    font-size: 14px;
-    transition: 0.2s;
+   li {
+      font-size: 14px;
+      transition: opacity 0.2s;
 
-    &:hover {
-      opacity: 0.8;
-    }
-  }
+      a {
+         color: white;
+         text-decoration: none;
+
+         &:hover {
+            opacity: 0.8;
+         }
+      }
+   }
 }
 
 .icons {
-  font-size: 18px;
+   font-size: 18px;
 }
 
 .end {
-  display: flex;
-  justify-content: flex-end;
-  padding: 0 60px 0 0;
+   display: flex;
+   justify-content: flex-end;
+   padding: 0 60px 0 0;
 
-  .logoEnd {
-    width: 86px;
-    height: 41px;
-  }
+   .logoEnd {
+      width: 86px;
+      height: 41px;
+   }
+}
+
+@media (min-width: 767px) {
+   .logo[data-second] {
+      display: none;
+   }
+}
+
+/* Планшеттер үчүн (768px чейин) */
+@media (max-width: 768px) {
+   .container {
+      padding: 0 10px;
+   }
+
+   .first {
+      flex-direction: row;
+      align-items: center;
+      padding: 0 20px 20px;
+
+      .logo {
+         width: 70px;
+         height: 35px;
+         object-fit: contain;
+      }
+   }
+
+   .head {
+      display: none; /* 768px жана андан төмөн экрандарда өлкөлөрдү жашырабыз */
+   }
+
+   .second {
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 0 30px;
+
+      .logoAskar {
+         width: 150px;
+         height: 115px;
+         display: none;
+      }
+   }
+
+   .block {
+      flex-direction: row;
+      gap: 30px;
+   }
+
+   .box {
+      width: 170px;
+
+      h4 {
+         font-size: 14px;
+      }
+
+      p {
+         font-size: 12px;
+      }
+   }
+
+   ul {
+      line-height: 24px;
+
+      li:first-child {
+         font-size: 14px;
+      }
+
+      li {
+         font-size: 13px;
+      }
+   }
+
+   .end {
+      padding: 0 20px 0 0;
+
+      .logoEnd {
+         width: 70px;
+         height: 33px;
+      }
+   }
+}
+
+@media (max-width: 560px) {
+   .footer {
+      padding: 30px 0;
+   }
+
+   .container {
+      padding: 0 5px;
+   }
+
+   .content {
+      align-items: center;
+   }
+
+   .first {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 10px 15px;
+      width: 100%;
+      max-width: 300px;
+
+      .logo {
+         width: 60px;
+         height: 30px;
+      }
+   }
+
+   .second {
+      flex-direction: column;
+      align-items: center;
+      padding: 15px 0 20px;
+      text-align: center;
+
+      .logoAskar {
+         width: 40px;
+         height: 40px;
+         margin-bottom: 20px;
+      }
+   }
+
+   .block {
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      width: 100%;
+   }
+
+   .box {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      h4 {
+         font-size: 13px;
+         display: flex;
+         align-items: center;
+         gap: 8px;
+      }
+
+      p {
+         font-size: 12px;
+         padding-top: 10px;
+      }
+   }
+
+   ul {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      line-height: 22px;
+      margin: 0;
+      padding: 0;
+
+      li:first-child {
+         font-size: 13px;
+         display: flex;
+         align-items: center;
+         gap: 8px;
+      }
+
+      li {
+         font-size: 12px;
+      }
+   }
+
+   .icons {
+      font-size: 16px;
+   }
+
+   .end {
+      padding: 0 10px 0 0;
+      width: 100%;
+      max-width: 300px;
+      display: flex;
+      justify-content: flex-end;
+
+      .logoEnd {
+         width: 40px;
+         height: 20px;
+      }
+   }
 }
