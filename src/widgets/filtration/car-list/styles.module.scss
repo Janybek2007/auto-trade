@@ -39,8 +39,6 @@
    --content-max-height: 140dvh;
    display: flex;
    flex-direction: column;
-   max-height: var(--content-max-height);
-   overflow-y: auto;
    width: 100%;
    overflow-x: hidden;
    &::-webkit-scrollbar {

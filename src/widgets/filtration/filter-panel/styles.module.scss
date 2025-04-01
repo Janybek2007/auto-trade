@@ -1,11 +1,11 @@
 .panel {
    --panel-w: 217px;
-   --panel-max-height: 140dvh;
+   --panel-max-height: 177dvh;
    border-right: 1px solid var(--gray);
    min-width: var(--panel-w);
    max-width: var(--panel-w);
-   max-height: var(--panel-max-height);
-   overflow-y: auto;
+   position: sticky;
+   top: 0;
    &::-webkit-scrollbar {
       width: 0;
    }

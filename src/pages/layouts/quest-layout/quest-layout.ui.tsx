@@ -1,11 +1,17 @@
-import { Outlet } from '@tanstack/react-router';
-import { Header } from '@widgets/header';
+import React from "react";
+import { Outlet } from "@tanstack/react-router";
+import { Footer } from "@widgets/footer";
+import { Header } from "@widgets/header";
+import styles from "./styles.module.scss";
 
 export const GuestLayout: React.FC = () => {
-   return (
-      <>
-         <Header />
-         <Outlet />
-      </>
-   );
+  return (
+    <div className={styles.layout}>
+      <Header />
+      <main className={styles.main}>
+        <Outlet />
+      </main>
+      <Footer />
+    </div>
+  );
 };

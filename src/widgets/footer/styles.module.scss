@@ -1,0 +1,123 @@
+.footer {
+  padding: 50px 0;
+  background: #157a75;
+  color: white;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.first {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid white;
+  padding: 0 40px 30px;
+
+  .logo {
+    width: 84px;
+    height: 42px;
+  }
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+
+  hr {
+    height: 20px;
+    border: none;
+    border-left: 1px solid white;
+  }
+}
+
+.blog {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  .flag {
+    width: 27px;
+    height: 18px;
+  }
+
+  p {
+    font-size: 16px;
+    font-weight: 400;
+  }
+}
+
+.second {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 0 50px;
+  border-bottom: 1px solid white;
+
+  .logoAskar {
+    width: 180px;
+    height: 138px;
+  }
+}
+
+.box {
+  width: 190px;
+
+  h4 {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 16px;
+  }
+
+  p {
+    font-size: 13px;
+    padding-top: 15px;
+  }
+}
+
+.block {
+  display: flex;
+  align-items: flex-start;
+  gap: 70px;
+}
+
+ul {
+  line-height: 28px;
+
+  li:first-child {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 16px;
+  }
+
+  li {
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.2s;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
+
+.icons {
+  font-size: 18px;
+}
+
+.end {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 60px 0 0;
+
+  .logoEnd {
+    width: 86px;
+    height: 41px;
+  }
+}

@@ -27,7 +27,7 @@ export default defineConfig(({ mode }) => {
          }),
       ],
       server: {
-         port: parseInt(env.PORT),
+         port: parseInt(env.APP_PORT),
          host: true,
       },
       build: {

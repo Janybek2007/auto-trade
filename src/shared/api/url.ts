@@ -1,5 +1,5 @@
-import { loadEnv } from 'vite'
+import { loadEnv } from 'vite';
 
-const env = loadEnv("develpoment", "", "")
+const env = loadEnv('develpoment', '', '');
 
-export const ApiUrl = env.API_URL
+export const ApiUrl = env.API_URL;
