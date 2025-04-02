@@ -94,6 +94,12 @@
    align-items: center;
    justify-content: space-between;
    transition: all 0.25s;
+   input {
+      font-size: 1em;
+      font-weight: 600;
+      width: 100%;
+      text-align: left;
+   }
    &:is(.active) {
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
