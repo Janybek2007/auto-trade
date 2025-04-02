@@ -7,6 +7,12 @@ export type RequestParams<T> = {
 	onProgress?: (progress: number) => void;
 };
 
+export interface IResponse<T> {
+	data: T
+	status: number
+	statusText: string
+}
+
 export type RequestCallback<T> = (
 	params: RequestParams<T>
 ) => RequestParams<T> | Promise<RequestParams<T>>;

@@ -1,12 +1,13 @@
-import { Button, CarItem, Icon } from '@shared/components';
-import { useNavigate } from '@tanstack/react-router';
+import { Button, CarItem, Icon, Loading } from '@shared/components';
+import { useNavigate, useSearch } from '@tanstack/react-router';
 import { motion } from 'framer-motion';
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useFiltrations } from '../context';
 import s from './styles.module.scss';
 import { useLanguages } from '@shared/libs/intl';
 import { useSize } from '@shared/utils';
-import { baseCarData } from '../const'
+import { useQuery } from '@tanstack/react-query';
+import { CarsService } from '@shared/api/cars';
 
 const getTranslationByLanguage = (key: string, language: string) => {
    switch (language) {
@@ -24,15 +25,22 @@ const BaseActionProps = {
    className: s.button,
 };
 
+const PAGE_SIZE = 9;
+
 export const CarList: React.FC = () => {
    const { onCompares, itemType } = useFiltrations();
-   const [visibleCount, setVisibleCount] = useState(9);
-   const { t, currentLanguage } = useLanguages();
+   const { by } = useSearch({ from: '/_guest-layout/filtration' });
+   const { data: cars, isLoading } = useQuery(CarsService.carsByCountryQuery({ country: by }));
+   const [page, setPage] = useState(1);
+   const { currentLanguage } = useLanguages();
    const { width } = useSize();
-   const HandleLoadMore = React.useCallback(() => setVisibleCount(prev => prev + 9), []);
-   const Navigate = useNavigate();
+   const navigate = useNavigate();
 
-   const CompareClick = React.useCallback(
+   const handleLoadMore = useCallback(() => setPage(prev => prev + 1), []);
+   const visibleCars = cars?.slice(0, page * PAGE_SIZE) || [];
+   const hasMore = cars && visibleCars.length < cars.length;
+
+   const compareClick = useCallback(
       (v: number) => {
          onCompares(String(v), [
             {
@@ -47,43 +55,44 @@ export const CarList: React.FC = () => {
             },
          ]);
       },
-      [currentLanguage],
+      [currentLanguage, onCompares],
    );
 
    return (
       <div className={s['content']}>
-         <motion.div
-            className={`${s.list} ${s[`type-${itemType}`]}`}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-         >
-            {Array.from({ length: visibleCount }).map((_, i) => {
-               const carData = baseCarData[i % baseCarData.length];
-               return (
+         {isLoading ? (
+            <Loading />
+         ) : (
+            <motion.div
+               className={`${s.list} ${s[`type-${itemType}`]}`}
+               initial={{ opacity: 0 }}
+               animate={{ opacity: 1 }}
+               transition={{ duration: 0.5 }}
+            >
+               {visibleCars.map((car, i) => (
                   <motion.div
-                     key={`${itemType}-${i}`}
-                     initial={{ opacity: 0, scale: 0.9 }}
+                     key={`${itemType}-${car.id}`}
+                     initial={{ opacity: 0, scale: 0.95 }}
                      animate={{ opacity: 1, scale: 1 }}
                      transition={{ delay: i * 0.02, duration: 0.3 }}
                   >
                      <CarItem
-                        item={{
-                           image: '/image/askar-img.svg',
-                           ...carData,
-                        }}
+                        item={car}
                         type={width <= 768 ? (width >= 560 ? 'list' : 'card') : itemType}
                         actions={[
-                           { type: 'more', button: { onClick: () => Navigate({ to: `/cars/${i}` }) } },
-                           { type: 'compare', button: { onClick: () => CompareClick(i) } },
+                           {
+                              type: 'more',
+                              button: { onClick: () => navigate({ to: `/cars/${car.id}`, search: { by } }) },
+                           },
+                           { type: 'compare', button: { onClick: () => compareClick(car.id) } },
                         ]}
                      />
                   </motion.div>
-               );
-            })}
-         </motion.div>
-         {visibleCount < 100 && (
-            <Button size='lg' color='neutral' className={s.moreButton} onClick={HandleLoadMore}>
+               ))}
+            </motion.div>
+         )}
+         {hasMore && (
+            <Button size='lg' color='neutral' className={s.moreButton} onClick={handleLoadMore}>
                {getTranslationByLanguage('loadMore', currentLanguage)}
                <Icon name='line-md:arrow-down' c_size={20} />
             </Button>

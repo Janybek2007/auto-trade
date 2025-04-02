@@ -41,6 +41,8 @@
    flex-direction: column;
    width: 100%;
    overflow-x: hidden;
+   max-height: 166dvh;
+   overflow-y: scroll;
    &::-webkit-scrollbar {
       width: 0;
    }

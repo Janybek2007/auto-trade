@@ -6,6 +6,9 @@
    max-width: var(--panel-w);
    position: sticky;
    top: 0;
+   max-height: 166dvh;
+   overflow-y: auto;
+   align-self: flex-start;
    &::-webkit-scrollbar {
       width: 0;
    }

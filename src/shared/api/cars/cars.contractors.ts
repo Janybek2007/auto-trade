@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const CountryDtoSchema = z.enum(['america', 'dubai', 'korea'])
+export const CountryDtoSchema = z.enum(['america', 'dubai', 'korea']);
 
 export const CarDtoSchema = z.object({
    id: z.number(),
@@ -37,7 +37,7 @@ export const CarDtoSchema = z.object({
    transmission_type: z.string(),
    start_price: z.string(),
    end_price: z.string(),
-   auction_start_time: z.string().datetime(),
+   auction_start_time: z.string(),
    interior: z.object({
       id: z.number(),
       steering_wheel: z.string(),
@@ -56,7 +56,7 @@ export const CarDtoSchema = z.object({
    photos: z.array(
       z.object({
          id: z.number(),
-         image: z.string().url(),
+         image: z.string().transform(img => (img.startsWith('http') ? img : `http://109.73.207.12:800${img}`)),
          is_main: z.boolean(),
       }),
    ),
@@ -64,4 +64,4 @@ export const CarDtoSchema = z.object({
    time_left: z.string(),
 });
 
-export const CarsDtoSchema = z.array(CarDtoSchema)
+export const CarsDtoSchema = z.array(CarDtoSchema);

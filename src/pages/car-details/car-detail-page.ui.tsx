@@ -8,8 +8,16 @@ import detIcon1 from '../../../public/icons/det-icon1.svg';
 import detIcon2 from '../../../public/icons/det-icon2.svg';
 import detIcon3 from '../../../public/icons/det-icon3.svg';
 import { useLanguages } from '@shared/libs/intl';
+import { useQuery } from '@tanstack/react-query';
+import { CarsService } from '@shared/api/cars';
+import { useParams, useSearch } from '@tanstack/react-router';
 
 export const CarDetailPage = () => {
+   const { by } = useSearch({ from: '/_guest-layout/cars/$car-id' });
+   const params = useParams({ from: '/_guest-layout/cars/$car-id' });
+   const { data: detail, isLoading } = useQuery(
+      CarsService.carsByIdQuery({ country: by, id: Number(params['car-id']) }),
+   );
    const images = [image1, image2, image3, image4, image1];
    const { t } = useLanguages();
 
@@ -21,7 +29,7 @@ export const CarDetailPage = () => {
       gearbox: 'Робот',
       wheelDrive: 'Передний',
       steeringWheel: 'Левый',
-      range: '25 000 км, без пробега по КР', 
+      range: '25 000 км, без пробега по КР',
    };
 
    const data2 = {
@@ -41,19 +49,19 @@ export const CarDetailPage = () => {
                      <div className={s.mainImage}>
                         <img src={selectedImage} alt={t.get('carDetail.selectedImageAlt')} />
                      </div>
-                     <div className={s.thumbnailContainer}> 
-                        {images.map((img, index) => (  
+                     <div className={s.thumbnailContainer}>
+                        {images.map((img, index) => (
                            <img
                               key={index}
                               src={img}
-                              alt={`Thumbnail Image ${index}`} 
+                              alt={`Thumbnail Image ${index}`}
                               className={selectedImage === img ? s.active : ''}
                               onClick={() => setSelectedImage(img)}
                            />
                         ))}
                      </div>
                   </div>
-                  <div className={s.right}>  
+                  <div className={s.right}>
                      <div className={s.main_content}>
                         <div className={s.block1}>
                            <h1>{data.title}</h1>
@@ -110,7 +118,7 @@ export const CarDetailPage = () => {
                </div>
 
                <div className={s.bottom}>
-                  <div className={s.bot_content}> 
+                  <div className={s.bot_content}>
                      <div className={s.left}>
                         <div className={s.box}>
                            <img src={detIcon1} alt='' />

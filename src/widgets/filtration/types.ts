@@ -1,3 +1,5 @@
+import { BrandDto } from '@shared/api/brands'
+
 export interface Filters {
    price: string;
    year_of_production: string;
@@ -7,17 +9,12 @@ export interface Filters {
    bodywork: string;
 }
 
-export interface Brand {
-   name: string;
-   logo: string;
-}
-
 export interface FiltrationContextType {
    compares: string[];
    itemType: 'card' | 'list';
    filters: Filters;
-   activeBrands: Brand[];
-   setActiveBrands: React.Dispatch<React.SetStateAction<Brand[]>>;
+   activeBrands: BrandDto[];
+   setActiveBrands: React.Dispatch<React.SetStateAction<BrandDto[]>>;
    onCompares: (car_id: string, actions?: any[]) => void;
    toggleItemType: () => void;
    updateFilter: (field: keyof Filters, value: string) => void;

@@ -63,6 +63,7 @@
    .bottom {
       display: flex;
       align-items: flex-start;
+      height: auto;
       border-top: 1px solid var(--gray);
    }
    @media (max-width: 768px) {
