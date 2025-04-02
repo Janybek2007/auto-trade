@@ -11,12 +11,12 @@ const ActionsComponent = (actions: CarItemPops['actions'] = [{ type: 'more' }, {
 
    return (
       <div className={s.buttons}>
-         {actions.map(({ type, button }) => (
+         {actions.map(({ type, button }, index) => (
             <Button
                {...button}
                className={`${s[`l-${actions.length}`]} ${s[`t-${type}`]}`}
                variant={type === 'more' ? 'outline' : 'solid'}
-               key={type}
+               key={`${type}-${index}`}
             >
                {type === 'more' && actions.length > 1 && (
                   <img className={s['compare-icon']} src='/icons/compare-icon.svg' alt='Compare Icon' />

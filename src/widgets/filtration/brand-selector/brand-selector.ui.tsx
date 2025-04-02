@@ -6,8 +6,11 @@ import { useFiltrations } from '../context';
 import s from './styles.module.scss';
 import { Icon } from '@shared/components';
 import { Brand } from '../types';
+import { useQuery } from '@tanstack/react-query';
+import { BrandsService } from '@shared/api/brands';
 
 export const BrandSelector: React.FC = React.memo(() => {
+   const { data, isLoading } = useQuery(BrandsService.brandsQuery());
    const { activeBrands, setActiveBrands, modalOpen, setModalOpen } = useFiltrations();
    const { by: region = 'america' } = useSearch({ from: '/_guest-layout/filtration' });
    const { currentLanguage } = useLanguages();
