@@ -24,6 +24,10 @@ export const BrandSelector: React.FC = React.memo(() => {
       [setActiveBrands],
    );
 
+   React.useEffect(()=>{
+      document.querySelector('[data-container]')?.setAttribute(`data-loading`, JSON.stringify(isLoading))
+   },[isLoading])
+
    return (
       <div data-brand-selector className={`${s[`om-${modalOpen}`]} ${s.brandSelector}`}>
          <h1 className={s.title}>{regionaleTitle(currentLanguage)[region]}</h1>

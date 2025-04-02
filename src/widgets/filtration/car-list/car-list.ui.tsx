@@ -8,15 +8,40 @@ import { useLanguages } from '@shared/libs/intl';
 import { useSize } from '@shared/utils';
 import { useQuery } from '@tanstack/react-query';
 import { CarsService } from '@shared/api/cars';
+import { useFilteredCars } from '../hooks';
 
 const getTranslationByLanguage = (key: string, language: string) => {
    switch (language) {
       case 'RU':
-         return key === 'return' ? 'Вернуть' : key === 'loadMore' ? 'Загрузить еще' : key;
+         return key === 'return'
+            ? 'Вернуть'
+            : key === 'loadMore'
+              ? 'Загрузить еще'
+              : key === 'empty'
+                ? 'Нет автомобилей'
+                : key === 'emptyDescription'
+                  ? 'Попробуйте изменить фильтры или сбросить их'
+                  : key;
       case 'KG':
-         return key === 'return' ? 'Кайтаруу' : key === 'loadMore' ? 'Жана жүктөө' : key;
+         return key === 'return'
+            ? 'Кайтаруу'
+            : key === 'loadMore'
+              ? 'Жана жүктөө'
+              : key === 'empty'
+                ? 'Унаалар жок'
+                : key === 'emptyDescription'
+                  ? 'Фильтрлерди өзгөртүп же тазалап көрүңүз'
+                  : key;
       default:
-         return key === 'return' ? 'Return' : key === 'loadMore' ? 'Load More' : key;
+         return key === 'return'
+            ? 'Return'
+            : key === 'loadMore'
+              ? 'Load More'
+              : key === 'empty'
+                ? 'No cars found'
+                : key === 'emptyDescription'
+                  ? 'Try adjusting or resetting the filters'
+                  : key;
    }
 };
 
@@ -35,10 +60,11 @@ export const CarList: React.FC = () => {
    const { currentLanguage } = useLanguages();
    const { width } = useSize();
    const navigate = useNavigate();
+   const filteredCars = useFilteredCars(cars);
 
    const handleLoadMore = useCallback(() => setPage(prev => prev + 1), []);
-   const visibleCars = cars?.slice(0, page * PAGE_SIZE) || [];
-   const hasMore = cars && visibleCars.length < cars.length;
+   const visibleCars = filteredCars?.slice(0, page * PAGE_SIZE) || [];
+   const hasMore = filteredCars && visibleCars.length < filteredCars.length;
 
    const compareClick = useCallback(
       (v: number) => {
@@ -62,6 +88,14 @@ export const CarList: React.FC = () => {
       <div className={s['content']}>
          {isLoading ? (
             <Loading />
+         ) : visibleCars.length === 0 ? (
+            <div className={'empty'}>
+               <Icon name="lucide:car" c_size={64} className={'emptyIcon'} />
+               <h2 className={'emptyTitle'}>{getTranslationByLanguage('empty', currentLanguage)}</h2>
+               <p className={'emptyDescription'}>
+                  {getTranslationByLanguage('emptyDescription', currentLanguage)}
+               </p>
+            </div>
          ) : (
             <motion.div
                className={`${s.list} ${s[`type-${itemType}`]}`}

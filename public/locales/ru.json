@@ -105,7 +105,7 @@
       "specsTitle": "Технические характеристики",
       "engineLabel": "Объем двигателя",
       "powerLabel": "Мощность",
-      "gearboxLabel": "Тип КПП",
+      "gearboxLabel": "Тип трансмиссии",
       "wheelDriveLabel": "Привод",
       "steeringWheelLabel": "Руль",
       "rangeLabel": "Пробег",
@@ -113,10 +113,15 @@
       "exteriorLabel": "Экстерьер",
       "interiorLabel": "Интерьер",
       "securityLabel": "Безопасность",
-      "deliveryTime": "Время доставки примерно 2,5 месяца",
-      "deliveryCost": "Цена доставки составляет $4000-4500 в зависимости от штата",
+      "deliveryTime": "Срок доставки: 30-45 дней",
+      "deliveryCost": "Стоимость доставки: $500",
+      "contactManager": "Написать менеджеру",
       "whatsappAlt": "Иконка WhatsApp",
-      "contactManager": "Написать менеджеру"
+      "notSpecified": "Не указано",
+      "literUnit": "л",
+      "powerUnit": "л.с.",
+      "kmUnit": "км",
+      "interiorSalon": "салон"
    },
    "comparison": {
       "added": "Авто добавлено к сравнению",

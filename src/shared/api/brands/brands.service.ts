@@ -3,7 +3,7 @@ import { queryClient } from '@shared/libs/tanstack';
 import { queryOptions } from '@tanstack/react-query';
 import { http } from '..';
 import { BrandsDtoSchema } from './brands.contractors';
-import { BrandDto, BrandsDto } from './brands.types';
+import { BrandsDto } from './brands.types';
 
 export class BrandsService {
    static readonly keys = {

@@ -1,9 +1,4 @@
-import { useState } from 'react';
 import s from './styles.module.scss';
-import image1 from '../../../public/image/detail-img1.svg';
-import image2 from '../../../public/image/detail-img2.svg';
-import image3 from '../../../public/image/detail-img3.svg';
-import image4 from '../../../public/image/detail-img4.svg';
 import detIcon1 from '../../../public/icons/det-icon1.svg';
 import detIcon2 from '../../../public/icons/det-icon2.svg';
 import detIcon3 from '../../../public/icons/det-icon3.svg';
@@ -11,6 +6,8 @@ import { useLanguages } from '@shared/libs/intl';
 import { useQuery } from '@tanstack/react-query';
 import { CarsService } from '@shared/api/cars';
 import { useParams, useSearch } from '@tanstack/react-router';
+import { Loading } from '@shared/components';
+import React from 'react'
 
 export const CarDetailPage = () => {
    const { by } = useSearch({ from: '/_guest-layout/cars/$car-id' });
@@ -18,27 +15,34 @@ export const CarDetailPage = () => {
    const { data: detail, isLoading } = useQuery(
       CarsService.carsByIdQuery({ country: by, id: Number(params['car-id']) }),
    );
-   const images = [image1, image2, image3, image4, image1];
    const { t } = useLanguages();
+   const [selectedImage, setSelectedImage] = React.useState(''); 
+   React.useEffect(() => {
+      if (detail?.photos && detail.photos.length > 0) {
+         setSelectedImage(detail.photos[0].image); 
+      }
+   }, [detail]); 
 
    const data = {
-      title: 'KIA K5',
-      price: '24 410 - 27 000',
-      engine: 'Бензин, 2.5л',
-      power: '294 л.с.',
-      gearbox: 'Робот',
-      wheelDrive: 'Передний',
-      steeringWheel: 'Левый',
-      range: '25 000 км, без пробега по КР',
+      title: `${detail?.brand.name} ${detail?.model.name}`,
+      price: `${detail?.start_price} - ${detail?.end_price}`,
+      engine: `${detail?.fuel_type}, ${detail?.engine_volume}${t.get('carDetail.literUnit')}`,
+      power: `${detail?.power} ${t.get('carDetail.powerUnit')}`,
+      gearbox: detail?.transmission_type,
+      wheelDrive: t.get('carDetail.notSpecified'),
+      steeringWheel: detail?.interior.steering_wheel,
+      range: `${detail?.mileage} ${t.get('carDetail.kmUnit')}`,
    };
 
    const data2 = {
-      ext: 'Скрытые дверные уплотнители, 18-19" легкосплавные диски',
-      int: 'Мультимедиа 10,25” (CarPlay, Android Auto) Кожаный салон с подсветкой',
-      secure: '6 подушек безопасности, Контроль слепых зон, Автоматическое торможение',
+      ext: detail?.configuration || t.get('carDetail.notSpecified'),
+      int: `${detail?.interior.seat_material} ${t.get('carDetail.interiorSalon')}`,
+      secure: t.get('carDetail.notSpecified'),
    };
 
-   const [selectedImage, setSelectedImage] = useState(images[0]);
+   if (isLoading) {
+      return <Loading />;
+   }
 
    return (
       <section className={s.Main}>
@@ -47,16 +51,20 @@ export const CarDetailPage = () => {
                <div className={s.top}>
                   <div className={s.left}>
                      <div className={s.mainImage}>
-                        <img src={selectedImage} alt={t.get('carDetail.selectedImageAlt')} />
+                        {selectedImage ? (
+                           <img src={selectedImage} alt={t.get('carDetail.selectedImageAlt')} />
+                        ) : (
+                           <p>{t.get('carDetail.noImageAvailable')}</p> // Fallback if no image
+                        )}
                      </div>
                      <div className={s.thumbnailContainer}>
-                        {images.map((img, index) => (
+                        {detail?.photos?.map((photo, index) => (
                            <img
                               key={index}
-                              src={img}
+                              src={photo.image}
                               alt={`Thumbnail Image ${index}`}
-                              className={selectedImage === img ? s.active : ''}
-                              onClick={() => setSelectedImage(img)}
+                              className={selectedImage === photo.image ? s.active : ''}
+                              onClick={() => setSelectedImage(photo.image)}
                            />
                         ))}
                      </div>

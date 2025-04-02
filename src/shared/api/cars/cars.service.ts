@@ -3,7 +3,7 @@ import { http } from '..';
 import { queryOptions } from '@tanstack/react-query';
 import { queryClient } from '@shared/libs/tanstack';
 import { CarDtoSchema, CarsDtoSchema, CountryDtoSchema } from './cars.contractors';
-import { CarsDto, PropsWithCountry } from './cars.types';
+import { CarDto, CarsDto, PropsWithCountry } from './cars.types';
 
 export class CarsService {
    static readonly keys = {
@@ -15,7 +15,9 @@ export class CarsService {
       return http.get(`/api/${parsedCountry}/cars/`, config).then(HTTPContracts.responseContract(CarsDtoSchema));
    }
 
-   private static GetCarsById(config: HTTPRequestConfig & PropsWithCountry & { id: number }) {
+   private static GetCarsById(
+      config: HTTPRequestConfig & PropsWithCountry & { id: number },
+   ): Promise<IResponse<CarDto>> {
       const parsedCountry = HTTPContracts.requestContract(CountryDtoSchema, config.country);
       return http
          .get(`/api/${parsedCountry}/cars/${config.id}`, config)
@@ -27,10 +29,9 @@ export class CarsService {
          queryKey: [...this.keys.root, props.id, props.country],
          queryFn: async ({ signal }) => {
             const response = await CarsService.GetCarsById({ signal, ...props });
-            return response;
+            return response.data;
          },
-         // @ts-expect-error FIXME: https://github.com/TanStack/query/issues/7341
-         initialData: () => queryClient.getQueryData<CarDtoSchema>([...this.keys.root]),
+         initialData: () => queryClient.getQueryData<CarDto>([...this.keys.root]),
          initialDataUpdatedAt: () => queryClient.getQueryState([...this.keys.root])?.dataUpdatedAt,
       });
    }
