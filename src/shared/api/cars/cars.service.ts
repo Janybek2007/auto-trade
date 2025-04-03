@@ -24,6 +24,29 @@ export class CarsService {
          .then(HTTPContracts.responseContract(CarDtoSchema));
    }
 
+   static carsByIdsQuery(props: PropsWithCountry & { ids: number[] }) {
+      return queryOptions({
+         queryKey: [...this.keys.root, props.ids, props.country],
+         queryFn: async ({ signal }) => {
+            const responses = await Promise.all(
+               props.ids.map(id => CarsService.GetCarsById({ signal, id, country: props.country })),
+            );
+            return responses.map(response => response.data) as CarDto[];
+         },
+         initialData: () =>
+            queryClient
+               .getQueriesData<CarDto>({ queryKey: [...this.keys.root] })
+               .filter(([_, data]) => data && props.ids.includes(data.id))
+               .map(([_, data]) => data),
+         initialDataUpdatedAt: () =>
+            Math.max(
+               ...queryClient
+                  .getQueriesData<CarDto>({ queryKey: [...this.keys.root] })
+                  .map(([key]) => queryClient.getQueryState(key)?.dataUpdatedAt || 0),
+            ),
+      });
+   }
+
    static carsByIdQuery(props: PropsWithCountry & { id: number }) {
       return queryOptions({
          queryKey: [...this.keys.root, props.id, props.country],

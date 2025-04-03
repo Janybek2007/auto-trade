@@ -14,14 +14,6 @@ interface Filtration {
    options: { label: string; value: string }[];
 }
 
-export const  baseCarData = [
-   { model: 'Kia K5', range: '38 000', year: 2024, price: '24 410' },
-   { model: 'Toyota Camry', range: '42 000', year: 2023, price: '28 150' },
-   { model: 'Honda Civic', range: '35 000', year: 2022, price: '22 990' },
-   { model: 'Ford Mustang', range: '45 000', year: 2025, price: '35 600' },
-   { model: 'BMW X5', range: '50 000', year: 2023, price: '48 300' },
-];
-
 export const filtrations: Filtration[] = [
    {
       label: 'Price',

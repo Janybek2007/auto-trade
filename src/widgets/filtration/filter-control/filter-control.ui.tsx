@@ -10,6 +10,7 @@ export const FilterControl: React.FC = React.memo(() => {
 
    const NavigateTo = React.useCallback((by: string) => {
       return () => {
+         // @ts-ignore
          navigate({ to: '/filtration', search: { by } });
       };
    }, []);

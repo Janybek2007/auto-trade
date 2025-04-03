@@ -151,7 +151,10 @@
       "wheel": "Steering Wheel:",
       "interiorColor": "Interior Color:",
       "seatMaterial": "Seat Material:",
-      "contactManager": "Contact Manager"
+      "contactManager": "Contact Manager",
+      "noCars": "No cars available for comparison",
+      "minimumRequirement": "Minimum requirement for comparison is 2 cars",
+      "minimumDescription": "Please add at least one more car to proceed with comparison."
    },
    "policy": {
       "title": "Privacy Policy",

@@ -22,5 +22,4 @@ export const useToast = create<ToastStore>()((set, get) => ({
    },
 }));
 
-
-export const toast = useToast.getState().toast
+export const toast = useToast.getState().toast;

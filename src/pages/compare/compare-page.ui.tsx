@@ -2,129 +2,62 @@ import React from 'react';
 import s from './styles.module.scss';
 import { useLanguages } from '@shared/libs/intl';
 import { CompareActions, CompareCarList, CompareTable } from '@widgets/compare';
-
-interface CarSpec {
-   id: number;
-   carfaxStatus: string;
-   vin: string;
-   engine: string;
-   color: string;
-   gearbox: string;
-   wheelDrive: string;
-   year: string;
-   trim: string;
-   steeringWheel: string;
-   interiorColor: string;
-   seatMaterial: string;
-}
-
-const carsData: CarSpec[] = [
-   {
-      id: 1,
-      carfaxStatus: 'Не чистый',
-      vin: '4T1B1IHK7JU505475',
-      engine: 'Бензин, 2.5л',
-      color: 'Серебристый',
-      gearbox: 'Робот',
-      wheelDrive: 'Передний',
-      year: '2022 год',
-      trim: 'xDrive30d AT Exclusive',
-      steeringWheel: 'Левый',
-      interiorColor: 'Коричневый',
-      seatMaterial: 'Кожанный велюр',
-   },
-   {
-      id: 2,
-      carfaxStatus: 'Чистый',
-      vin: '4T1B1IHK7JU505475',
-      engine: 'Бензин, 2.5л',
-      color: 'Серебристый',
-      gearbox: 'Робот',
-      wheelDrive: 'Передний',
-      year: '2023 год',
-      trim: 'xDrive30d AT Exclusive',
-      steeringWheel: 'Левый',
-      interiorColor: 'Белый',
-      seatMaterial: 'Кожанный велюр',
-   },
-   {
-      id: 3,
-      carfaxStatus: 'Чистый',
-      vin: '4T1B1IHK7JU505475',
-      engine: 'Бензин, 2.5л',
-      color: 'Серебристый',
-      gearbox: 'Робот',
-      wheelDrive: 'Передний',
-      year: '2024 год',
-      trim: 'xDrive30d AT Exclusive',
-      steeringWheel: 'Левый',
-      interiorColor: 'Черный',
-      seatMaterial: 'Кожанный велюр',
-   },
-];
+import { useQuery } from '@tanstack/react-query';
+import { CarDto, CarsService } from '@shared/api/cars';
+import { Link, useSearch } from '@tanstack/react-router';
+import { getCompareData } from './get-compare-data';
+import { Loading } from '@shared/components';
+import { useCompares } from '@features/compares';
 
 export const ComparePage: React.FC = () => {
    const { t } = useLanguages();
+   const { by } = useSearch({ from: '/_guest-layout/compare' });
+   const { compares, onCompares, clearCompares } = useCompares();
 
-   const handleAddCar = () => {
-      console.log('Add car clicked');
-   };
+   const { data, isLoading } = useQuery(CarsService.carsByIdsQuery({ country: by, ids: compares[by] || [] }));
 
-   const handleRemoveAll = () => {
-      console.log('Remove all clicked');
-   };
+   const { historyData, techSpecsData, interiorData } = getCompareData(data as CarDto[]);
 
-   const handleRemoveCar = (index: number) => {
-      console.log(`Remove car at index ${index}`);
-   };
+   const handleRemoveAll = React.useCallback(() => {
+      clearCompares(by);
+   }, [by, clearCompares, t]);
 
-   const historyData = {
-      titleKey: 'history',
-      data: [
-         { labelKey: 'carfaxStatus', values: carsData.map(car => car.carfaxStatus) },
-         { labelKey: 'vinCode', values: carsData.map(car => car.vin) },
-      ],
-   };
-
-   const techSpecsData = {
-      titleKey: 'specs',
-      data: [
-         { labelKey: 'engine', values: carsData.map(car => car.engine) },
-         { labelKey: 'color', values: carsData.map(car => car.color) },
-         { labelKey: 'gearbox', values: carsData.map(car => car.gearbox) },
-         { labelKey: 'drive', values: carsData.map(car => car.wheelDrive) },
-         { labelKey: 'year', values: carsData.map(car => car.year) },
-         { labelKey: 'trim', values: carsData.map(car => car.trim) },
-      ],
-   };
-
-   const interiorData = {
-      titleKey: 'interior',
-      data: [
-         { labelKey: 'wheel', values: carsData.map(car => car.steeringWheel) },
-         { labelKey: 'interiorColor', values: carsData.map(car => car.interiorColor) },
-         { labelKey: 'seatMaterial', values: carsData.map(car => car.seatMaterial) },
-      ],
-      showContact: true,
-   };
+   const handleRemoveCar = React.useCallback(
+      (id: number) => {
+         onCompares(id);
+      },
+      [by, t],
+   );
 
    return (
       <section className={s.Main}>
          <div className={s.container}>
             <div className={s.content}>
-               <div className={s.cards_for_compare}>
-                  <h1>{t.get('compare.title')}</h1>
-                  <CompareActions onAdd={handleAddCar} onRemoveAll={handleRemoveAll} />
-               </div>
+               {isLoading ? (
+                  <Loading />
+               ) : data && data.length > 0 ? (
+                  <>
+                     <div className={s.cards_for_compare}>
+                        <h1>{t.get('compare.title')}</h1>
+                        <CompareActions by={by} onRemoveAll={handleRemoveAll} />
+                     </div>
+                     <CompareCarList cars={(data as CarDto[]) || []} onRemove={handleRemoveCar} />
+                     <CompareTable {...historyData} />
+                     <CompareTable {...techSpecsData} />
+                     <CompareTable {...interiorData} />
+                  </>
+               ) : (
+                  <div className={s.emptyState}>
+                     <p>{t.get('compare.noCars')}</p>
+                     <Link to='/filtration' search={{ by }}>
+                        {t.get('compare.addCar')}
+                     </Link>
+                  </div>
+               )}
 
-               <CompareCarList count={3} onRemove={handleRemoveCar} />
-
-               <CompareTable {...historyData} />
-               <CompareTable {...techSpecsData} />
-               <CompareTable {...interiorData} />
                <button className={`${s['contact-btn']} ${s['mobile']}`}>
                   <img src={'/icons/det-icon3.svg'} alt={''} />
-                  <p>Написать менеджеру</p>
+                  <p>{t.get('compare.contactManager')}</p>
                </button>
             </div>
          </div>

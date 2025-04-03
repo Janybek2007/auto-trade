@@ -1,29 +1,36 @@
 import { Button, Icon } from '@shared/components';
 import { useLanguages } from '@shared/libs/intl';
-import { useNavigate } from '@tanstack/react-router';
+import { useNavigate, useSearch } from '@tanstack/react-router';
 import React from 'react';
 import { useFiltrations } from '../context';
 import s from './styles.module.scss';
+import { toast } from '@features/toast';
+import { useCompares } from '@features/compares';
 
 export const CompareSwitch: React.FC = () => {
-   const { compares, itemType, toggleItemType } = useFiltrations();
+   const { itemType, toggleItemType } = useFiltrations();
+   const { comparesWithBy } = useCompares();
    const navigate = useNavigate();
-   const { currentLanguage } = useLanguages();
+   const { by } = useSearch({ from: '/_guest-layout/filtration' });
+   const { currentLanguage, t } = useLanguages();
 
    const ToCompare = React.useCallback(() => {
-      if (compares.length > 1) {
-         navigate({ to: '/compare' });
+      if (comparesWithBy.length > 1) {
+         navigate({ to: '/compare', search: { by } });
+      } else {
+         toast(t.get('compare.minimumRequirement'), {
+            description: t.get('compare.minimumDescription'),
+         });
       }
-   }, [compares]);
+   }, [comparesWithBy, navigate, by, t]);
 
    const compareText = currentLanguage === 'KG' ? 'Салыштыруу' : currentLanguage === 'RU' ? 'Сравнение' : 'Compare';
-
    return (
       <div data-compare-switch className={s.compire_switch}>
          <Button onClick={ToCompare} className={s.compare} variant='outline'>
             <img src='/icons/compare-icon.svg' alt='Compare Icon' />
             <span>{compareText}</span>
-            {compares.length > 0 && <span className={s['badge']}>{compares.length}</span>}
+            {comparesWithBy.length > 0 && <span className={s['badge']}>{comparesWithBy.length}</span>}
          </Button>
          <Button onClick={toggleItemType} className={s.item_type} variant='outline'>
             {itemType === 'list' ? (

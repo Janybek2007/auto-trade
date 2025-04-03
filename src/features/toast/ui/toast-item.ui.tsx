@@ -54,7 +54,7 @@ const ToastItem: React.FC<{ toast: TItem; is: boolean }> = React.memo(({ toast, 
             </div>
             <div className={s.toastActions}>
                {actions &&
-                  actions.map((action, index) => <Button key={Math.floor(Math.random() * 20) + index} {...action} />)}
+                  actions.map((action, index) => <Button key={Math.floor(Math.random() * 20) + index} {...action} size="sm" />)}
             </div>
          </div>
          <div className={s.progressBar}>
@@ -64,6 +64,6 @@ const ToastItem: React.FC<{ toast: TItem; is: boolean }> = React.memo(({ toast, 
    );
 });
 
-ToastItem.displayName = "ToastItem"
+ToastItem.displayName = 'ToastItem';
 
 export default ToastItem;

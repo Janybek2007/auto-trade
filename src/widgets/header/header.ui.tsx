@@ -10,6 +10,8 @@ import { Icon } from '@shared/components';
 import { MenuBar } from './ui/MenuBar';
 import { AnimatePresence } from 'framer-motion';
 
+const JYLAS_TUNING_URL = import.meta.env.VITE_JYLAS_TUNING_URL;
+
 export const Header: React.FC = () => {
    const { currentLanguage } = useLanguages();
    const [open, setOpen] = React.useState(false);
@@ -41,9 +43,9 @@ export const Header: React.FC = () => {
                                  {AboutText}
                               </Link>
                               <SwitchLanguage />
-                              <figure className={s.jylas_logo}>
+                              <button onClick={() => window.open(JYLAS_TUNING_URL, '_blank')} className={s.jylas_logo}>
                                  <img src={'/image/jylas-tuning.svg'} alt='' />
-                              </figure>
+                              </button>
                            </div>
                         </>
                      ) : (
@@ -57,9 +59,9 @@ export const Header: React.FC = () => {
                            )}
                            <SwitchLanguage />
                            {width >= 600 && (
-                              <figure className={s.jylas_logo}>
+                              <button onClick={() => window.open(JYLAS_TUNING_URL, '_blank')} className={s.jylas_logo}>
                                  <img src={'/image/jylas.svg'} alt='' />
-                              </figure>
+                              </button>
                            )}
                            <button onClick={() => setOpen(p => !p)} className={`${s.menu} flexCenter`}>
                               <Icon name='lucide:menu' />

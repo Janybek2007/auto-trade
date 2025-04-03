@@ -1,17 +1,17 @@
-import { CarDto } from '@shared/api/cars'
+import { CarDto } from '@shared/api/cars';
 import { ButtonProps } from '../button/button.ui';
 
 export interface ActionButton {
    type: 'more' | 'compare';
-   button?: Omit<ButtonProps, 'children'>;
+   button?: ButtonProps;
 }
 
 export interface CarItemType {
-   type?: "card" | 'list'
+   type?: 'card' | 'list';
 }
 
 export interface CarItemPops extends React.PropsWithChildren {
    actions?: ActionButton[];
-   extraComponents?: React.ReactNode
-   item: CarDto
+   extraComponents?: React.ReactNode;
+   item: CarDto;
 }

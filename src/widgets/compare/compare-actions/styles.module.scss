@@ -1,37 +1,43 @@
 .compareActions {
-  --actions-margin-y: 27px 21px;
-  --actions-gap: 24px;
-  --button-padding: 6px 15px;
-  --button-radius: 15px;
+   --actions-margin-y: 27px 21px;
+   --actions-gap: 24px;
+   --button-padding: 6px 15px;
+   --button-radius: 15px;
 
-  margin: var(--actions-margin-y);
-  display: flex;
-  align-items: center;
-  gap: var(--actions-gap);
+   margin: var(--actions-margin-y);
+   display: flex;
+   align-items: center;
+   gap: var(--actions-gap);
 
-  button {
-    padding: var(--button-padding);
-    border-radius: var(--button-radius);
-    color: var(--white);
-    transition: all 0.25s;
+   button,
+   a {
+      padding: var(--button-padding);
+      border-radius: var(--button-radius);
+      color: var(--white);
+      transition: all 0.25s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      font-size: 16px;
 
-    &:hover {
-      transform: translateY(-1px);
-    }
-  }
+      &:hover {
+         transform: translateY(-1px);
+      }
+   }
 
-  .add {
-    background: #acacac;
-  }
+   .add {
+      background: #acacac;
+   }
 
-  .rmall {
-    background: #dd6b73;
-  }
+   .rmall {
+      background: #dd6b73;
+   }
 }
 
 @media (max-width: 768px) {
-  .compareActions {
-    --actions-margin-y: 20px 16px;
-    --actions-gap: 16px;
-  }
+   .compareActions {
+      --actions-margin-y: 20px 16px;
+      --actions-gap: 16px;
+   }
 }

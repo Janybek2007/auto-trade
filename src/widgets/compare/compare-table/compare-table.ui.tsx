@@ -1,6 +1,6 @@
 import React from 'react';
 import s from './styles.module.scss';
-import { useLanguages } from '@shared/libs/intl'
+import { useLanguages } from '@shared/libs/intl';
 
 interface CompareTableProps {
    titleKey: string;

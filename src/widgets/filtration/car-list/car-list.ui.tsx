@@ -9,6 +9,7 @@ import { useSize } from '@shared/utils';
 import { useQuery } from '@tanstack/react-query';
 import { CarsService } from '@shared/api/cars';
 import { useFilteredCars } from '../hooks';
+import { useCompares } from '@features/compares';
 
 const getTranslationByLanguage = (key: string, language: string) => {
    switch (language) {
@@ -53,7 +54,8 @@ const BaseActionProps = {
 const PAGE_SIZE = 9;
 
 export const CarList: React.FC = () => {
-   const { onCompares, itemType } = useFiltrations();
+   const { itemType } = useFiltrations();
+   const { onCompares } = useCompares();
    const { by } = useSearch({ from: '/_guest-layout/filtration' });
    const { data: cars, isLoading } = useQuery(CarsService.carsByCountryQuery({ country: by }));
    const [page, setPage] = useState(1);
@@ -68,7 +70,7 @@ export const CarList: React.FC = () => {
 
    const compareClick = useCallback(
       (v: number) => {
-         onCompares(String(v), [
+         onCompares(v, [
             {
                children: (
                   <>
@@ -77,11 +79,11 @@ export const CarList: React.FC = () => {
                   </>
                ),
                ...BaseActionProps,
-               onClick: () => onCompares(String(v)),
+               onClick: () => onCompares(v),
             },
          ]);
       },
-      [currentLanguage, onCompares],
+      [currentLanguage],
    );
 
    return (
@@ -90,11 +92,9 @@ export const CarList: React.FC = () => {
             <Loading />
          ) : visibleCars.length === 0 ? (
             <div className={'empty'}>
-               <Icon name="lucide:car" c_size={64} className={'emptyIcon'} />
+               <Icon name='lucide:car' c_size={64} className={'emptyIcon'} />
                <h2 className={'emptyTitle'}>{getTranslationByLanguage('empty', currentLanguage)}</h2>
-               <p className={'emptyDescription'}>
-                  {getTranslationByLanguage('emptyDescription', currentLanguage)}
-               </p>
+               <p className={'emptyDescription'}>{getTranslationByLanguage('emptyDescription', currentLanguage)}</p>
             </div>
          ) : (
             <motion.div

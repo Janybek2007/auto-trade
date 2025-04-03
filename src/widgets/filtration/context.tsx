@@ -1,7 +1,4 @@
-import { createContext, useContext, useState, ReactNode, useCallback } from 'react';
-import { toast } from '@features/toast';
-import { useLanguages } from '@shared/libs/intl';
-import { ButtonProps } from '@shared/components';
+import React, { createContext, useContext, useState, ReactNode, useCallback } from 'react';
 import { FiltrationContextType, Filters, ModalOpenType } from './types';
 import { BrandDto } from '@shared/api/brands';
 
@@ -12,8 +9,6 @@ interface FiltrationProviderProps {
 }
 
 export const FiltrationProvider: React.FC<FiltrationProviderProps> = ({ children }) => {
-   const { t } = useLanguages();
-   const [compares, setCompares] = useState<string[]>([]);
    const [itemType, setItemType] = useState<'card' | 'list'>('card');
    const [filters, setFilters] = useState<Filters>({
       price: '',
@@ -23,31 +18,9 @@ export const FiltrationProvider: React.FC<FiltrationProviderProps> = ({ children
       fuel_type: '',
       bodywork: '',
    });
+
    const [activeBrands, setActiveBrands] = useState<BrandDto[]>([]);
    const [modalOpen, setModalOpen] = useState<ModalOpenType>(null);
-
-   const onCompares = useCallback(
-      (car_id: string, actions?: ButtonProps[]) => {
-         setCompares(prev => {
-            const updatedCompares = prev.includes(car_id)
-               ? prev.filter(id => id !== car_id)
-               : prev.length < 6
-                 ? [...prev, car_id]
-                 : prev;
-
-            toast(prev.includes(car_id) ? t.get('comparison.removed') : t.get('comparison.added'), {
-               actions,
-               description: `${t.get('comparison.count')}: ${updatedCompares.length}`,
-            });
-
-            if (prev.length >= 6 && !prev.includes(car_id)) {
-               alert(t.get('comparison.limit'));
-            }
-            return updatedCompares;
-         });
-      },
-      [t],
-   );
 
    const toggleItemType = useCallback(() => {
       setItemType(prev => (prev === 'card' ? 'list' : 'card'));
@@ -73,12 +46,10 @@ export const FiltrationProvider: React.FC<FiltrationProviderProps> = ({ children
    }, []);
 
    const contextValue: FiltrationContextType = {
-      compares,
       itemType,
       filters,
       activeBrands,
       setActiveBrands,
-      onCompares,
       toggleItemType,
       updateFilter,
       resetFilters,

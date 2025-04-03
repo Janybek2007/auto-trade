@@ -28,7 +28,7 @@ export const LanguageProvider = ({ children }: { children: React.ReactNode }) =>
 
    const t = React.useMemo(
       () => ({
-         raw: <T = any>(key: string): T => {
+         raw: <T = any,>(key: string): T => {
             const keys = key.split('.');
             return keys.reduce((result: any, k) => result?.[k], messages) as T;
          },

@@ -6,6 +6,37 @@
 
    padding: var(--main-padding);
 
+   .emptyState {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      min-height: 60vh;
+      gap: 12px;
+      a {
+         --button-padding: 6px 15px;
+         --button-radius: 15px;
+         padding: var(--button-padding);
+         border-radius: var(--button-radius);
+         color: var(--white);
+         transition: all 0.25s;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         gap: 4px;
+         background: #acacac;
+
+         &:hover {
+            transform: translateY(-1px);
+         }
+      }
+      p {
+         font-size: 18px;
+         color: #666;
+         text-align: center;
+      }
+   }
+
    .contact-btn {
       --button-margin-top: 57px;
       --button-padding: 14px 35px;

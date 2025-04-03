@@ -1,43 +1,39 @@
 import { CarItem, Icon } from '@shared/components';
 import { useNavigate } from '@tanstack/react-router';
-import { baseCarData } from '@widgets/filtration';
 import s from './styles.module.scss';
+import { CarDto } from '@shared/api/cars';
 
 interface CompareCarListProps {
-  count: number;
-  onRemove: (index: number) => void;
+   onRemove: (id: number) => void;
+   cars: CarDto[];
 }
 
-export const CompareCarList: React.FC<CompareCarListProps> = ({ count, onRemove }) => {
-  const navigate = useNavigate();
+export const CompareCarList: React.FC<CompareCarListProps> = ({ onRemove, cars }) => {
+   const navigate = useNavigate();
 
-  return (
-    <div className={s.compareCarList}>
-      {Array.from({ length: count }).map((_, i) => {
-        const carData = baseCarData[i % baseCarData.length];
-
-        return (
-          <CarItem
-            key={i}
-            item={{
-              image: '/image/askar-img.svg',
-              ...carData,
-            }}
-            extraComponents={
-              <button className={`${s.remove} flexCenter`} onClick={() => onRemove(i)}>
-                <Icon name='lucide:x' />
-              </button>
-            }
-            type={'card'}
-            actions={[
-              {
-                type: 'more',
-                button: { onClick: () => navigate({ to: `/cars/${i}` }) },
-              },
-            ]}
-          />
-        );
-      })}
-    </div>
-  );
+   return (
+      <div className={s.compareCarList}>
+         {cars.map((car, i) => {
+            // image: '/image/askar-img.svg',
+            return (
+               <CarItem
+                  key={i}
+                  item={car}
+                  extraComponents={
+                     <button className={`${s.remove} flexCenter`} onClick={() => onRemove(car.id)}>
+                        <Icon name='lucide:x' />
+                     </button>
+                  }
+                  type={'card'}
+                  actions={[
+                     {
+                        type: 'more',
+                        button: { onClick: () => navigate({ to: `/cars/${car.id}` }) },
+                     },
+                  ]}
+               />
+            );
+         })}
+      </div>
+   );
 };

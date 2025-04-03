@@ -13,7 +13,7 @@ export const CardItem: React.FC<Omit<CarItemPops, 'actions'>> = ({ children, ite
                src={item.photos[0]?.image || '/placeholder.jpg'}
                alt={item.model.name}
             />
-
+   
             <div className={s.card_content}>
                <h1>
                   {item.brand.name} {item.model.name}

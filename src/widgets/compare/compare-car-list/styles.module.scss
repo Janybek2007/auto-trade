@@ -1,51 +1,51 @@
 .compareCarList {
-  --list-gap: 30px;
-  --list-margin-bottom: 40px;
+   --list-gap: 30px;
+   --list-margin-bottom: 40px;
 
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--list-gap);
-  margin-bottom: var(--list-margin-bottom);
+   display: flex;
+   align-items: center;
+   justify-content: flex-start;
+   gap: var(--list-gap);
+   margin-bottom: var(--list-margin-bottom);
 
-  .remove {
-    position: absolute;
-    background-color: var(--primary);
-    border-radius: 100px;
-    color: var(--white);
-    font-size: 17px;
-    padding: 4px;
-    right: -10px;
-    top: -10px;
-    transition: all 0.25s;
+   .remove {
+      position: absolute;
+      background-color: var(--primary);
+      border-radius: 100px;
+      color: var(--white);
+      font-size: 17px;
+      padding: 4px;
+      right: -10px;
+      top: -10px;
+      transition: all 0.25s;
 
-    &:hover {
-      background-color: var(--secondary);
-    }
-  }
+      &:hover {
+         background-color: var(--secondary);
+      }
+   }
 }
 
 @media (max-width: 1300px) {
-  .compareCarList {
-    --list-gap: 20px;
-  }
+   .compareCarList {
+      --list-gap: 20px;
+   }
 }
 
 @media (max-width: 1024px) {
-  .compareCarList {
-    --list-gap: 15px !important;
-  }
+   .compareCarList {
+      --list-gap: 15px !important;
+   }
 }
 
 @media (max-width: 900px) {
-  .compareCarList {
-    overflow-x: scroll;
-    padding: 10px;
-  }
+   .compareCarList {
+      overflow-x: scroll;
+      padding: 10px;
+   }
 }
 
 @media (max-width: 660px) {
-  .compareCarList {
-    --list-margin-bottom: 30px;
-  }
+   .compareCarList {
+      --list-margin-bottom: 30px;
+   }
 }

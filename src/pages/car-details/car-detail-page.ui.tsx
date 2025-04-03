@@ -7,7 +7,7 @@ import { useQuery } from '@tanstack/react-query';
 import { CarsService } from '@shared/api/cars';
 import { useParams, useSearch } from '@tanstack/react-router';
 import { Loading } from '@shared/components';
-import React from 'react'
+import React from 'react';
 
 export const CarDetailPage = () => {
    const { by } = useSearch({ from: '/_guest-layout/cars/$car-id' });
@@ -16,12 +16,12 @@ export const CarDetailPage = () => {
       CarsService.carsByIdQuery({ country: by, id: Number(params['car-id']) }),
    );
    const { t } = useLanguages();
-   const [selectedImage, setSelectedImage] = React.useState(''); 
+   const [selectedImage, setSelectedImage] = React.useState('');
    React.useEffect(() => {
       if (detail?.photos && detail.photos.length > 0) {
-         setSelectedImage(detail.photos[0].image); 
+         setSelectedImage(detail.photos[0].image);
       }
-   }, [detail]); 
+   }, [detail]);
 
    const data = {
       title: `${detail?.brand.name} ${detail?.model.name}`,
@@ -54,7 +54,7 @@ export const CarDetailPage = () => {
                         {selectedImage ? (
                            <img src={selectedImage} alt={t.get('carDetail.selectedImageAlt')} />
                         ) : (
-                           <p>{t.get('carDetail.noImageAvailable')}</p> // Fallback if no image
+                           <p>{t.get('carDetail.noImageAvailable')}</p>
                         )}
                      </div>
                      <div className={s.thumbnailContainer}>
