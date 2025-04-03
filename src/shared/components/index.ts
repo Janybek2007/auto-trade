@@ -5,3 +5,4 @@ export { CarItem } from './car-item';
 export { Icon, type IconProps } from './icon';
 export { Accordion } from './accordion';
 export { Collapsible } from './collapsible';
+export { Loading } from './loading';

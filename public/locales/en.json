@@ -101,7 +101,7 @@
       }
    },
    "carDetail": {
-      "selectedImageAlt": "Selected Car Image",
+      "selectedImageAlt": "Selected car image",
       "specsTitle": "Technical Specifications",
       "engineLabel": "Engine Capacity",
       "powerLabel": "Power",
@@ -113,10 +113,15 @@
       "exteriorLabel": "Exterior",
       "interiorLabel": "Interior",
       "securityLabel": "Safety",
-      "deliveryTime": "Delivery time approximately 2.5 months",
-      "deliveryCost": "Delivery cost is $4000-4500 depending on the state",
-      "whatsappAlt": "WhatsApp Icon",
-      "contactManager": "Contact Manager"
+      "deliveryTime": "Delivery Time: 30-45 days",
+      "deliveryCost": "Delivery Cost: $500",
+      "contactManager": "Contact Manager",
+      "whatsappAlt": "WhatsApp icon",
+      "notSpecified": "Not specified",
+      "literUnit": "l",
+      "powerUnit": "hp",
+      "kmUnit": "km",
+      "interiorSalon": "salon"
    },
    "comparison": {
       "added": "Car added to comparison",

@@ -1,8 +1,9 @@
-import { createContext, useContext, useState, ReactNode, useCallback, useMemo } from 'react';
+import { createContext, useContext, useState, ReactNode, useCallback } from 'react';
 import { toast } from '@features/toast';
 import { useLanguages } from '@shared/libs/intl';
 import { ButtonProps } from '@shared/components';
-import { FiltrationContextType, Brand, Filters, ModalOpenType } from './types';
+import { FiltrationContextType, Filters, ModalOpenType } from './types';
+import { BrandDto } from '@shared/api/brands';
 
 const FiltrationContext = createContext<FiltrationContextType | null>(null);
 
@@ -22,7 +23,7 @@ export const FiltrationProvider: React.FC<FiltrationProviderProps> = ({ children
       fuel_type: '',
       bodywork: '',
    });
-   const [activeBrands, setActiveBrands] = useState<Brand[]>([]);
+   const [activeBrands, setActiveBrands] = useState<BrandDto[]>([]);
    const [modalOpen, setModalOpen] = useState<ModalOpenType>(null);
 
    const onCompares = useCallback(

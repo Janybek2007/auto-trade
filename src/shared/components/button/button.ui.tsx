@@ -16,17 +16,15 @@ export interface ButtonProps extends React.PropsWithChildren {
 export const Button: React.FC<ButtonProps> = ({
    variant = 'solid',
    children,
-   disabled,
-   onClick,
    icon,
    className,
    color = 'primary',
    size = 'md',
+   ...props
 }) => {
    return (
       <button
-         disabled={disabled}
-         onClick={onClick}
+         {...props}
          className={`${s.button} ${s[`v-${variant}`]} ${s[`c-${color}`]} ${s[`s-${size}`]} ${className}`}
       >
          {icon && <Icon {...icon} />}

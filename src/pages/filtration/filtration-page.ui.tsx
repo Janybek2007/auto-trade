@@ -6,7 +6,7 @@ import { FiltrationProvider } from '@widgets/filtration/context';
 export const FiltrationPage: React.FC = () => {
    return (
       <main className={s.main}>
-         <div className={`${s['container']} container`}>
+         <div data-container className={`${s['container']} container`}>
             <FiltrationProvider>
                <BrandSelector />
                <CompareSwitch />
