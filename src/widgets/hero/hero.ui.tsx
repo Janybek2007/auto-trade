@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from './styles.module.scss';
-import logo from '../../../public/askar-auto-logo.svg';
 import america from '../../../public/image/flagImages/America.svg';
 import korea from '../../../public/image/flagImages/Korea.svg';
 import dubai from '../../../public/image/flagImages/Dubai.svg';
@@ -21,7 +20,7 @@ export const Hero: React.FC = () => {
          <div className={styles.leftSideDarkening}></div>
          <div className={styles.heroContainer}>
             <div className={`${styles.content}`}>
-               <img src={logo} alt={t.get('hero.logoAlt')} className={styles.logo} />
+               <img src={'/askar-auto-logo.svg'} alt={t.get('hero.logoAlt')} className={styles.logo} />
                <h1 className={styles.title}>
                   <span>{t.get('hero.title.part1')}</span>
                   <br />

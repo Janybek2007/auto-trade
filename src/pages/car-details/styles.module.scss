@@ -17,6 +17,8 @@
                   display: flex;
                   justify-content: center;
                   align-items: center;
+                  box-shadow: 0 1px 3px #00000080;
+                  border-radius: 10px;
                   img {
                      width: 100%;
                      height: 100%;
@@ -198,9 +200,7 @@
    }
 }
 
-
-
-@media(max-width: 1200px) {
+@media (max-width: 1200px) {
    .Main {
       .container {
          .content {
@@ -210,7 +210,7 @@
                      width: 500px;
                      height: 400px;
                   }
-   
+
                   .thumbnailContainer {
                      img {
                         width: 92px;
@@ -221,14 +221,14 @@
                      }
                   }
                }
-   
+
                .right {
                   .main_content {
                      width: 430px;
                   }
                }
             }
-   
+
             .bottom {
                .bot_content {
                   display: flex;
@@ -251,10 +251,7 @@
    }
 }
 
-
-
-
-@media(max-width: 990px) {
+@media (max-width: 990px) {
    .Main {
       .container {
          .content {
@@ -268,7 +265,7 @@
                      width: 100%;
                      height: 268px;
                   }
-   
+
                   .thumbnailContainer {
                      display: flex;
                      overflow-y: scroll;
@@ -288,7 +285,7 @@
                      }
                   }
                }
-   
+
                .right {
                   .main_content {
                      width: 100%;
@@ -301,14 +298,14 @@
                            font-weight: 600;
                            color: rgb(56, 55, 55);
                         }
-   
+
                         h2 {
                            font-size: 20px;
                            font-weight: 600;
                            color: rgb(3, 69, 66);
                         }
                      }
-   
+
                      .block2 {
                         h1 {
                            font-size: 18px;
@@ -316,7 +313,7 @@
                            color: rgb(0, 0, 0);
                            margin-bottom: 15px;
                         }
-   
+
                         .specs_boxes {
                            .box {
                               display: flex;
@@ -329,7 +326,7 @@
                                  font-weight: 400;
                                  color: rgb(118, 118, 118);
                               }
-   
+
                               p {
                                  font-size: 12px;
                                  font-weight: 400;
@@ -338,7 +335,7 @@
                            }
                         }
                      }
-   
+
                      .block3 {
                         h1 {
                            font-size: 18px;
@@ -347,7 +344,7 @@
                            margin-top: 35px;
                            margin-bottom: 10px;
                         }
-   
+
                         .comp_boxes {
                            width: 100%;
                            .box {
@@ -357,14 +354,14 @@
                               border-bottom: 0.5px solid rgba(99, 99, 102, 0.6);
                               padding: 10px 0;
                               padding-right: 10px;
-   
+
                               span {
                                  font-size: 12px;
                                  font-weight: 400;
                                  color: rgb(118, 118, 118);
                                  padding-right: 50px;
                               }
-   
+
                               p {
                                  width: 300px;
                                  font-size: 12px;
@@ -377,7 +374,7 @@
                   }
                }
             }
-   
+
             .bottom {
                .bot_content {
                   display: flex;
@@ -391,7 +388,7 @@
                         border-radius: 10px;
                         background: rgb(245, 245, 245);
                         margin-bottom: 17px;
-   
+
                         display: flex;
                         align-items: center;
                         gap: 20px;
@@ -400,7 +397,7 @@
                            width: 34px;
                            height: 34px;
                         }
-   
+
                         p {
                            font-size: 14px;
                            font-weight: 400;
@@ -408,7 +405,7 @@
                         }
                      }
                   }
-   
+
                   .right {
                      margin-top: -22px;
                      width: 100%;
@@ -418,7 +415,7 @@
                         border-radius: 10px;
                         background: rgb(21, 122, 117);
                         cursor: pointer;
-   
+
                         display: flex;
                         align-items: center;
                         gap: 20px;
@@ -428,7 +425,7 @@
                            height: 34px;
                            object-fit: contain;
                         }
-   
+
                         p {
                            font-size: 14px;
                            font-weight: 400;

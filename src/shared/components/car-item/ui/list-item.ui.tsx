@@ -11,7 +11,7 @@ export const ListItem: React.FC<Omit<CarItemPops, 'actions'>> = ({ item, childre
                   <img
                      data-car-image
                      className={s.image}
-                     src={item.photos[0]?.image || '/placeholder.jpg'}
+                     src={item.photos[0]?.image || '/image/placeholder.png'}
                      alt={`${item.brand.name} ${item.model.name}`}
                   />
                </div>

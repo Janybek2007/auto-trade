@@ -1,4 +1,4 @@
-import { useLocalstorageState } from '@shared/utils';
+import { useLocalStorageState } from '@shared/utils';
 import * as React from 'react';
 
 type Languages = 'KG' | 'RU' | 'EN';
@@ -15,11 +15,13 @@ interface IStore {
 const LanguageContext = React.createContext<IStore | undefined>(undefined);
 
 export const LanguageProvider = ({ children }: { children: React.ReactNode }) => {
-   const [currentLanguage, setCurrentLanguage] = useLocalstorageState<Languages>('language', 'EN');
+   const [currentLanguage, setCurrentLanguage] = useLocalStorageState<Languages>('language', {
+      defaultServerValue: 'EN',
+   });
    const [messages, setMessages] = React.useState<Record<string, any>>({});
 
    React.useEffect(() => {
-      fetch(`/locales/${currentLanguage.toLowerCase()}.json`)
+      fetch(`/locales/${currentLanguage?.toLowerCase()}.json`)
          .then(res => res.json())
          .then(setMessages);
    }, [currentLanguage]);
@@ -48,7 +50,11 @@ export const LanguageProvider = ({ children }: { children: React.ReactNode }) =>
       [messages],
    );
 
-   return <LanguageContext.Provider value={{ currentLanguage, setLanguage, t }}>{children}</LanguageContext.Provider>;
+   return (
+      <LanguageContext.Provider value={{ currentLanguage: currentLanguage!, setLanguage, t }}>
+         {children}
+      </LanguageContext.Provider>
+   );
 };
 
 export const useLanguages = () => {

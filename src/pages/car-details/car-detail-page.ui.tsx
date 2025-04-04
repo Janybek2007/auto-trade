@@ -17,6 +17,7 @@ export const CarDetailPage = () => {
    );
    const { t } = useLanguages();
    const [selectedImage, setSelectedImage] = React.useState('');
+
    React.useEffect(() => {
       if (detail?.photos && detail.photos.length > 0) {
          setSelectedImage(detail.photos[0].image);
@@ -51,11 +52,10 @@ export const CarDetailPage = () => {
                <div className={s.top}>
                   <div className={s.left}>
                      <div className={s.mainImage}>
-                        {selectedImage ? (
-                           <img src={selectedImage} alt={t.get('carDetail.selectedImageAlt')} />
-                        ) : (
-                           <p>{t.get('carDetail.noImageAvailable')}</p>
-                        )}
+                        <img
+                           src={selectedImage || '/image/placeholder.png'}
+                           alt={t.get('carDetail.selectedImageAlt')}
+                        />
                      </div>
                      <div className={s.thumbnailContainer}>
                         {detail?.photos?.map((photo, index) => (
@@ -138,10 +138,10 @@ export const CarDetailPage = () => {
                         </div>
                      </div>
                      <div className={s.right}>
-                        <button className={s.box}>
+                        <a href={detail?.url} target='_blank' className={s.box}>
                            <img src={detIcon3} alt={t.get('carDetail.whatsappAlt')} />
                            <p>{t.get('carDetail.contactManager')}</p>
-                        </button>
+                        </a>
                      </div>
                   </div>
                </div>

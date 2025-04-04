@@ -1,80 +1,215 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import type { Dispatch, SetStateAction } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore } from 'react'
 
-// Тип для функции, которая возвращает начальное значение
-type InitialValue<T> = T | (() => T);
+// in memory fallback used when `localStorage` throws an error
+export const inMemoryData = new Map<string, unknown>()
 
-// Интерфейс для опций (можно расширить в будущем)
-interface LocalStorageOptions {
-   serializer?: (value: any) => string;
-   deserializer?: (value: string) => any;
+export type LocalStorageOptions<T> = {
+    defaultValue?: T | (() => T)
+    defaultServerValue?: T | (() => T)
+    storageSync?: boolean
+    serializer?: {
+        stringify: (value: unknown) => string
+        parse: (value: string) => unknown
+    }
 }
 
-export function useLocalstorageState<T>(
-   key: string,
-   initialValue: InitialValue<T>,
-   options: LocalStorageOptions = {},
-): [T, React.Dispatch<React.SetStateAction<T>>, () => void] {
-   // Определяем функции сериализации/десериализации с дефолтными значениями
-   const { serializer = JSON.stringify, deserializer = JSON.parse } = options;
+// - `useLocalStorageState()` return type
+// - first two values are the same as `useState`
+export type LocalStorageState<T> = [
+    T,
+    Dispatch<SetStateAction<T>>,
+    {
+        isPersistent: boolean
+        removeItem: () => void
+    },
+]
 
-   // Инициализация состояния
-   const [state, setState] = useState<T>(() => {
-      // Проверяем, что мы на клиенте
-      if (typeof window === 'undefined') {
-         return typeof initialValue === 'function' ? (initialValue as () => T)() : initialValue;
-      }
+export default function useLocalStorageState(
+    key: string,
+    options?: LocalStorageOptions<undefined>,
+): LocalStorageState<unknown>
+export default function useLocalStorageState<T>(
+    key: string,
+    options?: Omit<LocalStorageOptions<T | undefined>, 'defaultValue'>,
+): LocalStorageState<T | undefined>
+export default function useLocalStorageState<T>(
+    key: string,
+    options?: LocalStorageOptions<T>,
+): LocalStorageState<T>
+export default function useLocalStorageState<T = undefined>(
+    key: string,
+    options?: LocalStorageOptions<T | undefined>,
+): LocalStorageState<T | undefined> {
+    const serializer = options?.serializer
+    const [defaultValue] = useState(options?.defaultValue)
+    const [defaultServerValue] = useState(options?.defaultServerValue)
+    return useLocalStorage(
+        key,
+        defaultValue,
+        defaultServerValue,
+        options?.storageSync,
+        serializer?.parse,
+        serializer?.stringify,
+    )
+}
 
-      try {
-         const storedValue = localStorage.getItem(key);
-         if (storedValue !== null) {
-            return deserializer(storedValue);
-         }
-         return typeof initialValue === 'function' ? (initialValue as () => T)() : initialValue;
-      } catch (error) {
-         console.error(`Error reading localStorage key "${key}":`, error);
-         return typeof initialValue === 'function' ? (initialValue as () => T)() : initialValue;
-      }
-   });
+function useLocalStorage<T>(
+    key: string,
+    defaultValue: T | undefined,
+    defaultServerValue: T | undefined,
+    storageSync: boolean = true,
+    parse: (value: string) => unknown = parseJSON,
+    stringify: (value: unknown) => string = JSON.stringify,
+): LocalStorageState<T | undefined> {
+    // we keep the `parsed` value in a ref because `useSyncExternalStore` requires a cached version
+    const storageItem = useRef<{ string: string | null; parsed: T | undefined }>({
+        string: null,
+        parsed: undefined,
+    })
 
-   // Синхронизация с localStorage
-   useEffect(() => {
-      if (typeof window === 'undefined') return;
+    const value = useSyncExternalStore(
+        // useSyncExternalStore.subscribe
+        useCallback(
+            (onStoreChange) => {
+                const onChange = (localKey: string): void => {
+                    if (key === localKey) {
+                        onStoreChange()
+                    }
+                }
+                callbacks.add(onChange)
+                return (): void => {
+                    callbacks.delete(onChange)
+                }
+            },
+            [key],
+        ),
 
-      try {
-         if (state === undefined || state === null) {
-            localStorage.removeItem(key);
-         } else {
-            localStorage.setItem(key, serializer(state));
-         }
-      } catch (error) {
-         console.error(`Error setting localStorage key "${key}":`, error);
-      }
-   }, [key, state, serializer]);
+        // useSyncExternalStore.getSnapshot
+        () => {
+            const string = goodTry(() => localStorage.getItem(key)) ?? null
 
-   // Функция для сброса значения до начального
-   const reset = useCallback(() => {
-      const value = typeof initialValue === 'function' ? (initialValue as () => T)() : initialValue;
-      setState(value);
-   }, [initialValue]);
+            if (inMemoryData.has(key)) {
+                storageItem.current.parsed = inMemoryData.get(key) as T | undefined
+            } else if (string !== storageItem.current.string) {
+                let parsed: T | undefined
 
-   // Синхронизация между вкладками
-   useEffect(() => {
-      if (typeof window === 'undefined') return;
+                try {
+                    parsed = string === null ? defaultValue : (parse(string) as T)
+                } catch {
+                    parsed = defaultValue
+                }
 
-      const handleStorageChange = (event: StorageEvent) => {
-         if (event.key === key && event.newValue !== serializer(state)) {
-            try {
-               const newValue = event.newValue ? deserializer(event.newValue) : null;
-               setState(newValue ?? (typeof initialValue === 'function' ? (initialValue as () => T)() : initialValue));
-            } catch (error) {
-               console.error(`Error parsing localStorage key "${key}" on storage event:`, error);
+                storageItem.current.parsed = parsed
             }
-         }
-      };
 
-      window.addEventListener('storage', handleStorageChange);
-      return () => window.removeEventListener('storage', handleStorageChange);
-   }, [key, state, serializer, deserializer, initialValue]);
+            storageItem.current.string = string
 
-   return [state, setState, reset];
+            // store default value in localStorage:
+            // - initial issue: https://github.com/astoilkov/use-local-storage-state/issues/26
+            //   issues that were caused by incorrect initial and secondary implementations:
+            //   - https://github.com/astoilkov/use-local-storage-state/issues/30
+            //   - https://github.com/astoilkov/use-local-storage-state/issues/33
+            if (defaultValue !== undefined && string === null) {
+                // reasons for `localStorage` to throw an error:
+                // - maximum quota is exceeded
+                // - under Mobile Safari (since iOS 5) when the user enters private mode
+                //   `localStorage.setItem()` will throw
+                // - trying to access localStorage object when cookies are disabled in Safari throws
+                //   "SecurityError: The operation is insecure."
+                // eslint-disable-next-line no-console
+                goodTry(() => {
+                    const string = stringify(defaultValue)
+                    localStorage.setItem(key, string)
+                    storageItem.current = { string, parsed: defaultValue }
+                })
+            }
+
+            return storageItem.current.parsed
+        },
+
+        // useSyncExternalStore.getServerSnapshot
+        () => defaultServerValue ?? defaultValue,
+    )
+    const setState = useCallback(
+        (newValue: SetStateAction<T | undefined>): void => {
+            const value =
+                newValue instanceof Function ? newValue(storageItem.current.parsed) : newValue
+
+            // reasons for `localStorage` to throw an error:
+            // - maximum quota is exceeded
+            // - under Mobile Safari (since iOS 5) when the user enters private mode
+            //   `localStorage.setItem()` will throw
+            // - trying to access `localStorage` object when cookies are disabled in Safari throws
+            //   "SecurityError: The operation is insecure."
+            try {
+                localStorage.setItem(key, stringify(value))
+
+                inMemoryData.delete(key)
+            } catch {
+                inMemoryData.set(key, value)
+            }
+
+            triggerCallbacks(key)
+        },
+        [key, stringify],
+    )
+    const removeItem = useCallback(() => {
+        goodTry(() => localStorage.removeItem(key))
+
+        inMemoryData.delete(key)
+
+        triggerCallbacks(key)
+    }, [key])
+
+    // - syncs change across tabs, windows, iframes
+    // - the `storage` event is called only in all tabs, windows, iframe's except the one that
+    //   triggered the change
+    useEffect(() => {
+        if (!storageSync) {
+            return undefined
+        }
+
+        const onStorage = (e: StorageEvent): void => {
+            if (e.key === key && e.storageArea === goodTry(() => localStorage)) {
+                triggerCallbacks(key)
+            }
+        }
+
+        window.addEventListener('storage', onStorage)
+
+        return (): void => window.removeEventListener('storage', onStorage)
+    }, [key, storageSync])
+
+    return useMemo(
+        () => [
+            value,
+            setState,
+            {
+                isPersistent: value === defaultValue || !inMemoryData.has(key),
+                removeItem,
+            },
+        ],
+        [key, setState, value, defaultValue, removeItem],
+    )
+}
+
+// notifies all instances using the same `key` to update
+const callbacks = new Set<(key: string) => void>()
+function triggerCallbacks(key: string): void {
+    for (const callback of [...callbacks]) {
+        callback(key)
+    }
+}
+
+// a wrapper for `JSON.parse()` that supports "undefined" value. otherwise,
+// `JSON.parse(JSON.stringify(undefined))` returns the string "undefined" not the value `undefined`
+function parseJSON(value: string): unknown {
+    return value === 'undefined' ? undefined : JSON.parse(value)
+}
+
+function goodTry<T>(tryFn: () => T): T | undefined {
+    try {
+        return tryFn()
+    } catch {}
 }

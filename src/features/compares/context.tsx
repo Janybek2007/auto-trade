@@ -2,7 +2,7 @@ import React, { createContext, useContext, useCallback } from 'react';
 import { toast } from '@features/toast';
 import { useLanguages } from '@shared/libs/intl';
 import { ButtonProps } from '@shared/components';
-import { useLocalstorageState } from '@shared/utils';
+import { useLocalStorageState } from '@shared/utils';
 import { useLocation, useSearch } from '@tanstack/react-router';
 import { CountryDto } from '@shared/api/cars';
 
@@ -24,24 +24,28 @@ export const ComparesProvider: React.FC<React.PropsWithChildren> = ({ children }
       from: fromPath as '/_guest-layout/filtration',
    });
 
-   const [compares, setCompares] = useLocalstorageState<ComparesContextType['compares']>('compares', {
-      america: [],
-      korea: [],
-      dubai: [],
+   const [compares, setCompares] = useLocalStorageState<ComparesContextType['compares']>('compares', {
+      defaultServerValue: {
+         america: [],
+         korea: [],
+         dubai: [],
+      },
    });
 
    const onCompares = useCallback(
       (car_id: number, actions?: ButtonProps[]) => {
          setCompares(prev => {
-            const currentCompares = prev[by];
+            const currentCompares = prev?.[by] || [];
             const updatedCompares = currentCompares.includes(car_id)
                ? currentCompares.filter(id => id !== car_id)
                : currentCompares.length < 6
                  ? [...currentCompares, car_id]
                  : currentCompares;
 
-            const newCompares = {
-               ...prev,
+            const newCompares: Record<'america' | 'korea' | 'dubai', number[]> = {
+               america: prev?.america || [],
+               korea: prev?.korea || [],
+               dubai: prev?.dubai || [],
                [by]: updatedCompares,
             };
 
@@ -62,15 +66,17 @@ export const ComparesProvider: React.FC<React.PropsWithChildren> = ({ children }
 
    const clearCompares = React.useCallback((country?: CountryDto) => {
       if (country) {
-         setCompares(p => ({ ...p, [country]: [] }));
+         setCompares(
+            p => ({ ...p, [country]: p?.[country] ? [] : [] }) as Record<'america' | 'dubai' | 'korea', number[]>,
+         );
       } else {
          setCompares({ america: [], dubai: [], korea: [] });
       }
    }, []);
 
    const contextValue: ComparesContextType = {
-      compares: compares,
-      comparesWithBy: compares[by],
+      compares: compares!,
+      comparesWithBy: compares?.[by]!,
       onCompares,
       clearCompares,
    };

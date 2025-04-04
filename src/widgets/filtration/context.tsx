@@ -27,7 +27,10 @@ export const FiltrationProvider: React.FC<FiltrationProviderProps> = ({ children
    }, []);
 
    const updateFilter = useCallback((field: keyof Filters, value: string) => {
-      setFilters(prev => ({ ...prev, [field]: value }));
+      setFilters(prev => ({
+         ...prev,
+         [field]: prev[field] === value ? undefined : value,
+      }));
    }, []);
 
    const resetFilters = useCallback(() => {

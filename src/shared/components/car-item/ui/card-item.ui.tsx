@@ -10,7 +10,7 @@ export const CardItem: React.FC<Omit<CarItemPops, 'actions'>> = ({ children, ite
             <img
                data-car-image
                className={s.image}
-               src={item.photos[0]?.image || '/placeholder.jpg'}
+               src={item.photos[0]?.image || '/image/placeholder.png'}
                alt={item.model.name}
             />
    
