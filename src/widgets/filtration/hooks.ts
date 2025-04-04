@@ -11,23 +11,18 @@ export const useFilteredCars = (cars: CarDto[] | undefined) => {
       return cars.filter(car => {
          // Фильтр по цене (диапазон)
          if (filters.price) {
-            const [minPriceStr, maxPriceStr] = filters.price.split('-').map(String);
-            let minPrice: number, maxPrice: number;
+            const [minPriceStr, maxPriceStr] = filters.price.split('-');
+            const minPrice = parseFloat(minPriceStr);
+            const maxPrice = parseFloat(maxPriceStr);
 
-            if (minPriceStr.length <= 2 && maxPriceStr.length <= 2) {
-               // Сокращенный формат (8-20 → 8000-20000)
-               minPrice = parseFloat(minPriceStr) * 1000;
-               maxPrice = parseFloat(maxPriceStr) * 1000;
-            } else {
-               // Полный формат (8000-20000)
-               minPrice = parseFloat(minPriceStr);
-               maxPrice = parseFloat(maxPriceStr);
-            }
+            const startPrice = parseFloat(car.start_price);
+            const endPrice = parseFloat(car.end_price);
 
-            const startPrice = parseFloat(car.start_price) * 1000; // Предполагаем, что цены в CarDto в тысячах
-            const endPrice = parseFloat(car.end_price) * 1000;
+            console.log(minPrice, maxPrice, 'MinMax');
+            console.log(startPrice, endPrice, 'StartEnd');
 
-            if ((minPrice && startPrice < minPrice) || (maxPrice && endPrice > maxPrice) || startPrice > endPrice) {
+            // Проверка: не входит в указанный диапазон
+            if (startPrice > maxPrice || endPrice < minPrice) {
                return false;
             }
          }
@@ -37,7 +32,7 @@ export const useFilteredCars = (cars: CarDto[] | undefined) => {
             const [minYearStr, maxYearStr] = filters.year_of_production.split('-').map(String);
             let minYear: number, maxYear: number;
 
-            if (minYearStr.length <= 2 && maxYearStr.length <= 2) {
+            if (minYearStr?.length <= 2 && maxYearStr?.length <= 2) {
                // Сокращенный формат (19-20 → 2019-2020)
                minYear = parseInt(minYearStr) < 100 ? 2000 + parseInt(minYearStr) : parseInt(minYearStr);
                maxYear = parseInt(maxYearStr) < 100 ? 2000 + parseInt(maxYearStr) : parseInt(maxYearStr);
@@ -59,7 +54,7 @@ export const useFilteredCars = (cars: CarDto[] | undefined) => {
             const [minMileageStr, maxMileageStr] = filters.mileage.split('-').map(String);
             let minMileage: number, maxMileage: number;
 
-            if (minMileageStr.length <= 2 && maxMileageStr.length <= 2) {
+            if (minMileageStr?.length <= 2 && maxMileageStr?.length <= 2) {
                // Сокращенный формат (0-30 → 0-30000)
                minMileage = parseInt(minMileageStr) * 1000;
                maxMileage = parseInt(maxMileageStr) * 1000;
@@ -92,7 +87,7 @@ export const useFilteredCars = (cars: CarDto[] | undefined) => {
          }
 
          // Фильтр по бренду
-         if (activeBrands.length > 0) {
+         if (activeBrands?.length > 0) {
             const carBrand = car.brand.name.toLowerCase();
             if (!activeBrands.some(brand => brand.name.toLowerCase() === carBrand)) {
                return false;

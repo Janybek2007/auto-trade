@@ -90,7 +90,7 @@ export const CarList: React.FC = () => {
       <div className={s['content']}>
          {isLoading ? (
             <Loading />
-         ) : visibleCars.length === 0 ? (
+         ) : cars?.length === 0 ? (
             <div className={'empty'}>
                <Icon name='lucide:car' c_size={64} className={'emptyIcon'} />
                <h2 className={'emptyTitle'}>{getTranslationByLanguage('empty', currentLanguage)}</h2>
@@ -103,7 +103,7 @@ export const CarList: React.FC = () => {
                animate={{ opacity: 1 }}
                transition={{ duration: 0.5 }}
             >
-               {visibleCars.map((car, i) => (
+               {cars?.map((car, i) => (
                   <motion.div
                      key={`${itemType}-${car.id}`}
                      initial={{ opacity: 0, scale: 0.95 }}

@@ -35,8 +35,8 @@ export const CarDtoSchema = z.object({
    }),
    fuel_type: z.string(),
    transmission_type: z.string(),
-   start_price: z.string(),
-   end_price: z.string(),
+   start_price: z.number(),
+   end_price: z.number(),
    auction_start_time: z.string(),
    interior: z.object({
       id: z.number(),

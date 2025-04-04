@@ -13,14 +13,12 @@ interface Country {
    alt: string;
 }
 
-// Instagram аккаунттары үчүн массив
 const instagramAccounts: InstagramAccount[] = [
    { name: '@askar_auto_america', link: 'https://www.instagram.com/askar_auto_america' },
    { name: '@askar_korea', link: 'https://www.instagram.com/askar_korea' },
    { name: '@jylas_tuning', link: 'https://www.instagram.com/jylas_tuning' },
 ];
 
-// Өлкөлөрдүн маалыматы үчүн массив
 const countries: Country[] = [
    { name: 'Америка', logo: '/icons/usa-logo.svg', alt: 'USA Logo' },
    { name: 'Дубай', logo: '/icons/oae-logo.svg', alt: 'OAE Flag' },
@@ -35,12 +33,7 @@ const Footer: React.FC = () => {
                <div className={styles.first}>
                   <img src='/image/jylas-tuning.svg' alt='Jylas Tuning Logo' className={styles.logo} />
 
-                  <img
-                     src='/icons/Askar-auto.svg'
-                     alt='Askar Auto Logo'
-                     data-second
-                     className={`${styles.logo}`}
-                  />
+                  <img src='/icons/Askar-auto.svg' alt='Askar Auto Logo' data-second className={`${styles.logo}`} />
                   <div className={styles.head}>
                      {countries.map((country, index) => (
                         <React.Fragment key={country.name}>
@@ -87,7 +80,6 @@ const Footer: React.FC = () => {
                   </div>
                </div>
 
-               {/* Акыркы бөлүк: Логотип */}
                <div className={styles.end}>
                   <img src='/icons/iant-logo.png' alt='IANT Logo' className={styles.logoEnd} />
                </div>
