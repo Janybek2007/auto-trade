@@ -13,7 +13,7 @@ export const Hero: React.FC = () => {
    const isRuOrKg = currentLanguage === 'RU' || currentLanguage === 'KG';
 
    return (
-      <main className={styles.main}>
+      <main className={styles.main}> 
          <video className={styles.background} autoPlay loop muted>
             <source src='/video/hero.mp4' type='video/mp4' />
          </video>
