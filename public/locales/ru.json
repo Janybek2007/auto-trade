@@ -130,8 +130,9 @@
       "limit": "Не больше 6 сравнений!"
    },
    "carActions": {
-      "comparison": "Сравнение",
-      "more": "Подробнее"
+      "inComparison": "В сравнение",
+      "more": "Подробнее",
+      "removeFromComparison": "Убрать"
    },
    "compare": {
       "title": "Сравнение авто",

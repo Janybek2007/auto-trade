@@ -11,11 +11,11 @@ export const useFilteredCars = (cars: CarDto[] | undefined) => {
       return cars.filter(car => {
          if (filters.price) {
             const [minPriceStr, maxPriceStr] = filters.price.split('-');
-            const minPrice = Number(minPriceStr);
-            const maxPrice = Number(maxPriceStr);
+            const minPrice = parseFloat(minPriceStr);
+            const maxPrice = parseFloat(maxPriceStr);
 
-            const startPrice = Number(car.start_price);
-            const endPrice = Number(car.end_price);
+            const startPrice = parseFloat(String(car.start_price));
+            const endPrice = parseFloat(String(car.end_price));
 
             if (startPrice > maxPrice || endPrice < minPrice) {
                return false;
@@ -26,8 +26,8 @@ export const useFilteredCars = (cars: CarDto[] | undefined) => {
             const [minYearStr, maxYearStr] = filters.year_of_production.split('-').map(String);
             let minYear: number, maxYear: number;
 
-            minYear = Number(minYearStr);
-            maxYear = Number(maxYearStr);
+            minYear = parseFloat(minYearStr);
+            maxYear = parseFloat(maxYearStr);
 
             if ((minYear && car.year < minYear) || (maxYear && car.year > maxYear)) {
                return false;
@@ -38,8 +38,8 @@ export const useFilteredCars = (cars: CarDto[] | undefined) => {
             const [minMileageStr, maxMileageStr] = filters.mileage.split('-').map(String);
             let minMileage: number, maxMileage: number;
 
-            minMileage = Number(minMileageStr);
-            maxMileage = Number(maxMileageStr);
+            minMileage = parseFloat(minMileageStr);
+            maxMileage = parseFloat(maxMileageStr);
 
             const carMileage = car.mileage;
 

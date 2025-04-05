@@ -55,7 +55,7 @@ const PAGE_SIZE = 9;
 
 export const CarList: React.FC = () => {
    const { itemType } = useFiltrations();
-   const { onCompares } = useCompares();
+   const { onCompares, compares } = useCompares();
    const { by } = useSearch({ from: '/_guest-layout/filtration' });
    const { data: cars, isLoading } = useQuery(CarsService.carsByCountryQuery({ country: by }));
    const [page, setPage] = useState(1);
@@ -90,7 +90,7 @@ export const CarList: React.FC = () => {
       <div className={s['content']}>
          {isLoading ? (
             <Loading />
-         ) : cars?.length === 0 ? (
+         ) : filteredCars?.length === 0 ? (
             <div className={'empty'}>
                <Icon name='lucide:car' c_size={64} className={'emptyIcon'} />
                <h2 className={'emptyTitle'}>{getTranslationByLanguage('empty', currentLanguage)}</h2>
@@ -103,7 +103,7 @@ export const CarList: React.FC = () => {
                animate={{ opacity: 1 }}
                transition={{ duration: 0.5 }}
             >
-               {cars?.map((car, i) => (
+               {filteredCars?.map((car, i) => (
                   <motion.div
                      key={`${itemType}-${car.id}`}
                      initial={{ opacity: 0, scale: 0.95 }}
@@ -113,6 +113,7 @@ export const CarList: React.FC = () => {
                      <CarItem
                         item={car}
                         type={width <= 768 ? (width >= 560 ? 'list' : 'card') : itemType}
+                        isCompares={compares[by].includes(car.id)}
                         actions={[
                            {
                               type: 'more',

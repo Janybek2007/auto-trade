@@ -9,14 +9,14 @@ import { useCompares } from '@features/compares';
 
 export const CompareSwitch: React.FC = () => {
    const { itemType, toggleItemType } = useFiltrations();
-   const { comparesWithBy } = useCompares();
+   const { comparesWithBy, compares } = useCompares();
    const navigate = useNavigate();
    const { by } = useSearch({ from: '/_guest-layout/filtration' });
    const { currentLanguage, t } = useLanguages();
 
    const ToCompare = React.useCallback(() => {
       if (comparesWithBy.length > 1) {
-         navigate({ to: '/compare', search: { by } });
+         navigate({ to: `/compare/${compares[by]}`, search: { by } });
       } else {
          toast(t.get('compare.minimumRequirement'), {
             description: t.get('compare.minimumDescription'),

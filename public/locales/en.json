@@ -130,8 +130,9 @@
       "limit": "No more than 6 comparisons!"
    },
    "carActions": {
-      "comparison": "Compare",
-      "more": "More details"
+      "inComparison": "Compare",
+      "more": "More details",
+      "removeFromComparison": "Remove"
    },
    "compare": {
       "title": "Car Comparison",

@@ -130,7 +130,8 @@
       "limit": "6дан көп салыштыруу мүмкүн эмес!"
    },
    "carActions": {
-      "comparison": "Салыштыруу",
+      "inComparison": "Салыштыруу",
+      "removeFromComparison": "Алып салуу",
       "more": "Толук"
    },
    "compare": {

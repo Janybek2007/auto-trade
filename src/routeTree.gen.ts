@@ -14,9 +14,9 @@ import { Route as rootRoute } from './app/routes/__root'
 import { Route as GuestLayoutImport } from './app/routes/_guest-layout'
 import { Route as GuestLayoutPolicyImport } from './app/routes/_guest-layout/policy'
 import { Route as GuestLayoutFiltrationImport } from './app/routes/_guest-layout/filtration'
-import { Route as GuestLayoutCompareImport } from './app/routes/_guest-layout/compare'
 import { Route as GuestLayoutAboutImport } from './app/routes/_guest-layout/about'
 import { Route as GuestLayoutHomeIndexImport } from './app/routes/_guest-layout/_home.index'
+import { Route as GuestLayoutCompareIdsImport } from './app/routes/_guest-layout/compare.$ids'
 import { Route as GuestLayoutCarsCarIdImport } from './app/routes/_guest-layout/cars.$car-id'
 
 // Create/Update Routes
@@ -38,12 +38,6 @@ const GuestLayoutFiltrationRoute = GuestLayoutFiltrationImport.update({
   getParentRoute: () => GuestLayoutRoute,
 } as any)
 
-const GuestLayoutCompareRoute = GuestLayoutCompareImport.update({
-  id: '/compare',
-  path: '/compare',
-  getParentRoute: () => GuestLayoutRoute,
-} as any)
-
 const GuestLayoutAboutRoute = GuestLayoutAboutImport.update({
   id: '/about',
   path: '/about',
@@ -53,6 +47,12 @@ const GuestLayoutAboutRoute = GuestLayoutAboutImport.update({
 const GuestLayoutHomeIndexRoute = GuestLayoutHomeIndexImport.update({
   id: '/_home/',
   path: '/',
+  getParentRoute: () => GuestLayoutRoute,
+} as any)
+
+const GuestLayoutCompareIdsRoute = GuestLayoutCompareIdsImport.update({
+  id: '/compare/$ids',
+  path: '/compare/$ids',
   getParentRoute: () => GuestLayoutRoute,
 } as any)
 
@@ -80,13 +80,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GuestLayoutAboutImport
       parentRoute: typeof GuestLayoutImport
     }
-    '/_guest-layout/compare': {
-      id: '/_guest-layout/compare'
-      path: '/compare'
-      fullPath: '/compare'
-      preLoaderRoute: typeof GuestLayoutCompareImport
-      parentRoute: typeof GuestLayoutImport
-    }
     '/_guest-layout/filtration': {
       id: '/_guest-layout/filtration'
       path: '/filtration'
@@ -108,6 +101,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GuestLayoutCarsCarIdImport
       parentRoute: typeof GuestLayoutImport
     }
+    '/_guest-layout/compare/$ids': {
+      id: '/_guest-layout/compare/$ids'
+      path: '/compare/$ids'
+      fullPath: '/compare/$ids'
+      preLoaderRoute: typeof GuestLayoutCompareIdsImport
+      parentRoute: typeof GuestLayoutImport
+    }
     '/_guest-layout/_home/': {
       id: '/_guest-layout/_home/'
       path: '/'
@@ -122,19 +122,19 @@ declare module '@tanstack/react-router' {
 
 interface GuestLayoutRouteChildren {
   GuestLayoutAboutRoute: typeof GuestLayoutAboutRoute
-  GuestLayoutCompareRoute: typeof GuestLayoutCompareRoute
   GuestLayoutFiltrationRoute: typeof GuestLayoutFiltrationRoute
   GuestLayoutPolicyRoute: typeof GuestLayoutPolicyRoute
   GuestLayoutCarsCarIdRoute: typeof GuestLayoutCarsCarIdRoute
+  GuestLayoutCompareIdsRoute: typeof GuestLayoutCompareIdsRoute
   GuestLayoutHomeIndexRoute: typeof GuestLayoutHomeIndexRoute
 }
 
 const GuestLayoutRouteChildren: GuestLayoutRouteChildren = {
   GuestLayoutAboutRoute: GuestLayoutAboutRoute,
-  GuestLayoutCompareRoute: GuestLayoutCompareRoute,
   GuestLayoutFiltrationRoute: GuestLayoutFiltrationRoute,
   GuestLayoutPolicyRoute: GuestLayoutPolicyRoute,
   GuestLayoutCarsCarIdRoute: GuestLayoutCarsCarIdRoute,
+  GuestLayoutCompareIdsRoute: GuestLayoutCompareIdsRoute,
   GuestLayoutHomeIndexRoute: GuestLayoutHomeIndexRoute,
 }
 
@@ -145,19 +145,19 @@ const GuestLayoutRouteWithChildren = GuestLayoutRoute._addFileChildren(
 export interface FileRoutesByFullPath {
   '': typeof GuestLayoutRouteWithChildren
   '/about': typeof GuestLayoutAboutRoute
-  '/compare': typeof GuestLayoutCompareRoute
   '/filtration': typeof GuestLayoutFiltrationRoute
   '/policy': typeof GuestLayoutPolicyRoute
   '/cars/$car-id': typeof GuestLayoutCarsCarIdRoute
+  '/compare/$ids': typeof GuestLayoutCompareIdsRoute
   '/': typeof GuestLayoutHomeIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/about': typeof GuestLayoutAboutRoute
-  '/compare': typeof GuestLayoutCompareRoute
   '/filtration': typeof GuestLayoutFiltrationRoute
   '/policy': typeof GuestLayoutPolicyRoute
   '/cars/$car-id': typeof GuestLayoutCarsCarIdRoute
+  '/compare/$ids': typeof GuestLayoutCompareIdsRoute
   '/': typeof GuestLayoutHomeIndexRoute
 }
 
@@ -165,10 +165,10 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/_guest-layout': typeof GuestLayoutRouteWithChildren
   '/_guest-layout/about': typeof GuestLayoutAboutRoute
-  '/_guest-layout/compare': typeof GuestLayoutCompareRoute
   '/_guest-layout/filtration': typeof GuestLayoutFiltrationRoute
   '/_guest-layout/policy': typeof GuestLayoutPolicyRoute
   '/_guest-layout/cars/$car-id': typeof GuestLayoutCarsCarIdRoute
+  '/_guest-layout/compare/$ids': typeof GuestLayoutCompareIdsRoute
   '/_guest-layout/_home/': typeof GuestLayoutHomeIndexRoute
 }
 
@@ -177,21 +177,27 @@ export interface FileRouteTypes {
   fullPaths:
     | ''
     | '/about'
-    | '/compare'
     | '/filtration'
     | '/policy'
     | '/cars/$car-id'
+    | '/compare/$ids'
     | '/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/about' | '/compare' | '/filtration' | '/policy' | '/cars/$car-id' | '/'
+  to:
+    | '/about'
+    | '/filtration'
+    | '/policy'
+    | '/cars/$car-id'
+    | '/compare/$ids'
+    | '/'
   id:
     | '__root__'
     | '/_guest-layout'
     | '/_guest-layout/about'
-    | '/_guest-layout/compare'
     | '/_guest-layout/filtration'
     | '/_guest-layout/policy'
     | '/_guest-layout/cars/$car-id'
+    | '/_guest-layout/compare/$ids'
     | '/_guest-layout/_home/'
   fileRoutesById: FileRoutesById
 }
@@ -221,19 +227,15 @@ export const routeTree = rootRoute
       "filePath": "_guest-layout.tsx",
       "children": [
         "/_guest-layout/about",
-        "/_guest-layout/compare",
         "/_guest-layout/filtration",
         "/_guest-layout/policy",
         "/_guest-layout/cars/$car-id",
+        "/_guest-layout/compare/$ids",
         "/_guest-layout/_home/"
       ]
     },
     "/_guest-layout/about": {
       "filePath": "_guest-layout/about.tsx",
-      "parent": "/_guest-layout"
-    },
-    "/_guest-layout/compare": {
-      "filePath": "_guest-layout/compare.tsx",
       "parent": "/_guest-layout"
     },
     "/_guest-layout/filtration": {
@@ -246,6 +248,10 @@ export const routeTree = rootRoute
     },
     "/_guest-layout/cars/$car-id": {
       "filePath": "_guest-layout/cars.$car-id.tsx",
+      "parent": "/_guest-layout"
+    },
+    "/_guest-layout/compare/$ids": {
+      "filePath": "_guest-layout/compare.$ids.tsx",
       "parent": "/_guest-layout"
     },
     "/_guest-layout/_home/": {

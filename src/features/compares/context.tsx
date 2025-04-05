@@ -1,31 +1,28 @@
-import React, { createContext, useContext, useCallback } from 'react';
+import React, { createContext, useContext, useCallback, PropsWithChildren } from 'react';
 import { toast } from '@features/toast';
 import { useLanguages } from '@shared/libs/intl';
 import { ButtonProps } from '@shared/components';
-import { useLocalStorageState } from '@shared/utils';
-import { useLocation, useSearch } from '@tanstack/react-router';
+import { useLocation, useSearch, useNavigate } from '@tanstack/react-router';
 import { CountryDto } from '@shared/api/cars';
+import { useLocalStorageState } from '@shared/utils';
 
 interface ComparesContextType {
    compares: Record<CountryDto, number[]>;
    comparesWithBy: number[];
    onCompares: (car_id: number, actions?: ButtonProps[]) => void;
-   clearCompares: (country?: CountryDto) => void;
 }
 
 const ComparesContext = createContext<ComparesContextType | null>(null);
 
-export const ComparesProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
+export const ComparesProvider: React.FC<PropsWithChildren> = ({ children }) => {
    const { t } = useLanguages();
-   const { pathname } = useLocation();
-   const fromPath = `/_guest-layout/${pathname.includes('filtration') ? 'filtration' : 'compare'}`;
 
    const { by } = useSearch({
-      from: fromPath as '/_guest-layout/filtration',
+      from: '/_guest-layout/filtration',
    });
 
    const [compares, setCompares] = useLocalStorageState<ComparesContextType['compares']>('compares', {
-      defaultServerValue: {
+      defaultValue: {
          america: [],
          korea: [],
          dubai: [],
@@ -35,50 +32,38 @@ export const ComparesProvider: React.FC<React.PropsWithChildren> = ({ children }
    const onCompares = useCallback(
       (car_id: number, actions?: ButtonProps[]) => {
          setCompares(prev => {
-            const currentCompares = prev?.[by] || [];
-            const updatedCompares = currentCompares.includes(car_id)
-               ? currentCompares.filter(id => id !== car_id)
-               : currentCompares.length < 6
-                 ? [...currentCompares, car_id]
-                 : currentCompares;
+            const current = prev?.[by] || [];
+            const alreadyAdded = current.includes(car_id);
+            const updated = alreadyAdded
+               ? current.filter(id => id !== car_id)
+               : current.length < 6
+                 ? [...current, car_id]
+                 : current;
 
-            const newCompares: Record<'america' | 'korea' | 'dubai', number[]> = {
-               america: prev?.america || [],
-               korea: prev?.korea || [],
-               dubai: prev?.dubai || [],
-               [by]: updatedCompares,
+            const newCompares = {
+               ...prev,
+               [by]: updated,
             };
 
-            toast(currentCompares.includes(car_id) ? t.get('comparison.removed') : t.get('comparison.added'), {
+            toast(alreadyAdded ? t.get('comparison.removed') : t.get('comparison.added'), {
                actions,
-               description: `${t.get('comparison.count')}: ${updatedCompares.length}`,
+               description: `${t.get('comparison.count')}: ${updated.length}`,
             });
 
-            if (currentCompares.length >= 4 && !currentCompares.includes(car_id)) {
+            if (!alreadyAdded && current.length >= 4) {
                toast(t.get('comparison.limit'));
             }
 
             return newCompares;
          });
       },
-      [t, by, setCompares],
+      [by, t],
    );
 
-   const clearCompares = React.useCallback((country?: CountryDto) => {
-      if (country) {
-         setCompares(
-            p => ({ ...p, [country]: p?.[country] ? [] : [] }) as Record<'america' | 'dubai' | 'korea', number[]>,
-         );
-      } else {
-         setCompares({ america: [], dubai: [], korea: [] });
-      }
-   }, []);
-
    const contextValue: ComparesContextType = {
-      compares: compares!,
-      comparesWithBy: compares?.[by]!,
+      compares,
+      comparesWithBy: compares?.[by] || [],
       onCompares,
-      clearCompares,
    };
 
    return <ComparesContext.Provider value={contextValue}>{children}</ComparesContext.Provider>;

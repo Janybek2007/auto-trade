@@ -4,44 +4,64 @@ import { useLanguages } from '@shared/libs/intl';
 import { CompareActions, CompareCarList, CompareTable } from '@widgets/compare';
 import { useQuery } from '@tanstack/react-query';
 import { CarDto, CarsService } from '@shared/api/cars';
-import { Link, useSearch } from '@tanstack/react-router';
+import { Link, useNavigate, useParams, useSearch } from '@tanstack/react-router';
 import { getCompareData } from './get-compare-data';
 import { Loading } from '@shared/components';
-import { useCompares } from '@features/compares';
 
 export const ComparePage: React.FC = () => {
    const { t } = useLanguages();
-   const { by } = useSearch({ from: '/_guest-layout/compare' });
-   const { compares, onCompares, clearCompares } = useCompares();
+   const { by } = useSearch({ from: '/_guest-layout/compare/$ids' });
+   const { ids } = useParams({ from: '/_guest-layout/compare/$ids' });
 
-   const { data, isLoading } = useQuery(CarsService.carsByIdsQuery({ country: by, ids: compares[by] || [] }));
+   const parseIds = React.useMemo(() => (ids ? ids.split(',').map(Number).filter(Boolean) : []), [ids]);
+
+   const navigate = useNavigate();
+
+   const RemoveAll = React.useCallback(() => {
+      navigate({
+         from: '/compare/$ids',
+         search: { by },
+         replace: true,
+         params: { ids: `[]` },
+      });
+   }, [by, navigate]);
+
+   const OnRemove = React.useCallback(
+      (id: number) => {
+         navigate({
+            from: '/compare/$ids',
+            search: { by },
+            replace: true,
+            params: { ids: `${parseIds.filter(v => v !== id)}` },
+         });
+      },
+      [by, parseIds, navigate],
+   );
+
+   const { data, isLoading, isFetching } = useQuery(
+      CarsService.carsByIdsQuery({
+         country: by,
+         ids: parseIds,
+      }),
+   );
 
    const { historyData, techSpecsData, interiorData } = getCompareData(data as CarDto[]);
 
-   const handleRemoveAll = React.useCallback(() => {
-      clearCompares(by);
-   }, [by, clearCompares, t]);
-
-   const handleRemoveCar = React.useCallback(
-      (id: number) => {
-         onCompares(id);
-      },
-      [by, t],
-   );
-
+   if (isLoading || isFetching) {
+      return <Loading />;
+   }
+   console.log(data)
    return (
       <section className={s.Main}>
          <div className={s.container}>
             <div className={s.content}>
-               {isLoading ? (
-                  <Loading />
-               ) : data && data.length > 0 ? (
+               {data && data.length > 0 ? (
                   <>
                      <div className={s.cards_for_compare}>
                         <h1>{t.get('compare.title')}</h1>
-                        <CompareActions by={by} onRemoveAll={handleRemoveAll} />
+                        <CompareActions by={by} onRemoveAll={RemoveAll} />
                      </div>
-                     <CompareCarList cars={(data as CarDto[]) || []} onRemove={handleRemoveCar} />
+                     <CompareCarList cars={(data as CarDto[]) || []} onRemove={OnRemove} />
                      <CompareTable {...historyData} />
                      <CompareTable {...techSpecsData} />
                      <CompareTable {...interiorData} />

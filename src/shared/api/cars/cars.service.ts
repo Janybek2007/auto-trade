@@ -44,6 +44,7 @@ export class CarsService {
                   .getQueriesData<CarDto>({ queryKey: [...this.keys.root] })
                   .map(([key]) => queryClient.getQueryState(key)?.dataUpdatedAt || 0),
             ),
+         enabled: props.ids.length > 0,
       });
    }
 
